@@ -1,0 +1,131 @@
+<section class="blog-area blog-grid section-padding-strict section-bg">
+    <div class="container">
+        <div class="row">
+            <div class="container-fluid">
+                <form class="input-group">
+                  <input
+                    type="search"
+                    class="form-control"
+                    placeholder="Search Volunteers by Name"
+                    aria-label="Search"
+                    [(ngModel)]="search"
+                    [ngModelOptions]="{standalone: true}"
+                  />
+                  <button class="btn btn-outline-white bg-dark" style="color: white;" type="button"
+                  (click)="applySearch(search)">Search</button>
+                </form>
+              </div>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="container-fluid" style="margin-left: 20px;">
+                <h6>Filter volunteers</h6>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="container-fluid">
+            
+                <form class="input-group ">
+                
+                    <div class="col-md-4">
+                        <div>
+                            <ng-select (open)="getAllCountries()" [items]="countries" 
+                                placeholder="Select country" bindLabel="name"
+                                bindValue="name" [(ngModel)]="seletedCountry"
+                                [ngModelOptions]="{standalone: true}"
+                                >
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div>
+                            <ng-select (open)="getAllCities()" [items]="cities" 
+                             placeholder="Select city" bindLabel="name"
+                             bindValue="name" [(ngModel)]="selectedCity"
+                             [ngModelOptions]="{standalone: true}"
+                             >
+                            </ng-select>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <button class="btn btn-outline-white bg-dark" style="color: white;" 
+                        type="button" (click)="applyFilter(selectedCity, seletedCountry)">Apply filters</button>
+                        &nbsp;
+                        <button class="btn btn-outline-white bg-dark" style="color: white;" 
+                        type="button" (click)="clearFilters()">Clear filters</button>
+                    </div>
+                    
+                  </form>
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-lg-4 col-md-6" *ngFor="let volunteer of volunteers">
+                <div class="grid-single">
+                    <div class="card post--card shadow-sm">
+                        <!-- <figure >
+                            <img class="pic" alt=""> 
+                        </figure> -->
+                        <!--Namesto slika nesto drugo -> slika moze da se stavi kaj list na organizacii--> 
+  <!-- <                      <div class="card-body">
+                            <h6><a></a></h6>
+                            <ul class="post-meta list-unstyled">
+                                <li ></li>
+                                <li><a></a></li>
+                            </ul>
+                            <p></p>
+                            <p class="pull-right">
+                                by <a href=""></a>
+                            </p>
+                        </div>> -->
+                        <div class="card-body">
+                          <!-- <figure>
+                               <img class="pic rounded-circle z-depth-2" alt="" [src]="volunteer.photo"> 
+                          </figure>
+                          <h6 class="float-right"><a>{{volunteer.name}}</a></h6> -->
+                          <div class="row">
+                              <div class="col-md-4">
+                               
+
+                                <figure *ngIf="volunteer.photo;else other_content">
+                                    <img [src]="volunteer.photo" class="pic rounded-circle z-depth-2" alt="">
+                                </figure>
+                                <ng-template #other_content>
+                                    <figure>
+                                        <img src="../../assets/img/avatar.jpeg"class="pic rounded-circle z-depth-2" alt="">
+                                    </figure>
+                                </ng-template>
+
+                              </div>
+                              <div class="col-md-8">
+                                <h6><a>{{volunteer.name}}</a></h6>
+                                <div style="font-size: 15px; height: 70px;">
+                                    <span *ngIf="volunteer.location" class="text-grey">Location:  </span>
+                                    <span  *ngIf="volunteer.location">{{volunteer.location.city}}, {{volunteer.location.country}}</span>
+                                     
+                                </div>
+                                <div style="font-size: 15px; height: 17px;">
+                                    <span *ngIf="volunteer.nationality" class="text-grey">Nationality:  </span>
+                                    <span *ngIf="volunteer.nationality">{{volunteer.nationality.nationality}}</span>
+                                </div>
+                                <br>
+                                <div class="list-inline">
+                                    <a href="" class="mr-2 text-grey"><i class="fa fa-facebook"></i></a>
+                                    <a href="" class="mr-2 text-grey"><i class="fa fa-twitter"></i></a>
+                                    <a href="" class="mr-2 text-grey"><i class="fa fa-linkedin"></i></a>
+                                    <a href="" class="mr-2 text-grey"><i class="fa fa-instagram"></i></a>
+                                </div>
+                              </div>
+                          </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

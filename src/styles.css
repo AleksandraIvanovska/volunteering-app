@@ -1,0 +1,85 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.blog-grid .grid-single {
+    margin-bottom: 2rem;
+  }
+
+  .section-padding-strict {
+    padding: 6.66667rem 0;
+  }
+  
+  .section-bg {
+    background-color: rgba(235, 213, 235, 0.26);
+  }
+  
+  .section-bg2 {
+    background: #f1f3f8;
+  }
+
+
+  .card {
+    border-radius: 0.26667rem;
+    overflow: hidden;
+    border: 0 none;
+    height: 200px;
+  }
+
+  .card figure {
+    margin: 0;
+  }
+  .card figure img {
+    width: 100%;
+  }
+
+  .card .card-body .card-title {
+    margin-bottom: 25px;
+  }
+  
+  .card.card-shadow {
+    box-shadow: 0 0.67rem 0.67rem rgba(146, 153, 184, 0.08);
+  }
+  
+  .post--card {
+    transition: all 0.3s ease;
+    box-shadow: 0 0.33333rem 1rem rgba(39, 43, 65, 0.06);
+  }
+  
+  .post--card .card-body h6 {
+    margin: 0 0 0.66667rem 0;
+  }
+  
+  .post--card .card-body h6 a {
+    transition: all 0.3s ease;
+  }
+  
+  .post--card .card-body .post-meta {
+    margin-bottom: 1rem;
+  }
+  
+  .post--card .card-body .post-meta li {
+    color: #9299b8;
+    margin-right: 1rem;
+  }
+  
+  .post--card .card-body .post-meta li:last-child {
+    margin-right: 0;
+  }
+  
+  .post--card .card-body p {
+    margin-bottom: 0;
+  }
+
+  a {
+    text-decoration: none !important;
+  }
+  
+  .text-grey {
+    color: grey;
+}

@@ -1,0 +1,116 @@
+<section class="blog-area blog-grid section-padding-strict section-bg">
+    <div class="container">
+        <div class="row">
+            <div class="container-fluid">
+                <form class="input-group">
+                  <input
+                    type="search"
+                    class="form-control"
+                    placeholder="Search by Title and Description"
+                    aria-label="Search"
+                    [(ngModel)]="search"
+                    [ngModelOptions]="{standalone: true}"
+                  />
+                  <button class="btn btn-outline-white bg-dark" style="color: white;" type="button"
+                  (click)="applySearch(search)">Search</button>
+                </form>
+              </div>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="container-fluid" style="margin-left: 20px;">
+                <h6>Filter organizations</h6>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="container-fluid">
+            
+                <form class="input-group" style="background-color: white;">
+                
+                    <div class="col-md-3">
+                        <div>
+                            <ng-select (open)="getAllCountries()" [items]="countries" 
+                                placeholder="Select country" bindLabel="name"
+                                bindValue="name" [(ngModel)]="seletedCountry"
+                                [ngModelOptions]="{standalone: true}"
+                                >
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div>
+                            <ng-select (open)="getAllCities()" [items]="cities" 
+                             placeholder="Select city" bindLabel="name"
+                             bindValue="name" [(ngModel)]="selectedCity"
+                             [ngModelOptions]="{standalone: true}"
+                             >
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div>
+                            <ng-select (open)="getAllCategories()" [items]="categories" 
+                              placeholder="Select category" bindLabel="description"
+                              bindValue="description" [(ngModel)]="selectedCategory"
+                              [ngModelOptions]="{standalone: true}"
+                              
+                              
+                              >
+                            </ng-select>
+                        </div>
+                        
+                    </div>
+                    
+                    <button class="btn btn-outline-white bg-dark" style="color: white;" 
+                    type="button" (click)="applyFilter(selectedCategory, selectedCity, seletedCountry)">Apply filters</button>
+                    &nbsp;
+                    <button class="btn btn-outline-white bg-dark" style="color: white;" 
+                    type="button" (click)="clearFilters()">Clear filters</button>
+                  </form>
+            </div>
+        </div>
+
+
+        <br>
+        <br>
+        <div class="row">
+            
+            <div class="col-lg-4 col-md-6" *ngFor="let organization of organizations">
+                <div class="grid-single">
+                    <div class="card post--card shadow-sm">
+                        <figure *ngIf="organization.photo;else other_content">
+                            <img [src]="organization.photo" class="pic" alt="">
+                        </figure>
+                        <ng-template #other_content>
+                            <figure>
+                                <img src="../../assets/img/org1.png" class="pic" alt="">
+                            </figure>
+                        </ng-template>
+                        <div class="card-body">
+                            <h6><a >{{organization.name}}</a></h6>
+                            <ul class="post-meta  list-unstyled">
+                                <li style="height: 30px;"><div *ngIf="organization.location">Location: {{organization.location.city}}, {{organization.location.county | slice:0:15}}...</div></li>
+                                <li style="height: 55px;"><div *ngIf="organization.description" style="font-size: 15px;margin-top: 5px;">{{organization.description | slice:0:115}}...</div></li>
+                                <br>
+                                <li>
+                                    <div class="list-inline">
+                                        <a href="" class="mr-2 text-grey"><i class="fa fa-globe"></i></a>
+                                        <a href="" class="mr-2 text-grey"><i class="fa fa-facebook"></i></a>
+                                        <a href="" class="mr-2 text-grey"><i class="fa fa-twitter"></i></a>
+                                        <a href="" class="mr-2 text-grey"><i class="fa fa-linkedin"></i></a>
+                                        <a href="" class="mr-2 text-grey"><i class="fa fa-instagram"></i></a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <p></p>
+                            <p class="pull-right" >
+                                <a></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

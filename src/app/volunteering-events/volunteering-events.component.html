@@ -1,0 +1,178 @@
+<section class="blog-area blog-grid section-padding-strict section-bg">
+    <div class="container">
+        <div class="row">
+            <div class="container-fluid">
+                <form class="input-group">
+                  <input
+                    type="search"
+                    class="form-control"
+                    placeholder="Search by Title and Description"
+                    aria-label="Search"
+                    [(ngModel)]="search"
+                    [ngModelOptions]="{standalone: true}"
+                  />
+                  <button class="btn btn-outline-white bg-dark" style="color: white;" type="button"
+                  (click)="applySearch(search)">Search</button>
+                </form>
+              </div>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="container-fluid" style="margin-left: 20px;">
+                <h6>Filter organizations</h6>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="container-fluid">
+            
+                <!-- <form class="input-group "> -->
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div>
+                                <ng-select (open)="getAllCountries()" [items]="countries" 
+                                    placeholder="Select country" bindLabel="name"
+                                    bindValue="name" [(ngModel)]="selectedCountry"
+                                    [ngModelOptions]="{standalone: true}"
+                                    >
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div>
+                                <ng-select (open)="getAllCities()" [items]="cities" 
+                                 placeholder="Select city" bindLabel="name"
+                                 bindValue="name" [(ngModel)]="selectedCity"
+                                 [ngModelOptions]="{standalone: true}"
+                                 >
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div>
+                                <ng-select (open)="getAllCategories()" [items]="categories" 
+                                  placeholder="Select category" bindLabel="description"
+                                  bindValue="description" [(ngModel)]="selectedCategory"
+                                  [ngModelOptions]="{standalone: true}" 
+                                  >
+                                </ng-select>
+                            </div>
+                        </div>
+    
+                        <div class="col-md-3">
+                            <div>
+                                <ng-select (open)="getAllOrganizations()" [items]="organizations" 
+                                  placeholder="Select organization" bindLabel="name"
+                                  bindValue="name" [(ngModel)]="selectedOrganization"
+                                  [ngModelOptions]="{standalone: true}" 
+                                  >
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div style="text-align: center;">
+                                <label
+                                for="virtual">Filter Virtual events</label>&nbsp;
+                          <input type="checkbox"
+                          [(ngModel)]="selectVirtial"
+                          name="virtual" id="is_virtual" value="is_virtual"
+                            [ngModelOptions]="{standalone: true}"  >   
+                            </div>                            
+                        </div>
+
+                        <div class="col-md-3">
+                            <input type="date" data-date-format="DD MMMM YYYY"
+                            [ngModelOptions]="{standalone: true}" value={{start_date}}
+                            [(ngModel)]='start_date' [id]="start_date" onFocusOut
+                            class="form-control">
+                        </div>
+
+                        <div class="col-md-3">
+                            <div>
+                                <ng-select (open)="getAllDurations()" [items]="durations" 
+                                  placeholder="Duration" bindLabel="description"
+                                  bindValue="description" [(ngModel)]="selectedDuration"
+                                  [ngModelOptions]="{standalone: true}" 
+                                  >
+                                </ng-select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div>
+                                <ng-select (open)="getAllGreatFor()" [items]="greatFor" 
+                                  placeholder="Great for.." bindLabel="description"
+                                  bindValue="description" [(ngModel)]="selectedGreatFor"
+                                  [ngModelOptions]="{standalone: true}" 
+                                  >
+                                </ng-select>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: center;">
+                            <button class="btn btn-outline-white bg-dark" style="color: white;" 
+                            type="button" (click)="applyFilter(selectedCategory, selectedCity, selectedCountry, selectedOrganization, selectVirtial, start_date, selectedDuration, selectedGreatFor)">Apply filters</button>
+                            &nbsp;
+                            <button class="btn btn-outline-white bg-dark" style="color: white;" 
+                            type="button" (click)="clearFilters()">Clear filters</button>
+                        </div> 
+                    </div>
+                   
+                  <!-- </form> -->
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-lg-4 col-md-6" *ngFor="let volunteering_event of volunteering_events">
+                <div class="grid-single">
+                    <div class="card post--card shadow-sm" style="cursor: pointer;" (click)="openEventByUuid(volunteering_event.uuid)">
+                        <div class="card-body">
+                            <h6><a>{{volunteering_event.title}}</a></h6>
+                            <!-- <a (click)="openPlaceById(place.id)"
+                                                        class="cursor-pointer">{{place.name}}</a> -->
+                            <div *ngIf="volunteering_event.is_virtual">
+                               <div style="float: right; color: chartreuse;">
+                                <strong>Virtual event</strong> 
+                               </div> 
+                           </div>
+                            <ul class="list-unstyled">
+                                <li style="height: 50px;">
+                                    <p *ngIf="volunteering_event.volunteering_location"><span class="text-grey">Location: </span> {{volunteering_event.volunteering_location ? volunteering_event.volunteering_location.address + ', ' + volunteering_event.volunteering_location.city + ', ' + (volunteering_event.volunteering_location.country | slice:0:30) : ''}}</p>
+                                   <!-- <div *ngIf="!volunteering_event.is_virtual">
+                                        <p *ngIf="volunteering_event.volunteering_location">Location: {{volunteering_event.volunteering_location ? volunteering_event.volunteering_location.address + ', ' + volunteering_event.volunteering_location.city + ', ' + volunteering_event.volunteering_location.country : ''}}</p>
+                                   </div> -->  
+                                </li>
+
+                                <li style="height: 20px;"><p *ngIf="volunteering_event.category"><span class="text-grey">Category:</span> {{volunteering_event.category.description}}</p></li>
+                            </ul>
+                            <div style="height: 63px;">
+                                <p *ngIf="volunteering_event.description" class="text-grey" style="font-size: 15px;">{{volunteering_event.description | slice:0:80}} ...</p>
+                            </div>
+
+                            <ul class="list-unstyled">
+                                <li style="text-align: center;">Spaces Available: {{volunteering_event.spaces_available}}</li>
+                                <li style="text-align: center;">Application Deadline: <strong>{{volunteering_event.deadline}}</strong></li>
+                                <li style="height: 20px;text-align: center;"><p *ngIf="volunteering_event.start_date">Start Date: {{volunteering_event.start_date}}</p></li>
+                            </ul>
+                           
+                           
+                            <span class="text-grey pull-left">Created: {{volunteering_event.created_at}}</span>
+                            <p class="pull-right" *ngIf="volunteering_event.organization">
+                                by <a href="">{{volunteering_event.organization.title}}</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

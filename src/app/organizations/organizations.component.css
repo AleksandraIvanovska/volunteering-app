@@ -1,0 +1,12 @@
+.card {
+    height: 360px;
+  }
+
+.pic{
+    height: 150px;
+    width: 360px;
+}
+
+.form-control {
+  margin-right: 20px;
+}

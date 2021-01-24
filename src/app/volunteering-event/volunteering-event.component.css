@@ -1,0 +1,33 @@
+.banner {
+	background-attachment: fixed;
+	/* background-color: #645862; */
+	background-image: url("../../assets/img/handsup.jpg");
+	background-position: top center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: white;
+	cursor: default;
+	text-align: center;
+	width: 100%;
+	float: left;
+}
+.bg-overlay {
+	padding: 280px 0 220px;
+	/* background-color: RGBA(50, 5, 15, 0.25); */
+}
+.banner-text h2 {
+	font-size: 50px;
+}
+.banner-text h2 span {
+	color: #EB233C;
+}
+.banner-text p {
+	font-size: 15px;
+}
+
+.event {
+	padding: 50px 0px;
+	background-color: rgba(235, 213, 235, 0.26);
+	float: left;
+	width: 100%;
+}
