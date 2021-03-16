@@ -1,26 +1,673 @@
 <section>
   <div class="banner" id="banner">
-      <div class="bg-overlay">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <!-- <div class="banner-text">
-                <h2>Welcome to <span>VolunteerUp</span></h2>
-                <h3>Bringing People Together</h3>
-                <p>We believe everyone should have the chance to make a difference. That's why we make it easy for good people and good causes to connect. We've connected millions of people with a great place to volunteer and helped tens of thousands of organizations better leverage volunteers to create real impact.</p>
-            </div> -->
+    <div class="bg-overlay">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+
           </div>
         </div>
       </div>
-  </div>
+    </div>
   </div>
 
- <!-- Event Data -->
+  <!-- Event Data -->
   <div class="event">
     <div class="container">
       <div class="row">
-        TTTTESTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+        <div class="col_md-8" style="padding-right: 30px;">
+          <div class="row ">
+            <div class="col-md-12">
+              <div class="event_header">
+                <h2>{{eventHeaderData.title}}</h2>
+              </div>
+              <div class="edit-delete">
+                <button type="submit" class="btn btn-edit" data-toggle="modal" data-target="#moda_claim_listing">Edit
+                  Event</button>
+                &nbsp;
+                <button type="submit" class="btn btn-delete" data-toggle="modal"
+                  data-target="#atbdp-report-abuse-modal">Delete Event</button>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-12">
+              <h5 *ngIf="eventHeaderData.organization" style="margin-left: 10px;">
+                By Organization:
+                <a href="/">
+                   {{eventHeaderData.organization.title}}
+                </a>
+              </h5>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-12">
+
+              <div class="atbd_content_module">
+                <h4><i class="fa fa-file-text-o" aria-hidden="true"></i>
+
+                  General Information</h4>
+                <hr>
+                <div class="atbdb_content_module_contents">
+                  <div class="atbd_contact_info">
+                    <ul>
+                      <li *ngIf="eventHeaderData.description">
+                        <div class="atbd_info_title"><i class="fa fa-file-text-o" aria-hidden="true"></i>Event description:</div>
+                        <div class="atbd_info">{{eventHeaderData.description}}</div>
+                      </li>
+                      <li *ngIf="eventHeaderData.category">
+                        <div class="atbd_info_title"><i class="fa fa-bookmark-o" aria-hidden="true"></i>Category:</div>
+                        <div class="atbd_info">{{eventHeaderData.category.description}}</div>
+                      </li>
+                      <li *ngIf="eventHeaderData.start_date || eventHeaderData.end_date" style="display: inline;">
+                        <div class="row" style="margin-left: 1px; margin-top: -17px;">
+                          <div class="col-md-6">
+                            <div class="atbd_info_title"><i class="fa fa-calendar" aria-hidden="true"></i>
+                              Start date:</div>
+                            <div class="atbd_info">{{eventHeaderData.start_date}}</div>
+                          </div>
+                          <div class="col-md-6">
+
+                            <div class="atbd_info_title"><i class="fa fa-calendar" aria-hidden="true"></i>
+                              End date:</div>
+                            <div class="atbd_info">{{eventHeaderData.end_date}}</div>
+                          </div>
+                        </div>
+                      </li>
+                      <li *ngIf="eventHeaderData.duration">
+                        <div class="atbd_info_title"><i class="fa fa-clock-o" aria-hidden="true"></i>
+                          Duration:</div>
+                        <div class="atbd_info">{{eventHeaderData.duration.description}}</div>
+                      </li>
+
+                      <li *ngIf="eventHeaderData.volunteers_needed">
+                        <div class="atbd_info_title"><i class="fa fa-users" aria-hidden="true"></i>
+                          Volunteers needed:</div>
+                        <div class="atbd_info">{{eventHeaderData.volunteers_needed}}</div>
+                      </li>
+
+                      <li *ngIf="eventHeaderData.spaces_available">
+                        <div class="atbd_info_title"><i class="fa fa-user-plus" aria-hidden="true"></i>
+                          Spaces available:</div>
+                        <div class="atbd_info">{{eventHeaderData.spaces_available}}</div>
+                      </li>
+
+                      <li *ngIf="eventHeaderData.estimated_hours || eventHeaderData.average_hours_per_day"
+                        style="display: inline;">
+                        <div class="row" style="margin-left: 1px; margin-top: -17px;">
+                          <div class="col-md-6">
+                            <div class="atbd_info_title"><i class="fa fa-hourglass-o" aria-hidden="true"></i>
+                              Estimated working hours:</div>
+                            <div class="atbd_info">{{eventHeaderData.estimated_hours}} hrs</div>
+                          </div>
+                          <div class="col-md-6">
+
+                            <div class="atbd_info_title"><i class="fa fa-hourglass-half" aria-hidden="true"></i>
+                              Average working hours per day:</div>
+                            <div class="atbd_info">{{eventHeaderData.average_hours_per_day}} hrs</div>
+                          </div>
+                        </div>
+                      </li>
+
+                      <li *ngIf="eventHeaderData.group_size">
+                        <div class="atbd_info_title"><i class="fa fa-users" aria-hidden="true"></i>
+                          Groups size:</div>
+                        <div class="atbd_info">{{eventHeaderData.group_size.description}}</div>
+                      </li>
+
+                      <li *ngIf="eventHeaderData.great_for">
+                        <div class="atbd_info_title"><i class="fa fa-address-card-o" aria-hidden="true"></i>
+                          Great for people:</div>
+                        <div class="atbd_info">{{eventHeaderData.great_for.description}}</div>
+                      </li>
+
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+          <br>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="atbd_content_module">
+                <h4><i class="fa fa-map-marker" aria-hidden="true"></i> 
+                  Location</h4>
+                <hr>
+                <div class="atbdb_content_module_contents">
+                  <div class="atbd_contact_info">
+                    <div *ngIf="!eventHeaderData.is_virtual; else virtual_content">
+                      <ul>
+                        <li *ngIf="eventHeaderLocationData.location">
+                          <div class="atbd_info_title">Country:</div>
+                          <div class="atbd_info">{{eventHeaderLocationData.location.country.name}}</div>
+                        </li>
+                        <li *ngIf="eventHeaderLocationData.location">
+                          <div class="atbd_info_title">City:</div>
+                          <div class="atbd_info">{{eventHeaderLocationData.location.name}}</div>
+                        </li>
+                        <li *ngIf="eventHeaderLocationData.address">
+                          <div class="atbd_info_title">Address:</div>
+                          <div class="atbd_info">{{eventHeaderLocationData.address}}</div>
+                        </li>
+                        <li *ngIf="eventHeaderLocationData.address">
+                          <div class="atbd_info_title">Google Maps Link:</div>
+                          <div class="atbd_info"><a href="{{eventHeaderLocationData.postal_code}}"
+                              target="_blank">{{eventHeaderLocationData.postal_code | slice:0:55}}</a></div>
+                        </li>
+                      </ul>
+                    </div>
+                    <ng-template #virtual_content>
+                      <div style="margin-bottom: -3px;margin-left: 15px; font-size: 20px;">This Volunteering Event is
+                        VIRTUAL</div>
+                      <ul>
+                        <li *ngIf="eventHeaderData">
+                          <div class="atbd_info_title">Virtual Event Information:</div>
+                          <div class="atbd_info">{{eventHeaderData.virtual_info}}</div>
+                        </li>
+                      </ul>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="atbd_content_module">
+                <h4><i class="fa fa-check-square-o" aria-hidden="true"></i>
+                  Requirements</h4>
+                <hr>
+                <div class="atbdb_content_module_contents">
+                  <div class="atbd_contact_info">
+                    <ul>
+                      <li *ngIf="eventHeaderRequirementsData.driving_license">
+                        <div class="atbd_info_title">Driving License:</div>
+                        <div class="atbd_info">{{eventHeaderRequirementsData.driving_license}}</div>
+                      </li>
+                      <li *ngIf="eventHeaderRequirementsData.minimum_age">
+                        <div class="atbd_info_title">Minimum age:</div>
+                        <div class="atbd_info">{{eventHeaderRequirementsData.minimum_age}}</div>
+                      </li>
+                      <li *ngIf="eventHeaderRequirementsData.languages">
+                        <div class="atbd_info_title">Languages:</div>
+                        <div class="atbd_info">{{eventHeaderRequirementsData.languages}}</div>
+                      </li>
+                      <li *ngIf="eventHeaderRequirementsData.other">
+                        <div class="atbd_info_title">Other:</div>
+                        <div class="atbd_info">{{eventHeaderRequirementsData.other}}</div>
+                      </li>
+                      <li *ngIf="eventHeaderData.skills_needed">
+                        <div class="atbd_info_title">Skills Needed:</div>
+                        <div class="atbd_info">{{eventHeaderData.skills_needed}}</div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="atbd_content_module">
+                <h4><i class="fa fa-file-o" aria-hidden="true"></i>
+                  Additional Information</h4>
+                <hr>
+                <div class="atbdb_content_module_contents">
+                  <div class="atbd_contact_info">
+                    <ul>
+                      <li *ngIf="eventHeaderData.sleeping">
+                        <div class="atbd_info_title"><i class="fa fa-bed" aria-hidden="true"></i>
+                          Sleeping:</div>
+                        <div class="atbd_info">{{eventHeaderData.sleeping}}</div>
+                      </li>
+                      <li *ngIf="eventHeaderData.food">
+                        <div class="atbd_info_title"><i class="fa fa-cutlery" aria-hidden="true"></i>
+                          Food:</div>
+                        <div class="atbd_info">{{eventHeaderData.food}}</div>
+                      </li>
+                      <li *ngIf="eventHeaderData.transport">
+                        <div class="atbd_info_title"><i class="fa fa-car" aria-hidden="true"></i>
+                          Transport:</div>
+                        <div class="atbd_info">{{eventHeaderData.transport}}</div>
+                      </li>
+                      <li *ngIf="eventHeaderData.benefits">
+                        <div class="atbd_info_title"><i class="fa fa-plus" aria-hidden="true"></i>
+                          Benefits:</div>
+                        <div class="atbd_info">{{eventHeaderData.benefits}}</div>
+                      </li>
+                      <li *ngIf="eventHeaderAssets.length > 0">
+                        <div class="atbd_info_title"><i class="fa fa-files-o" aria-hidden="true"></i>
+                          Assets:</div>
+                        <div class="atbd_info" style="margin-left: -45px;">
+                          <ul class="list-unstyled" *ngFor="let asset of eventHeaderAssets">
+                            <li
+                              style="float: left; border: 1px solid rgba(235, 213, 235, 0.7);border-radius: 0.26667rem;">
+                              <button (click)="downloadCV(asset.url)"
+                                *ngIf="asset.url && asset.url.substr(asset.url.length - 3) != 'pdf'"
+                                class="btn bg-primary-color" style="float: left;">
+                                {{asset.asset_name}}
+                              </button>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="vr_line"></div>
+        <div class="col_md-4" style="padding-left: 10px;padding-right: 10px;">
+
+          <div class="atbd_contact_info1">
+            <ul>
+              <li *ngIf="eventHeaderData.status">
+                <div class="atbd_info_title">Event status</div>
+                <div class="atbd_info">{{eventHeaderData.status.description}}</div>
+              </li>
+              <hr style="margin-left: -20px;">
+              <li *ngIf="eventHeaderData.deadline">
+                <div class="atbd_info_title">Application deadline</div>
+                <div class="atbd_info">{{eventHeaderData.deadline}}</div>
+              </li>
+            </ul>
+          </div>
+
+          <div *ngIf="isOrganization; else other_con">
+            <button class="dropdown-item" class="btn btn-grad btn-lg" 
+            data-toggle="modal"
+                  data-target="#invite-volunteer" >Invite Volunteer</button>
+          </div>
+          <ng-template #other_con>
+            <button class="dropdown-item" class="btn btn-grad btn-lg" type="submit" (click)="applyToEvent()">Apply Here</button>
+           </ng-template>  
+
+          <br><br>
+          <div class="atbd_contact_info1">
+            <ul>
+              <li *ngIf="eventHeaderData.contacts">
+                <div class="atbd_info_title">Contacts</div>
+                <div class="atbd_info">
+                  <ul *ngFor="let contact of eventHeaderContacts">
+                    <li>
+                      <div class="contact_item">
+                          <ul>
+                            <li>{{contact.name}}</li>
+                            <li>{{contact.email | slice:0:25}}</li>
+                            <li>{{contact.phone_number}}</li>
+                            <li><a href="{{contact.facebook}}"
+                              target="_blank">{{contact.facebook | slice:0:20}}</a></li>
+                            <li><a href="{{contact.linkedIn}}"
+                              target="_blank">{{contact.linkedIn | slice:0:20}}</a></li>
+                            <li>{{contact.skype}}</li>
+                          </ul>   
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+
+<div class="modal fade" id="moda_claim_listing" tabindex="-1" role="dialog" aria-labelledby="claim_listing_label"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="claim_listing_label"><i class="la la-check-square"></i> Edit Volunteering Event
+        </h5>
+      </div>
+      <div class="modal-body">
+        <form action="/">
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                * Event Title
+                <input type="text" placeholder="Insert title" class="form-control" required onFocusOut
+                  (focusout)="eventHeaderData.title ? editEvent(eventHeaderData.title, 'title'): this.toastr.warning('Mandatory field')"
+                  [(ngModel)]="eventHeaderData.title" [ngModelOptions]="{standalone: true}">
+              </div>
+              <div class="col-md-6">
+                Description
+                <input type="text" placeholder="Insert description" class="form-control"
+                  (focusout)="editEvent(eventHeaderData.description, 'description')"
+                  [(ngModel)]="eventHeaderData.description" [ngModelOptions]="{standalone: true}">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mb-3">
+            <div class="row">
+              <div class="col-md-12">
+                * Categories
+                <ng-select bindLabel="description" dropdownPosition="bottom"
+                  (change)="editEvent(eventHeaderData.category.value, 'category')" (open)="getAllCategories()"
+                  [(ngModel)]="eventHeaderData.category" placeholder="Select category" [items]="categories"
+                  [ngModelOptions]="{standalone: true}">
+                </ng-select>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="form-group mb-3">
+            <div class="row">
+              <div class="col-md-12">
+                <h6>Location</h6>
+                <div>
+                  <label for="virtual">Is the event virtual ?</label>&nbsp;
+                  <input type="checkbox" [(ngModel)]="eventHeaderData.is_virtual" name="virtual" id="is_virtual"
+                    value="is_virtual" [ngModelOptions]="{standalone: true}"
+                    (focusout)="editEvent(eventHeaderData.is_virtual, 'is_virtual')">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mb-3 " *ngIf="!eventHeaderData.is_virtual;else other_content">
+            <div class="row">
+              <div class="col-md-12">
+                * City
+                <ng-select bindLabel="name" dropdownPosition="bottom"
+                  (change)="editEventLocation(eventHeaderLocationData.location.name, 'city')" (open)="getAllCities()"
+                  [(ngModel)]="eventHeaderLocationData.location" placeholder="Select city" [items]="cities"
+                  [ngModelOptions]="{standalone: true}">
+                </ng-select>
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 10px;">
+              <div class="col-md-6">
+                Address
+                <input type="text" placeholder="Insert address" class="form-control"
+                  (focusout)="editEventLocation(eventHeaderLocationData.address, 'address')"
+                  [(ngModel)]="eventHeaderLocationData.address" [ngModelOptions]="{standalone: true}">
+              </div>
+              <div class="col-md-6">
+                Google Maps URL
+                <input type="text" placeholder="Insert Google Maps URL" class="form-control"
+                  (focusout)="editEventLocation(eventHeaderLocationData.postal_code, 'postal_code')"
+                  [(ngModel)]="eventHeaderLocationData.postal_code" [ngModelOptions]="{standalone: true}">
+              </div>
+            </div>
+          </div>
+          <ng-template #other_content>
+            Virtual Event Informations
+            <input type="text" placeholder="Insert virtual event info" class="form-control"
+              (focusout)="editEvent(eventHeaderData.virtual_info, 'virtual_info')"
+              [(ngModel)]="eventHeaderData.virtual_info" [ngModelOptions]="{standalone: true}">
+          </ng-template>
+          <hr>
+
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                Application Deadline
+                <input type="date" data-date-format="DD MMMM YYYY" [ngModelOptions]="{standalone: true}"
+                  [(ngModel)]='eventHeaderData.deadline' onFocusOut class="form-control"
+                  (focusout)="editEvent(eventHeaderData.deadline, 'deadline')">
+              </div>
+              <div class="col-md-6">
+                Volunteers Needed
+                <input type="text" placeholder="Number of volunteers needed" class="form-control"
+                  [(ngModel)]="eventHeaderData.volunteers_needed" [ngModelOptions]="{standalone: true}"
+                  (focusout)="editEvent(eventHeaderData.volunteers_needed, 'volunteers_needed')">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                Start Date
+                <input type="date" data-date-format="DD MMMM YYYY" [ngModelOptions]="{standalone: true}"
+                  [(ngModel)]='eventHeaderData.start_date' onFocusOut class="form-control"
+                  (focusout)="editEvent(eventHeaderData.start_date, 'start_date')">
+              </div>
+              <div class="col-md-6">
+                End Date
+                <input type="date" data-date-format="DD MMMM YYYY" [ngModelOptions]="{standalone: true}"
+                  [(ngModel)]='eventHeaderData.end_date' onFocusOut class="form-control"
+                  (focusout)="editEvent(eventHeaderData.end_date, 'end_date')">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-12">
+                Duration
+                <ng-select (open)="getAllDurations()" [items]="durations" placeholder="Select duration"
+                  bindLabel="description" [(ngModel)]="eventHeaderData.duration" [ngModelOptions]="{standalone: true}"
+                  dropdownPosition="bottom" (change)="editEvent(eventHeaderData.duration.value, 'duration')">
+                </ng-select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                Estimated Work Hours
+                <input type="text" placeholder="Insert estimated hours" class="form-control"
+                  [(ngModel)]="eventHeaderData.estimated_hours" [ngModelOptions]="{standalone: true}"
+                  (focusout)="editEvent(eventHeaderData.estimated_hours, 'estimated_hours')">
+              </div>
+              <div class="col-md-6">
+                Estimated Hours per Day
+                <input type="text" placeholder="Insert estimated hours per day" class="form-control"
+                  [(ngModel)]="eventHeaderData.average_hours_per_day" [ngModelOptions]="{standalone: true}"
+                  (focusout)="editEvent(eventHeaderData.average_hours_per_day, 'average_hours_per_day')">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-12">
+                Event Status
+                <ng-select (open)="getAllStatuses()" [items]="eventStatuses" placeholder="Select event status"
+                  bindLabel="description" [(ngModel)]="eventHeaderData.status" [ngModelOptions]="{standalone: true}"
+                  (change)="editEvent(eventHeaderData.status.value, 'status')">
+                </ng-select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                Great For
+                <ng-select (open)="getAllGreatFor()" [items]="greatFor" placeholder="Select great for"
+                  bindLabel="description" [(ngModel)]="eventHeaderData.great_for" [ngModelOptions]="{standalone: true}"
+                  (change)="editEvent(eventHeaderData.great_for.value, 'great_for')">
+                </ng-select>
+              </div>
+              <div class="col-md-6">
+                Group Size
+                <ng-select (open)="getAllGroupSize()" [items]="groupSize" placeholder="Select group size"
+                  bindLabel="description" [(ngModel)]="eventHeaderData.group_size" [ngModelOptions]="{standalone: true}"
+                  (change)="editEvent(eventHeaderData.group_size.value, 'group_size')">
+                </ng-select>
+              </div>
+            </div>
+          </div>
+          <hr>
+
+          <h6>Requirements</h6>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                Driving License
+                <input type="text" placeholder="Driving license" class="form-control"
+                  [(ngModel)]="eventHeaderRequirementsData.driving_license" [ngModelOptions]="{standalone: true}"
+                  (change)="editEventRequirements(eventHeaderRequirementsData.driving_license, 'driving_license')">
+              </div>
+              <div class="col-md-6">
+                Minimum age
+                <input type="text" placeholder="Minimum age" class="form-control"
+                  [(ngModel)]="eventHeaderRequirementsData.min_age" [ngModelOptions]="{standalone: true}"
+                  (change)="editEventRequirements(eventHeaderRequirementsData.min_age, 'min_age')">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                Languages
+                Array of languages
+              </div>
+              <div class="col-md-6">
+                Other
+                Array of Other data
+              </div>
+            </div>
+          </div>
+
+          <hr>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                Sleeping
+                <input type="text" placeholder="Insert sleeping info" class="form-control"
+                  [(ngModel)]="eventHeaderData.sleeping" [ngModelOptions]="{standalone: true}"
+                  (focusout)="editEvent(eventHeaderData.sleeping, 'sleeping')">
+              </div>
+              <div class="col-md-6">
+                Food
+                <input type="text" placeholder="Insert food info" class="form-control"
+                  [(ngModel)]="eventHeaderData.food" [ngModelOptions]="{standalone: true}"
+                  (focusout)="editEvent(eventHeaderData.food, 'food')">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                Transport
+                <input type="text" placeholder="Insert transport info" class="form-control"
+                  [(ngModel)]="eventHeaderData.transport" [ngModelOptions]="{standalone: true}"
+                  (focusout)="editEvent(eventHeaderData.transport, 'transport')">
+              </div>
+              <div class="col-md-6">
+                Benefits
+                <input type="text" placeholder="Insert benefits info" class="form-control"
+                  [(ngModel)]="eventHeaderData.benefits" [ngModelOptions]="{standalone: true}"
+                  (focusout)="editEvent(eventHeaderData.benefits, 'benefits')">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                Skills needed
+                Array of skills
+              </div>
+              <div class="col-md-6">
+                Additional tags
+                How do Insert array od tags
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-12">
+                Notes
+                <textarea placeholder="Insert notes" class="form-control" rows="2" [(ngModel)]="eventHeaderData.notes"
+                  [ngModelOptions]="{standalone: true}"
+                  (focusout)="editEvent(eventHeaderData.notes, 'notes')"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-12">
+                Contacts
+              <ng-select (open)="getOrganizationContacts()" [items]="organization_contacts" placeholder="Select Contacts"
+                [multiple]="true"  (change)="editEventContacts()"
+                bindLabel="name" [(ngModel)]="eventHeaderContacts" [ngModelOptions]="{standalone: true}">
+              </ng-select>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-secondary btn-sm" data-dismiss="modal" id="closeEdit">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="atbdp-report-abuse-modal" tabindex="-1" role="dialog" aria-hidden="true"
+  aria-labelledby="atbdp-report-abuse-modal-label">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form action="/" id="atbdp-report-abuse-form" class="form-vertical">
+        <div class="modal-header">
+          <h3 class="modal-title" id="atbdp-report-abuse-modal-label">Delete Volunteering Event</h3>
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete the Volunteering Event ?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" id="closeDelete">No</button>
+          <button type="submit" class="btn btn-secondary btn-sm" (click)="deleteEvent()">Yes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="invite-volunteer" tabindex="-1" role="dialog" aria-hidden="true"
+  aria-labelledby="invite-volunteer-label">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form action="/" id="atbdp-report-abuse-form" class="form-vertical">
+        <div class="modal-header">
+          <h3 class="modal-title" id="invite-volunteer-label">Invite Volunteers</h3>
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete the Volunteering Event ?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" id="closeDelete">No</button>
+          <button type="submit" class="btn btn-secondary btn-sm" (click)="deleteEvent()">Yes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppComponent } from '../app.component';
 import { VolunteeringEventsService } from '../volunteering-events/volunteering-events.service';
 
 @Component({
@@ -10,14 +11,15 @@ export class HomeComponent implements OnInit {
 
   volunteering_events:[];
 
-  constructor(private eventsService: VolunteeringEventsService) { }
+
+  constructor(private eventsService: VolunteeringEventsService, private globals: AppComponent) { }
 
   ngOnInit(): void {
     this.getEvents();
   }
 
   getEvents() {
-    this.eventsService.getEvents().subscribe(
+    this.eventsService.getEvents(this.globals.user.accessToken).subscribe(
             (data) => {
               this.volunteering_events =  data.slice(0, 3);
               //console.log(this.volunteering_events);

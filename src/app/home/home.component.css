@@ -10,9 +10,7 @@
 	color: #ffffff;
 	font-size: 26px;
 }
-.navbar-brand:hover {
-	color: #EB233C;
-}
+
 .navbar-toggle {
 	background-color: #fff;
 }
@@ -20,7 +18,7 @@
 	background-color: RGBA(0, 0, 0, 0.48);
 }
 .banner {
-	background-attachment: fixed;
+	/* background-attachment: fixed; */
 	background-color: #645862;
 	background-image: url("../../assets/img/intro-background.jpg");
 	background-position: top center;
@@ -93,21 +91,28 @@
 	line-height: 35px;
 	
 }
+
+.view-more {background-image: linear-gradient(to right, #DC2424 0%, #4A569D  51%, #DC2424  100%)}
+
 .view-more {
-	padding: 12px 35px;
-	color: #ffffff;
-	text-decoration: none;
-	display: inline-block;
-	border-radius: 25px 25px 25px 25px;
-	font-size: 15px;
-	background-color: #EB233C;
-	margin-top: 20px;
+   margin: 10px;
+   padding: 15px 45px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   color: white;            
+   box-shadow: 0 0 20px #eee;
+   border-radius: 25px 25px 25px 25px;
+   font-size: 18px;
 	
 }
 .view-more:hover {
-	text-decoration: none;
-	color: #ffffff;
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
 }
+
 
 .nospace{margin:0; padding:0; list-style:none;}
 .article {display:block; margin:0; padding:0;}

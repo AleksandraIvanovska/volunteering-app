@@ -1,0 +1,60 @@
+section {
+    width: 100%;
+	height: 100%;
+    background-color: rgba(235, 213, 235, 0.26);
+}
+
+.volunteer {
+    padding: 20px 20px;
+	background-color: rgba(235, 213, 235, 0.26);
+	width: 100%;
+}
+
+.pic {
+    height: 200px;
+	width: 200px;
+}
+
+.atbd_content_module {
+    width: 620px;
+}
+
+
+.btn-edit {background-image: linear-gradient(to right, #7474BF 0%, #348AC7  51%, #7474BF  100%)}
+.btn-edit {
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   color: white;            
+   box-shadow: 0 0 20px #eee;
+   border-radius: 10px;
+ }
+ .btn-edit:hover {
+   color: #fff;
+   text-decoration: none;
+ }
+
+
+.pic1 {
+    height: 45px;
+    width: 45px;
+}
+
+.btn-delete {background-image: linear-gradient(to right, #e52d27 0%, #b31217  51%, #e52d27  100%)}
+  .btn-delete {
+	 /* margin: 10px;
+	 padding: 15px 45px;
+	 text-align: center; */
+	 text-transform: uppercase;
+	 transition: 0.5s;
+	 background-size: 200% auto;
+	 color: white;            
+	 box-shadow: 0 0 20px #eee;
+	 border-radius: 10px;
+   }
+   .btn-delete:hover {
+	/* background-position: right center;  change the direction of the change here */
+	 color: #fff;
+	 text-decoration: none;
+   }
+

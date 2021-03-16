@@ -1,19 +1,24 @@
+section {
+	background-color: rgba(235, 213, 235, 0.26);
+}
+
 .banner {
-	background-attachment: fixed;
-	/* background-color: #645862; */
-	background-image: url("../../assets/img/handsup.jpg");
+	background-image: url("../../assets/img/NationalNews_01_International-Volunteers-Day.jpg");
+	/* background-image: linear-gradient(red, yellow, green); */
 	background-position: top center;
-	background-repeat: no-repeat;
 	background-size: cover;
 	color: white;
 	cursor: default;
 	text-align: center;
 	width: 100%;
+	height: 100%;
 	float: left;
+		
 }
+
 .bg-overlay {
 	padding: 280px 0 220px;
-	/* background-color: RGBA(50, 5, 15, 0.25); */
+	 background-color: RGBA(50, 0, 50, 0.25);
 }
 .banner-text h2 {
 	font-size: 50px;
@@ -31,3 +36,102 @@
 	float: left;
 	width: 100%;
 }
+
+.edit-delete {
+	float: right;
+}
+
+.vr_line {
+	border-left:1px solid grey;	
+}
+
+
+
+.btn-grad {background-image: linear-gradient(to right, #DC2424 0%, #4A569D  51%, #DC2424  100%)}
+.btn-grad {
+   margin: 10px;
+   padding: 15px 45px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   color: white;            
+   box-shadow: 0 0 20px #eee;
+   border-radius: 10px;
+   display: block;
+   font-size: 20px;
+ }
+ .btn-grad:hover {
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
+ }
+
+
+  .btn-delete {background-image: linear-gradient(to right, #e52d27 0%, #b31217  51%, #e52d27  100%)}
+  .btn-delete {
+	 /* margin: 10px;
+	 padding: 15px 45px;
+	 text-align: center; */
+	 text-transform: uppercase;
+	 transition: 0.5s;
+	 background-size: 200% auto;
+	 color: white;            
+	 box-shadow: 0 0 20px #eee;
+	 border-radius: 10px;
+   }
+   .btn-delete:hover {
+	/* background-position: right center;  change the direction of the change here */
+	 color: #fff;
+	 text-decoration: none;
+   }
+
+
+
+
+   .btn-edit {background-image: linear-gradient(to right, #7474BF 0%, #348AC7  51%, #7474BF  100%)}
+   .btn-edit {
+	  /* margin: 10px;
+	  padding: 15px 45px;
+	  text-align: center; */
+	  text-transform: uppercase;
+	  transition: 0.5s;
+	  background-size: 200% auto;
+	  color: white;            
+	  box-shadow: 0 0 20px #eee;
+	  border-radius: 10px;
+	}
+	.btn-edit:hover {
+	 /* background-position: right center;  change the direction of the change here */
+	  color: #fff;
+	  text-decoration: none;
+	}
+ 
+
+	.event_header {
+		float: left;
+		margin-left: 10px;
+		font-weight: 500;
+		text-decoration: none;
+		font-family: "system-ui";
+	}
+
+	
+
+
+  .assets {
+	  display: inline;
+  }
+
+  .list-unstyled {
+	
+	list-style: none;
+  }
+
+
+  .contact_item {
+	border: 1px solid rgba(235, 213, 235, 0.7);border-radius: 0.26667rem;
+	margin-left: -25px;
+	padding: 2px;
+	font-size: 17px;
+  }

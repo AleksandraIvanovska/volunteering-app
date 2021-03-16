@@ -1,3 +1,64 @@
 a:hover {
     cursor: pointer;
   }
+
+  a {
+    color: white;
+  }
+
+
+  .vr_line {
+    border-left:1px solid rgba(255,255,255, .3);
+    height: 35px;
+    margin-right: 8px;
+  }
+
+
+  .navbar-color {
+    background-image: linear-gradient(#EB233C 0%, #500000 50%, #1C061A 100%);
+    opacity: 0.9;
+  }
+  .navbar-color  {
+     transition: 0.5s;
+     color: white;             
+  }
+
+  .logo {
+    background: url("../../assets/img/Volunteer-Icon.png");
+ 
+  }
+
+  .navbackground {
+    
+
+    position:relative;
+    background-image:  url("../../assets/img/intro-background.jpg");
+    background-color: RGBA(15, 9, 20, 0.84);
+   
+    
+  }
+
+
+  i {
+    color: white;
+  }
+
+  .dropdown-item {
+    color: black;
+  }
+
+
+  
+
+
+  
+  
+  
+
+
+
+
+
+  
+
+  

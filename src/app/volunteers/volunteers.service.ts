@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -11,36 +11,47 @@ export class VolunteersService {
 
   constructor(private http: HttpClient) { }
 
-  getVolunteers(cityName?, countryName?, search?): Observable<any> {
+  getVolunteers(accessToken,cityName?, countryName?, search?): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    })
 
     if (search) {
-      return this.http.get(environment.backendURL + '/api/volunteers' + '?search=' + search);
+      return this.http.get(environment.backendURL + '/api/volunteers' + '?search=' + search, { headers: headers });
   }
 
     if(cityName && countryName) {
-      return this.http.get(environment.backendURL + '/api/volunteers' + '?country=' + countryName + '&city=' + cityName);
+      return this.http.get(environment.backendURL + '/api/volunteers' + '?country=' + countryName + '&city=' + cityName, { headers: headers });
     }
     else if(!cityName && countryName) {
-      console.log('Vleze vo contru');
-      return this.http.get(environment.backendURL + '/api/volunteers' + '?country=' + countryName);  
+      return this.http.get(environment.backendURL + '/api/volunteers' + '?country=' + countryName, { headers: headers });  
     }
     else if(cityName && !countryName) {
-      return this.http.get(environment.backendURL + '/api/volunteers' + '?city=' + cityName);
+      return this.http.get(environment.backendURL + '/api/volunteers' + '?city=' + cityName, { headers: headers });
     }
     else {
-      return this.http.get(environment.backendURL + '/api/volunteers');
+      return this.http.get(environment.backendURL + '/api/volunteers', { headers: headers });
     }
 
   }
 
-  getcities(): Observable<any>
+  getcities(accessToken): Observable<any>
   {
-    return this.http.get(environment.backendURL + '/api/resources/cities');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    })
+    return this.http.get(environment.backendURL + '/api/resources/cities', { headers: headers });
   }
 
-  getCountries(): Observable<any>
+  getCountries(accessToken): Observable<any>
   {
-    return this.http.get(environment.backendURL + '/api/resources/countries');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    })
+    return this.http.get(environment.backendURL + '/api/resources/countries', { headers: headers });
   }
 
 }

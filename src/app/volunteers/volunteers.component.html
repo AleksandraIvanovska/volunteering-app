@@ -65,7 +65,7 @@
         <br>
         <div class="row">
             <div class="col-lg-4 col-md-6" *ngFor="let volunteer of volunteers">
-                <div class="grid-single">
+                <div class="grid-single" style="cursor: pointer;" (click)="openVolunteerByUuid(volunteer.uuid)">
                     <div class="card post--card shadow-sm">
                         <!-- <figure >
                             <img class="pic" alt=""> 

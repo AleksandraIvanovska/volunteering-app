@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-//import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-//import { TestService } from './test.service';
-
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -12,9 +10,25 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'volunteering-app';
   products: null
+  volunteeringEvent: null
+  organization: null
+  volunteer: null
+
+  loggedUuid: null;
+
+  user: any = {
+    emailVerifiedAt: null,
+    accessToken: null,
+    name: null,
+    email: null,
+    id: null,
+    uuid: null
+  }
 
   constructor(
-   // private route: ActivatedRoute,
-   // private testService: TestService,
+    private activatedRoute: ActivatedRoute
   ) { }
+
+
+
 }

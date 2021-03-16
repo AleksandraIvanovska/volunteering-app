@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { OrganizationsService } from '../organizations/organizations.service';
 import { VolunteeringEventService } from '../volunteering-event/volunteering-event.service';
 import { ToastrService } from 'ngx-toastr';
+import { AppComponent } from '../app.component';
 
 
 @Component({
@@ -13,28 +14,28 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class VolunteeringEventsComponent implements OnInit {
 
-  volunteering_events:[];
+  volunteering_events: [];
   search: null;
   selectedCategory: null;
   selectedCity: null;
   selectedCountry: null;
   selectedOrganization: null;
   organizations: any = [];
-  cities : any = [];
-  countries : any = [];
-  categories : any = [];
+  cities: any = [];
+  countries: any = [];
+  categories: any = [];
   selectVirtial = null;
-  start_date : any = null;
+  start_date: any = null;
   greatFor: any = [];
   durations: any = [];
   selectedGreatFor: null;
   selectedDuration: null;
   event = null;
   eventHeaderData: any = {};
-  
+
 
   constructor(private eventsService: VolunteeringEventsService, private router: Router, private organizationsService: OrganizationsService,
-    private voluneeringEventService: VolunteeringEventService, public toastr: ToastrService) { }
+    private voluneeringEventService: VolunteeringEventService, public toastr: ToastrService, private globals: AppComponent) { }
 
   ngOnInit(): void {
     document.body.scrollTop = 0;
@@ -45,100 +46,98 @@ export class VolunteeringEventsComponent implements OnInit {
   }
 
   getAllEvents() {
-    this.eventsService.getEvents().subscribe(
-            (data) => {
-              this.volunteering_events = data;
-              //console.log(this.volunteering_events);
-         }
+    this.eventsService.getEvents(this.globals.user.accessToken).subscribe(
+      (data) => {
+        this.volunteering_events = data;
+        //console.log(this.volunteering_events);
+      }
     )
   }
 
   applySearch(applySearch) {
-    this.eventsService.getEvents(applySearch, null, null, null, null, null, null, null, null).subscribe(
-      (data) =>
-      {
+    this.eventsService.getEvents(this.globals.user.accessToken,applySearch, null, null, null, null, null, null, null, null).subscribe(
+      (data) => {
         this.volunteering_events = data;
       }
-   )
- }
+    )
+  }
 
 
- clearFilters() {
-  this.getAllEvents();
- }
+  clearFilters() {
+    this.getAllEvents();
+  }
 
 
 
-getAllCities() {
-  this.organizationsService.getcities().subscribe(
-    (data) => {
-      this.cities = data.slice(0, 1000);
-     // this.cities = data;
-    }
-  )
-}
+  getAllCities() {
+    this.organizationsService.getcities(this.globals.user.accessToken).subscribe(
+      (data) => {
+        this.cities = data.slice(0, 1000);
+        // this.cities = data;
+      }
+    )
+  }
 
-getAllCountries() {
-  this.organizationsService.getCountries().subscribe(
-    (data) => {
-      this.countries = data;
-    }
-  )
-}
+  getAllCountries() {
+    this.organizationsService.getCountries(this.globals.user.accessToken).subscribe(
+      (data) => {
+        this.countries = data;
+      }
+    )
+  }
 
-getAllCategories() {
-  this.organizationsService.getCategories().subscribe(
-    (data) => {
-      this.categories = data;
-      console.log(this.categories);
-    }
-  )
-}
+  getAllCategories() {
+    this.organizationsService.getCategories(this.globals.user.accessToken).subscribe(
+      (data) => {
+        this.categories = data;
+        console.log(this.categories);
+      }
+    )
+  }
 
-getAllOrganizations() {
-  this.organizationsService.getOrganizations().subscribe(
-    (data) => {
-      this.organizations = data;
-     // console.log(this.organizations);
-     // this.organizations = data.slice(0, 6);
+  getAllOrganizations() {
+    this.organizationsService.getOrganizations(this.globals.user.accessToken).subscribe(
+      (data) => {
+        this.organizations = data;
+        // console.log(this.organizations);
+        // this.organizations = data.slice(0, 6);
 
-    }
-  )
-}
+      }
+    )
+  }
 
-getAllDurations() {
-  this.eventsService.getDurations().subscribe(
-    (data) => {
-      this.durations = data;
-    }
-  )
-}
+  getAllDurations() {
+    this.eventsService.getDurations(this.globals.user.accessToken).subscribe(
+      (data) => {
+        this.durations = data;
+      }
+    )
+  }
 
-getAllGreatFor() {
-  this.eventsService.getGreatFor().subscribe(
-    (data) => {
-      this.greatFor = data;
-    }
-  )
-}
+  getAllGreatFor() {
+    this.eventsService.getGreatFor(this.globals.user.accessToken).subscribe(
+      (data) => {
+        this.greatFor = data;
+      }
+    )
+  }
 
-applyFilter(selectedCategory, selectedCity, selectedCountry, selectedOrganization, selectVirtial, start_date, selectedDuration, selectedGreatFor) {
-  this.eventsService.getEvents(null, selectedCity, selectedCountry, selectedCategory, selectedOrganization, selectVirtial, start_date, selectedDuration, selectedGreatFor).subscribe(
-    (ev) => 
-    {
-      this.volunteering_events = ev;
-    }
-  )
-}
+  applyFilter(selectedCategory, selectedCity, selectedCountry, selectedOrganization, selectVirtial, start_date, selectedDuration, selectedGreatFor) {
+    this.eventsService.getEvents(this.globals.user.accessToken,null, selectedCity, selectedCountry, selectedCategory, selectedOrganization, selectVirtial, start_date, selectedDuration, selectedGreatFor).subscribe(
+      (ev) => {
+        this.volunteering_events = ev;
+      }
+    )
+  }
 
-openEventByUuid(uuid) {
-
-  this.router.navigate(['/volunteeringEvent'],
-            {
-                queryParams: {
-                    uuid: uuid
-                }
-            });
-}
+  openEventByUuid(uuid) {
+    this.globals.volunteeringEvent = uuid;
+    this.router.navigate(['/volunteeringEvent'],
+      {
+        queryParams: {
+          uuid: uuid
+        }
+      });
+  }
 
 }

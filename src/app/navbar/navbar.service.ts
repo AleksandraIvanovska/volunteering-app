@@ -10,23 +10,65 @@ export class NavbarService {
 
   constructor(private http: HttpClient) { }
 
-  addEvent(body, accessToken): Observable<any> {
-    // const headers = new HttpHeaders({
-    //   'Content-Type': 'application/json',
-    //   Authorization: `Bearer ${accessToken}`
-    // })
-    //return this.httpClient.post(environment.backendURL + '/api/placvolunteeringEventses', body, { headers: headers });
-    return this.http.post(environment.backendURL + '/api/volunteeringEvents', body);
+  addEvent(accessToken,body): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    })
+    return this.http.post(environment.backendURL + '/api/volunteeringEvents', body, { headers: headers });
   }
 
-  getStatuses(): Observable<any>
+  getStatuses(accessToken): Observable<any>
   {
-    return this.http.get(environment.backendURL + '/api/resources?type=event_status_type');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    })
+    return this.http.get(environment.backendURL + '/api/resources?type=event_status_type', { headers: headers });
   }
 
-  getGroupSize(): Observable<any>
+  getGroupSize(accessToken): Observable<any>
   {
-    return this.http.get(environment.backendURL + '/api/resources?type=group_size_type');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    })
+    return this.http.get(environment.backendURL + '/api/resources?type=group_size_type', { headers: headers });
   }
+
+  login(body) {
+    return this.http.post(environment.backendURL + '/api/users/login', body);
+  }
+
+  register(body): Observable<any> {
+    return this.http.post<any>(environment.backendURL + '/api/users/register', body);
+  }
+
+  // resetPassword(body): Observable<any> {
+  //   return this.http.post<any>(environment.api + '/api/password/reset', body);
+  // }
+
+  // forgotPassword(body): Observable<any> {
+  //   return this.http.post<any>(environment.api + '/api/password/email', body);
+  // }
+
+  // verifyEmail(accessToken): Observable<any> {
+  //   const headers = new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     Authorization: `Bearer ${accessToken}`
+  //   })
+  //   return this.http.get(environment.api + '/api/email/resend', { headers: headers });
+  // }
+
+  getIsUserOrganization(accessToken): Observable<any>
+  {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    })
+    return this.http.get(environment.backendURL + '/api/users/isUserOrganization', { headers: headers });
+  }
+
+ 
 
 }

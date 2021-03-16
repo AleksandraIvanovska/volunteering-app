@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
@@ -12,11 +12,16 @@ export class VolunteeringEventsService {
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private http: HttpClient) { }
 
-  getEvents(search?, city?, country?, category?, organization?, virtual?, start_date?, duration?, great_for?): Observable<any> {
+  getEvents(accessToken,search?, city?, country?, category?, organization?, virtual?, start_date?, duration?, great_for?): Observable<any> {
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    })
 
     console.log(category);
     if (search) {
-      return this.http.get(environment.backendURL + '/api/volunteeringEvents' + '?search=' + search);
+      return this.http.get(environment.backendURL + '/api/volunteeringEvents' + '?search=' + search, { headers: headers });
     }
 
     if (city) {
@@ -64,17 +69,27 @@ export class VolunteeringEventsService {
       return this.http.get(environment.backendURL + '/api/volunteeringEvents' + '?great_for=' + great_for);
     }
 
-    return this.http.get(environment.backendURL + '/api/volunteeringEvents');
+    return this.http.get(environment.backendURL + '/api/volunteeringEvents', { headers: headers });
   }
 
-  getGreatFor(): Observable<any>
+  getGreatFor(accessToken): Observable<any>
   {
-    return this.http.get(environment.backendURL + '/api/resources/greatFor');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    })
+
+    return this.http.get(environment.backendURL + '/api/resources/greatFor', { headers: headers });
   }
 
-  getDurations(): Observable<any>
+  getDurations(accessToken): Observable<any>
   {
-    return this.http.get(environment.backendURL + '/api/resources/durations');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    })
+
+    return this.http.get(environment.backendURL + '/api/resources/durations', { headers: headers });
   }
 
 }

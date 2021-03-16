@@ -126,5 +126,8 @@
       }
     }
   },
-  "defaultProject": "volunteering-app"
+  "defaultProject": "volunteering-app",
+  "cli": {
+    "analytics": "8f9b8c8c-cef5-4c0b-927a-8ff6c76e04f4"
+  }
 }

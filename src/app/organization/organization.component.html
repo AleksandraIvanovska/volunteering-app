@@ -1,0 +1,702 @@
+<section>
+    <div class="organization">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7" style="padding-right: 30px;">
+
+                    <div *ngIf="organizationData.photo; else other_photo">
+                        <img src="{{organizationData.photo}}" class="pic" alt="">
+                    </div>
+                    <ng-template #other_photo>
+                        <img src="../../assets/img/org1.png" class="pic" alt="">
+                    </ng-template>
+
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <h4>{{organizationData.name}}</h4>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="edit-delete">
+                                <button type="submit" class="btn btn-edit btn" data-toggle="modal"
+                                    data-target="#moda_claim_listing">Edit Profile
+                                </button>
+                                &nbsp;
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="atbd_content_module">
+                                <h4>General Information</h4>
+                                <hr>
+                                <div class="atbdb_content_module_contents">
+                                    <div class="atbd_contact_info">
+                                        <ul>
+                                            <li *ngIf="organizationData.description">
+                                                <div class="atbd_info_title"><i class="fa fa-file-text-o"
+                                                        aria-hidden="true"></i>Description:</div>
+                                                <div class="atbd_info">{{organizationData.description}}</div>
+                                            </li>
+                                            <li *ngIf="organizationData.mission">
+                                                <div class="atbd_info_title"><i class="fa fa-rocket"
+                                                        aria-hidden="true"></i>Mission:</div>
+                                                <div class="atbd_info">{{organizationData.mission}}</div>
+                                            </li>
+                                            <li *ngIf="organizationCategories.length > 0">
+                                                <div class="atbd_info_title"><i class="fa fa-bookmark-o"
+                                                        aria-hidden="true"></i>
+                                                    Categories:</div>
+                                                <div class="atbd_info">
+                                                    <div *ngFor="let category of organizationCategories">
+                                                        <span>{{category.description}}</span> &nbsp;
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li *ngIf="organizationData.location">
+                                                <div class="atbd_info_title"><i class="fa fa-map-marker"
+                                                        aria-hidden="true"></i>
+                                                    Location:</div>
+                                                <div class="atbd_info">{{organizationData.location.city}} ,
+                                                    {{organizationData.location.county}}</div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="atbd_content_module">
+                                <h4>Social Media and Contact Info</h4>
+                                <hr>
+                                <div class="atbdb_content_module_contents">
+                                    <div class="atbd_contact_info">
+                                        <ul>
+                                            <li *ngIf="organizationData.website">
+                                                <div class="atbd_info_title"><i class="fa fa-globe"
+                                                        aria-hidden="true"></i>
+                                                    Website:</div>
+                                                <div class="atbd_info">{{organizationData.website}}</div>
+                                            </li>
+                                            <li *ngIf="organizationData.linkedIn">
+                                                <div class="atbd_info_title"><i class="fa fa-linkedin-square"
+                                                        aria-hidden="true"></i>
+                                                    LinkedIn:</div>
+                                                <div class="atbd_info">{{organizationData.linkedIn}}</div>
+                                            </li>
+                                            <li *ngIf="organizationData.email">
+                                                <div class="atbd_info_title"><i class="fa fa-envelope"
+                                                        aria-hidden="true"></i>
+                                                    Email:</div>
+                                                <div class="atbd_info">{{organizationData.email}}</div>
+                                            </li>
+                                            <li *ngIf="organizationData.phone_number">
+                                                <div class="atbd_info_title"><i class="fa fa-phone"
+                                                        aria-hidden="true"></i>
+                                                    Phone number:</div>
+                                                <div class="atbd_info">{{organizationData.phone_number}}</div>
+                                            </li>
+                                            <li *ngIf="organizationData.facebook">
+                                                <div class="atbd_info_title"><i class="fa fa-facebook-square"
+                                                        aria-hidden="true"></i>
+                                                    Facebook:</div>
+                                                <div class="atbd_info">{{organizationData.facebook}}</div>
+                                            </li>
+                                            <li *ngIf="organizationData.twitter">
+                                                <div class="atbd_info_title"><i class="fa fa-twitter-square"
+                                                        aria-hidden="true"></i>
+                                                    Twitter:</div>
+                                                <div class="atbd_info">{{organizationData.twitter}}</div>
+                                            </li>
+                                            <li *ngIf="organizationData.instagram">
+                                                <div class="atbd_info_title"><i class="fa fa-instagram"
+                                                        aria-hidden="true"></i>
+                                                    Instagram:</div>
+                                                <div class="atbd_info">{{organizationData.instagram}}</div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="atbd_content_module">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <h4>Organization Contacts</h4>
+                                    </div>
+
+                                    <div class="col-md-5">
+                                        <button data-target="#add-contact-modal" type="submit" data-toggle="modal"
+                                            class="btn btn-secondary btn-icon-left btn-sm not_empty btn-comment"
+                                            style="float: right;" (click)="addContactBar()">+ Add Contact</button>
+                                    </div>
+                                </div>
+
+                                <hr>
+                                <div class="atbdb_content_module_contents">
+                                    <div class="atbd_contact_info">
+                                        <ul *ngFor="let contact of organizationContacts;">
+                                            <li>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="row">
+                                                            <div style="float: left;">
+                                                                <div
+                                                                    *ngIf="contact.photo;then contact_photo else other_photo">
+                                                                </div>
+                                                                <ng-template #contact_photo>
+                                                                    <img src="{{contact.photo}}"
+                                                                        class="pic1 rounded-circle z-depth-2" alt="">
+                                                                </ng-template>
+                                                                <ng-template #other_photo>
+                                                                    <img src="../../assets/img/avatar.jpeg"
+                                                                        class="pic1 rounded-circle z-depth-2" alt="">
+                                                                </ng-template>
+                                                            </div>
+
+                                                            <div style="float: right;">
+                                                                <div
+                                                                    style="margin-top: 10px;margin-left: 15px;font-size: 18px; float: right;">
+                                                                    {{contact.name}}
+                                                                </div>
+                                                                <!-- <span >
+                                                                        {{contact.dob}}
+                                                                    </span>            -->
+                                                            </div>
+
+
+                                                        </div>
+                                                        <div class="row">
+                                                            <a style="cursor: pointer; margin-left: 565px;"
+                                                                (click)="deleteContact(contact.contact_uuid)">
+                                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                            </a>
+                                                        </div>
+
+
+                                                        <div class="row">
+                                                            <div style="float: left;">
+                                                                <div *ngIf="contact.email">
+                                                                    <label class="style-label">Email:
+                                                                        &nbsp;</label><span>{{contact.email |
+                                                                        slice:0:25}}</span>
+                                                                </div>
+                                                                <div *ngIf="contact.phone_number">
+                                                                    <label class="style-label">Phone number:
+                                                                        &nbsp;</label><span>{{contact.phone_number}}</span>
+                                                                </div>
+                                                                <div *ngIf="contact.linkedIn">
+                                                                    <label class="style-label">LinkedIn:
+                                                                        &nbsp;</label><a
+                                                                        href="{{contact.linkedIn}}">{{contact.linkedIn |
+                                                                        slice:0:15}}</a>
+                                                                </div>
+                                                            </div>
+
+                                                            <div style="float: right;">
+                                                                <div *ngIf="contact.linkedIn">
+                                                                    <label class="style-label">Twitter: &nbsp;</label><a
+                                                                        href="{{contact.linkedIn}}">{{contact.twitter |
+                                                                        slice:0:15}}</a>
+                                                                </div>
+                                                                <div *ngIf="contact.facebook">
+                                                                    <label class="style-label">Facebook:
+                                                                        &nbsp;</label><a
+                                                                        href="{{contact.facebook}}">{{contact.facebook |
+                                                                        slice:0:15}}</a>
+                                                                </div>
+                                                                <div *ngIf="contact.skype">
+                                                                    <label class="style-label">Skype:
+                                                                        &nbsp;</label><span>{{contact.skype}}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+
+                                            </li>
+                                            <hr>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="atbd_content_module">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <h4>Comments</h4>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label for="review_content"
+                                            class="btn btn-secondary btn-icon-left btn-sm not_empty btn-comment"
+                                            style="float: right;" (click)="addCommentBar()">+ Add Comment</label>
+                                    </div>
+                                </div>
+
+                                <hr>
+                                <div class="atbdb_content_module_contents">
+                                    <div id="client_review_list">
+                                        <div class="atbd_single_review atbdp_static"
+                                            *ngFor="let comment of resources.comments; let i = index">
+
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                    <i style="font-size: 30px;" class="fa fa-user-circle-o"
+                                                        aria-hidden="true"></i>
+                                                </div>
+                                                <div class="col_md-1">
+                                                    <h5 style="margin-top: 5px;">{{comment.creator}}</h5>
+                                                </div>
+
+                                            </div>
+                                            <div style="margin-top: 5px;">
+                                                <p>{{comment.body}}
+                                                </p>
+                                            </div>
+
+                                            <div class="review_content">
+                                                <div>
+                                                    <span class="review_time">{{comment.created_date}}</span>
+                                                    <a class="pull-right" style="cursor: pointer;"
+                                                        (click)="deleteComment(i, comment.comment_uuid)">
+                                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+
+                                                <hr>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row" *ngIf="organizationComments.length">
+                                            <div class="col-lg-12">
+                                                <nav class="navigation pagination d-flex justify-content-end"
+                                                    role="navigation">
+                                                    <div class="nav-links">
+                                                        <a class="prev page-numbers mr-0"
+                                                            *ngIf="0!=pagination.current-1"
+                                                            (click)="paggination(pagination.current-1)">
+                                                            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+
+                                                        </a>
+                                                        <div *ngFor="let i of pagination.max;let index = index">
+                                                            <a class="page-numbers"
+                                                                [ngClass]="{'current' : i == pagination.current}"
+                                                                (click)="paggination(i)">{{i}}</a>
+                                                        </div>
+                                                        <a class="next page-numbers"
+                                                            (click)="paggination(pagination.current+1)"
+                                                            *ngIf="pagination.max.length != pagination.current">
+                                                            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+
+                                                        </a>
+                                                    </div>
+                                                </nav>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+
+                    <div class="atbd_content_module atbd_review_form" *ngIf="showAddComment">
+                        <div class="atbd_content_module__tittle_area">
+                            <div class="atbd_area_title">
+
+
+                                <h5>Add Comment</h5>
+                                <div style="float: right; margin-top: -30px;">
+                                    <a style="cursor: pointer;" (click)="closeAddComment()">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                        <div class="atbdb_content_module_contents atbd_give_review_area">
+                            <form action="/" id="atbdp_review_form" method="post">
+                                <div class="form-group">
+                                    <textarea name="content" id="review_content" rows=2 class="form-control"
+                                        placeholder="Message" [(ngModel)]="comment.body"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="col-12">
+                                            <button class="btn btn-comment pull-right btn-sm" type="submit"
+                                                id="atbdp_review_form_submit" (click)="addComment()">Submit
+                                                Comment</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <button type="submit" class="btn btn-delete btn-sm" data-toggle="modal"
+                        data-target="#deactivate-profile-modal">Deactivate Profile</button>
+                </div>
+
+
+
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="atbd_content_module" style="width: 450px;">
+                                <h5><i class="fa fa-list" aria-hidden="true"></i>
+                                    &nbsp;Volunteering Events by this Organization</h5>
+                                <hr>
+                                <div class="atbdb_content_module_contents">
+                                    <div class="atbd_contact_info">
+                                        <ul *ngFor="let event of organizationEvents;">
+                                            <li *ngIf="event.title">
+
+                                                <div class="atbd_info"><a style="color: #3a7dfd; font-size: 25px;"
+                                                        href="">{{event.title}}</a></div>
+
+                                            </li>
+                                            <li *ngIf="event.category">
+                                                <div class="atbd_info_title">Category:</div>
+                                                <div class="atbd_info">{{event.category}}</div>
+
+                                            </li>
+                                            <li *ngIf="event.city; else other_virtual">
+                                                <div class="atbd_info_title">Location:</div>
+                                                <div class="atbd_info">{{event.city}}&nbsp;<span
+                                                        *ngIf="event.country">{{event.country}}</span></div>
+
+                                            </li>
+                                            <ng-template #other_virtual>
+                                                <li>
+                                                    <div class="atbd_info"><span
+                                                            style="background-color: #32cc6f;padding: 5px; border-radius: 3px;">Virtual
+                                                            Event</span> </div>
+                                                </li>
+                                            </ng-template>
+
+                                            <hr>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<div class="modal fade" id="moda_claim_listing" tabindex="-1" role="dialog" aria-labelledby="claim_listing_label"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="claim_listing_label"><i class="la la-check-square"></i> Edit Organization
+                </h5>
+            </div>
+            <div class="modal-body">
+                <form action="/">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                * Organization Name
+                                <input type="text" placeholder="Insert name" class="form-control" required onFocusOut
+                                    (focusout)="organizationData.name ? editOrganization(organizationData.name, 'name'): this.toastr.warning('Mandatory field')"
+                                    [(ngModel)]="organizationData.name" [ngModelOptions]="{standalone: true}">
+                            </div>
+                            <div class="col-md-6">
+                                Description
+                                <input type="text" placeholder="Insert description" class="form-control"
+                                    (focusout)="editOrganization(organizationData.description, 'description')"
+                                    [(ngModel)]="organizationData.description" [ngModelOptions]="{standalone: true}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                Mission
+                                <input type="text" placeholder="Insert mission" class="form-control"
+                                    (focusout)="editOrganization(organizationData.mission, 'mission')"
+                                    [(ngModel)]="organizationData.mission" [ngModelOptions]="{standalone: true}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                City
+                                <ng-select bindLabel="name" dropdownPosition="bottom"
+                                    (change)="editOrganization(organizationData.location.name, 'city')"
+                                    (open)="getAllCities()" [(ngModel)]="organizationData.location"
+                                    placeholder="Select city" [items]="cities" [ngModelOptions]="{standalone: true}">
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+
+                    <h6>Social Media</h6>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                Website
+                                <input type="text" placeholder="Insert Website" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]='organizationData.website' onFocusOut class="form-control"
+                                    (focusout)="editOrganization(organizationData.website, 'website')">
+                            </div>
+                            <div class="col-md-6">
+                                Facebook
+                                <input type="text" placeholder="Insert Facebook" class="form-control"
+                                    [(ngModel)]="organizationData.facebook" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editOrganization(organizationData.facebook, 'facebook')">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                LinkedIn
+                                <input type="text" placeholder="Insert LinkedIn" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]='organizationData.linkedIn' onFocusOut class="form-control"
+                                    (focusout)="editOrganization(organizationData.linkedIn, 'linkedIn')">
+                            </div>
+                            <div class="col-md-6">
+                                Twitter
+                                <input type="text" placeholder="Insert Twitter" class="form-control"
+                                    [(ngModel)]="organizationData.twitter" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editOrganization(organizationData.twitter, 'twitter')">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                Phone number
+                                <input type="text" placeholder="Insert phone number"
+                                    [ngModelOptions]="{standalone: true}" [(ngModel)]='organizationData.phone_number'
+                                    onFocusOut class="form-control"
+                                    (focusout)="editOrganization(organizationData.phone_number, 'phone_number')">
+                            </div>
+                            <div class="col-md-6">
+                                Instagram
+                                <input type="text" placeholder="Insert Instagram" class="form-control"
+                                    [(ngModel)]="organizationData.instagram" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editOrganization(organizationData.instagram, 'instagram')">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                Photo url
+                                <input type="text" placeholder="Insert photo Url" class="form-control"
+                                    [(ngModel)]="organizationData.photo" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editOrganization(organizationData.photo, 'photo')">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                Categories
+                                <!-- <ng-select bindLabel="description" bindValue="value" dropdownPosition="bottom"
+                                    [multiple]="true" (open)="getAllCategories()"
+                                    [(ngModel)]="organizationData.categories" placeholder="Select category"
+                                    [items]="categories" [ngModelOptions]="{standalone: true}">
+                                </ng-select> -->
+
+                                <ng-select bindLabel="description" dropdownPosition="bottom" [multiple]="true"
+                                    (change)="editCategories()" (open)="getAllCategories()"
+                                    [(ngModel)]="organizationData.categories" placeholder="Select category"
+                                    [items]="resources.category" [ngModelOptions]="{standalone: true}">
+                                </ng-select>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary btn-sm" data-dismiss="modal"
+                    id="closeEdit">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="deactivate-profile-modal" tabindex="-1" role="dialog" aria-hidden="true"
+    aria-labelledby="deactivate-profile-modal-label">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form action="/" id="atbdp-report-abuse-form" class="form-vertical">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="deactivate-profile-modal-label">Deactivate Organization Profile</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to deactivate your profile ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"
+                        id="closeDelete">No</button>
+                    <button type="submit" class="btn btn-secondary btn-sm" (click)="deleteOrganization()">Yes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="add-contact-modal" tabindex="-1" role="dialog" aria-hidden="true"
+    aria-labelledby="add-contact-modal-label">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form action="/" id="atbdp-report-abuse-form" class="form-vertical">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="add-contact-modal-label">Add Organization Contact</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="/">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    * First Name
+                                    <input type="text" placeholder="First name" class="form-control" required
+                                        [(ngModel)]="addContact.first_name" [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="col-md-4">
+                                    Middle Name
+                                    <input type="text" placeholder="Middle name" class="form-control" 
+                                        [(ngModel)]="addContact.middle_name" [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="col-md-4">
+                                    Last Name
+                                    <input type="text" placeholder="Last name" class="form-control" 
+                                        [(ngModel)]="addContact.last_name" [ngModelOptions]="{standalone: true}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    Date of birth
+                                    <input type="date" data-date-format="DD MMMM YYYY"
+                                        [ngModelOptions]="{standalone: true}" [(ngModel)]='addContact.dob'
+                                        onFocusOut class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    Photo Url
+                                    <input type="text" placeholder="Photo Url" class="form-control" 
+                                        [(ngModel)]="addContact.photo" [ngModelOptions]="{standalone: true}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    * Email
+                                    <input type="text" placeholder="Insert Email" class="form-control" required
+                                        [(ngModel)]="addContact.email" [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="col-md-6">
+                                    Facebook
+                                    <input type="text" placeholder="Insert facebook" class="form-control" 
+                                        [(ngModel)]="addContact.facebook" [ngModelOptions]="{standalone: true}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    LinkedIn
+                                    <input type="text" placeholder="Insert LinkedIn" class="form-control" required
+                                        [(ngModel)]="addContact.linkedIn" [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="col-md-6">
+                                    Twiter
+                                    <input type="text" placeholder="Insert twitter" class="form-control" 
+                                        [(ngModel)]="addContact.twitter" [ngModelOptions]="{standalone: true}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    Phone number
+                                    <input type="text" placeholder="Insert phone number" class="form-control" required
+                                        [(ngModel)]="addContact.phone_number" [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="col-md-6">
+                                    Skype
+                                    <input type="text" placeholder="Insert skype" class="form-control" 
+                                        [(ngModel)]="addContact.skype" [ngModelOptions]="{standalone: true}">
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </form>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-secondary btn-sm" (click)="newContact()">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

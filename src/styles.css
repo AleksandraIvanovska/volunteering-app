@@ -83,3 +83,268 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .text-grey {
     color: grey;
 }
+
+
+/* single listing details styles */
+.atbd_content_module {
+	border: 1px solid #e3e6ef;
+	background: #fff;
+	margin-bottom: 2rem;
+	padding: 20px;
+	width: 800px;
+  }
+  
+  .atbd_content_module:last-child {
+	margin-bottom: 0;
+  }
+
+
+  .atbd_info_title {
+	flex: 1;
+	color: #272b41;
+	position: relative;
+    top: 5px;
+  }
+
+
+  .atbdb_content_module_contents {
+	margin: 0;
+	position: relative;
+  }
+
+ 
+ .atbd_contact_info ul {
+	margin: 0;
+	padding: 0;
+  }
+  
+ .atbd_contact_info ul li {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	font-family: "LineAwesome";
+	margin-left: 15px;
+  }
+
+  .atbd_contact_info ul li .atbd_info_title {
+	font-size: 18px;
+	color: #5d658c;
+  }
+
+  .atbd_contact_info ul li .atbd_info {
+	flex: 2;
+	color: #272b41;
+	font-size: 19px;
+	margin-top: 11px;
+	font-weight: 300;
+  }
+
+  .atbd_contact_info1 ul li {
+	list-style-type: none;
+	font-family: "LineAwesome";
+	margin-left: -20px;
+  }
+
+  .atbd_contact_info1 ul li .atbd_info_title {
+	font-size: 20px;
+	color: #5d658c;
+  }
+
+  .atbd_contact_info1 ul li .atbd_info {
+	color: #272b41;
+	font-size: 25px;
+	margin-top: 7px;
+	font-weight: 300;
+  }
+
+  i {
+      color: #9299b8;
+  }
+
+  .atbd_info_title i {
+    -webkit-border-radius: 20rem;
+    -moz-border-radius: 20rem;
+    border-radius: 20rem;
+    width: 2.26667rem;
+    height: 2.26667rem;
+    background: #f1f3f8;
+    font-size: 1.2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.66667rem;
+  }
+
+
+
+  .pagination .nav-links {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .pagination .nav-links .page-numbers {
+    width: 2.66667rem;
+    height: 2.66667rem;
+    border: 1px solid #e3e6ef;
+    background: #fff;
+    margin-right: 0.4rem;
+    color: #272b41;
+    font-size: 0.93333rem;
+    transition: all 0.3s ease;
+  }
+  
+  .pagination .nav-links .page-numbers:last-child {
+    margin-right: 0;
+  }
+
+  .pagination .nav-links .page-numbers{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-numbers {
+  cursor: pointer;
+}
+
+.pagination .nav-links .page-numbers.current {
+  background: #4A569D;
+  color: white;
+}
+
+
+.btn-comment {background-image: linear-gradient(to right, #DC2424 0%, #4A569D  51%, #DC2424  100%)}
+.btn-comment {
+   margin: 10px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   color: white;            
+   box-shadow: 0 0 20px #eee;
+   border-radius: 3px;
+   display: block;
+ }
+ .btn-comment:hover {
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
+ }
+
+ .btn-secondary {
+  
+   background-color: #5bc0de;
+   background-color: #0275d8;
+   background-color: #FFBD44;
+ }
+
+ #login_modal .modal-body .form-excerpts .social-login,
+#agenda_modal .modal-body .form-excerpts .social-login,
+#forgot_modal .modal-body .form-excerpts .social-login,
+#reset_modal .modal-body .form-excerpts .social-login,
+#signup_modal .modal-body .form-excerpts .social-login,
+#add_listing .modal-body .form-excerpts .social-login,
+#moda_claim_listing .modal-body .form-excerpts .social-login {
+  text-align: center;
+}
+
+#login_modal .modal-body .form-excerpts .social-login span,
+#login_modal .modal-body .form-excerpts .social-login a,
+#agenda_modal .modal-body .form-excerpts .social-login span,
+#agenda_modal .modal-body .form-excerpts .social-login a,
+#forgot_modal .modal-body .form-excerpts .social-login span,
+#forgot_modal .modal-body .form-excerpts .social-login a,
+#reset_modal .modal-body .form-excerpts .social-login span,
+#reset_modal .modal-body .form-excerpts .social-login a,
+#signup_modal .modal-body .form-excerpts .social-login span,
+#signup_modal .modal-body .form-excerpts .social-login a,
+#add_listing .modal-body .form-excerpts .social-login span,
+#add_listing .modal-body .form-excerpts .social-login a,
+#moda_claim_listing .modal-body .form-excerpts .social-login span,
+#moda_claim_listing .modal-body .form-excerpts .social-login a {
+  display: inline-block;
+}
+
+#login_modal .modal-header,
+#agenda_modal .modal-header,
+#forgot_modal .modal-header,
+#reset_modal .modal-header,
+#signup_modal .modal-header,
+#add_listing .modal-header,
+#moda_claim_listing .modal-header {
+  padding: 2rem;
+}
+
+#login_modal .modal-header .modal-title i,
+#agenda_modal .modal-header .modal-title i,
+#reset_modal .modal-header .modal-title i,
+#signup_modal .modal-header .modal-title i,
+#add_listing .modal-header .modal-title i,
+#moda_claim_listing .modal-header .modal-title i {
+  font-size: 1.33333rem;
+  color: #9299b8;
+}
+
+#login_modal .modal-body,
+#agenda_modal .modal-body,
+#forgot_modal .modal-body,
+#reset_modal .modal-body,
+#signup_modal .modal-body,
+#add_listing .modal-body,
+#moda_claim_listing .modal-body {
+  padding: 2rem;
+}
+
+#login_modal .modal-body .form-control,
+#login_modal .modal-body .keep_signed,
+#login_modal .modal-body .btn,
+#agenda_modal .modal-body .form-control,
+#agenda_modal .modal-body .keep_signed,
+#agenda_modal .modal-body .btn,
+#forgot_modal .modal-body .form-control,
+#forgot_modal .modal-body .keep_signed,
+#forgot_modal .modal-body .btn,
+#reset_modal .modal-body .form-control,
+#reset_modal .modal-body .keep_signed,
+#reset_modal .modal-body .btn,
+#signup_modal .modal-body .form-control,
+#signup_modal .modal-body .keep_signed,
+#signup_modal .modal-body .btn,
+#add_listing .modal-body .form-control,
+#add_listing .modal-body .keep_signed,
+#add_listing .modal-body .btn,
+#moda_claim_listing .modal-body .form-control,
+#moda_claim_listing .modal-body .keep_signed,
+#moda_claim_listing .modal-body .btn {
+  margin-bottom: 1.33333rem;
+}
+
+ #login_modal .modal-body .form-excerpts ul,
+#agenda_modal .modal-body .form-excerpts ul,
+#forgot_modal .modal-body .form-excerpts ul,
+#reset_modal .modal-body .form-excerpts ul,
+#signup_modal .modal-body .form-excerpts ul,
+#add_listing .modal-body .form-excerpts ul,
+#moda_claim_listing .modal-body .form-excerpts ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+
+
+.btn-gradient {
+  color: #fff !important;
+  font-weight: 700;
+  border: 0 none;
+  line-height: 3.33333rem;
+  position: relative;
+  z-index: 1;
+}
+
+.btn-gradient.btn-gradient-two {
+  background: linear-gradient(to right, #f5548e, #fa8b0c);
+}
+

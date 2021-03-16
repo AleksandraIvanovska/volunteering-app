@@ -1,0 +1,1079 @@
+<section>
+    <div class="volunteer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7" style="padding-right: 30px;">
+                    <div class="row">
+                        <div *ngIf="volunteerData.photo; else other_photo">
+                            <img src="{{volunteerData.photo}}" class="pic rounded-circle z-depth-2" alt="">
+                        </div>
+                        <ng-template #other_photo>
+                            <img src="../../assets/img/avatar.jpeg" class="pic rounded-circle z-depth-2" alt="">
+                        </ng-template>
+                        <div class="col-md-8">
+                            <div style="margin-left: 20px;margin-top: 10px;">
+                                <div class="row">
+                                    <h3>
+                                        {{volunteerData.first_name}} {{volunteerData.middle_name}}
+                                        {{volunteerData.last_name}}
+                                    </h3>&nbsp;
+
+                                    <button type="submit" class="btn btn-edit btn-sm" data-toggle="modal"
+                                        data-target="#moda_claim_listing" style="height: 30px;width: 110px;">Edit
+                                        Profile
+                                    </button>
+
+                                </div>
+                                <div class="row" *ngIf="volunteerData.location">
+                                    <p><i class="fa fa-map-marker"></i>
+                                        {{volunteerData.location.city}},&nbsp;{{volunteerData.location.country}}</p>
+                                </div>
+
+                                <div class="row">
+                                    <p><i class="fa fa-envelope" aria-hidden="true"></i>
+                                        {{volunteerData.email}}</p>
+                                </div>
+                                <div class="row" *ngIf="volunteerData.linkedIn">
+                                    <p><i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                                        {{volunteerData.linkedIn}}</p>
+                                </div>
+
+                                <div class="row"
+                                    *ngIf="volunteerData.facebook || volunteerData.twitter || volunteerData.instagram">
+                                    <ul style="display: inline-flex; list-style-type: none;">
+                                        <li *ngIf="volunteerData.facebook">
+                                            <a href="{{volunteerData.faceboo}}"><i class="fa fa-facebook-square"
+                                                    aria-hidden="true"></i></a>&nbsp;
+                                        </li>
+                                        <li *ngIf="volunteerData.twitter">
+                                            <a href="{{volunteerData.faceboo}}"><i class="fa fa-twitter-square"
+                                                    aria-hidden="true"></i></a>&nbsp;
+                                        </li>
+                                        <li *ngIf="volunteerData.instagram">
+                                            <a href="{{volunteerData.faceboo}}"><i class="fa fa-instagram"
+                                                    aria-hidden="true"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="atbd_content_module">
+                                <h4>General Information</h4>
+                                <hr>
+                                <div class="atbdb_content_module_contents">
+                                    <div class="atbd_contact_info">
+                                        <ul>
+                                            <li *ngIf="volunteerData.genderType">
+                                                <div class="atbd_info_title"><i class="fa fa-transgender"
+                                                        aria-hidden="true"></i>
+                                                    Gender:</div>
+                                                <div class="atbd_info">{{volunteerData.genderType.description}}</div>
+                                            </li>
+                                            <li *ngIf="volunteerData.dob">
+                                                <div class="atbd_info_title"><i class="fa fa-birthday-cake"
+                                                        aria-hidden="true"></i>
+                                                    Date of birth:</div>
+                                                <div class="atbd_info">{{volunteerData.dob}}</div>
+                                            </li>
+                                            <li *ngIf="volunteerData.nationality">
+                                                <div class="atbd_info_title"><i class="fa fa-flag"
+                                                        aria-hidden="true"></i>
+                                                    Nationality:</div>
+                                                <div class="atbd_info">{{volunteerData.nationality.nationality}}</div>
+                                            </li>
+                                            <li
+                                                *ngIf="volunteerData.facebook || volunteerData.twitter || volunteerData.instagram">
+                                                <div class="atbd_info_title"><i class="fa fa-globe"
+                                                        aria-hidden="true"></i>
+
+                                                    Social Media:</div>
+                                                <div class="atbd_info">
+                                                    <ul style="display: inline-flex; list-style-type: none;">
+                                                        <li *ngIf="volunteerData.facebook">
+                                                            <a href="{{volunteerData.faceboo}}"><i
+                                                                    class="fa fa-facebook-square"
+                                                                    aria-hidden="true"></i></a>
+                                                        </li>
+                                                        <li *ngIf="volunteerData.twitter">
+                                                            <a href="{{volunteerData.faceboo}}"><i
+                                                                    class="fa fa-twitter-square"
+                                                                    aria-hidden="true"></i></a>
+                                                        </li>
+                                                        <li *ngIf="volunteerData.instagram">
+                                                            <a href="{{volunteerData.faceboo}}"><i
+                                                                    class="fa fa-instagram" aria-hidden="true"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li *ngIf="volunteerData.phone_number">
+                                                <div class="atbd_info_title"><i class="fa fa-phone"
+                                                        aria-hidden="true"></i>
+                                                    Phone number:</div>
+                                                <div class="atbd_info">{{volunteerData.phone_number}}</div>
+                                            </li>
+                                            <li *ngIf="volunteerData.my_causes">
+                                                <div class="atbd_info_title"><i class="fa fa-rocket"
+                                                        aria-hidden="true"></i>
+                                                    My causes:</div>
+                                                <div class="atbd_info">{{volunteerData.my_causes}}</div>
+                                            </li>
+                                            <li *ngIf="volunteerData.asset">
+                                                <div class="atbd_info_title"><i class="fa fa-file-text-o"
+                                                        aria-hidden="true"></i>CV:</div>
+                                                <div class="atbd_info">
+                                                    <div
+                                                        style="float: left; border: 1px solid rgba(235, 213, 235, 0.7);border-radius: 0.26667rem;">
+                                                        <button (click)="downloadCV(volunteerData.asset.url)"
+                                                            *ngIf="volunteerData.asset.url && volunteerData.asset.url.substr(volunteerData.asset.url.length - 3) != 'pdf'"
+                                                            class="btn bg-primary-color" style="float: left;">
+                                                            {{volunteerData.asset.asset_name}}
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="atbd_content_module">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <h4>Experiences</h4>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <button data-target="#add-experience-modal" type="submit" data-toggle="modal"
+                                            class="btn btn-secondary btn-icon-left btn-sm not_empty btn-comment"
+                                            style="float: right;" data-toggle="modal">+ Add Experience</button>
+
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="atbdb_content_module_contents">
+                                    <div class="atbd_contact_info">
+                                        <ul *ngFor="let experience of experiences;">
+                                            <li>
+                                                <ul>
+                                                    <li>
+                                                        <h6><i class="fa fa-building-o" aria-hidden="true"></i>
+                                                            {{experience.job_title}}<span style="color: gray;"> @
+                                                                {{experience.company_name}}</span></h6>
+                                                    </li>
+                                                    <li *ngIf="experience.location"><i class="fa fa-map-pin"
+                                                            aria-hidden="true"></i>&nbsp;
+                                                        <span style="color: gray;"> Location: </span>&nbsp;
+                                                        {{experience.location.city}}, {{experience.location.country}}
+                                                    </li>
+                                                    <li>
+                                                        <span *ngIf="experience.start_date"><i class="fa fa-calendar"
+                                                                aria-hidden="true"></i>
+                                                            {{experience.start_date}} </span>
+                                                        <span
+                                                            *ngIf="experience.end_date">&nbsp;-&nbsp;{{experience.end_date}}</span>
+                                                    </li>
+                                                </ul>
+
+                                            </li>
+                                            <div style="float: right;margin-top: -10px;">
+                                                <a style="cursor: pointer; " data-toggle="modal"
+                                                    data-target="#edit_experience_modal"
+                                                    (click)="editExperienceSelected(experience)">
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                </a>&nbsp;
+                                                <a style="cursor: pointer;" (click)="deleteExperience(experience.uuid)">
+                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                            <hr>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="atbd_content_module">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <h4>Languages</h4>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <button data-target="#add-language-modal" type="submit" data-toggle="modal"
+                                            class="btn btn-secondary btn-icon-left btn-sm not_empty btn-comment"
+                                            style="float: right;" data-toggle="modal">+ Add Language</button>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+                                <div class="atbdb_content_module_contents">
+                                    <div class="atbd_contact_info">
+                                        <ul *ngFor="let language of languages;">
+                                            <li>
+                                                <ul>
+                                                    <li>
+                                                        <h5>{{language.language}} - <span
+                                                                style="color: gray;font-size: 17px;">
+                                                                {{language.level}}</span></h5>
+                                                    </li>
+                                                </ul>
+
+                                            </li>
+                                            <div style="float: right;margin-top: -10px;">
+                                                <a style="cursor: pointer; " data-toggle="modal"
+                                                    data-target="#edit_language_modal"
+                                                    (click)="editLanguageSelected(language)">
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                </a>&nbsp;
+                                                <a style="cursor: pointer;" (click)="deleteLanguage(language.uuid)">
+                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                            <hr>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+
+
+
+
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="atbd_content_module">
+                                <h4>Additional Information</h4>
+                                <hr>
+                                <div class="atbdb_content_module_contents">
+                                    <div class="atbd_contact_info">
+                                        <ul>
+
+                                            <li *ngIf="volunteerData.skills">
+                                                <div class="atbd_info_title"><i class="fa fa-lightbulb-o"
+                                                        aria-hidden="true"></i>
+                                                    Skills:</div>
+                                                <div class="atbd_info">{{volunteerData.skills}}</div>
+                                            </li>
+                                            <li *ngIf="volunteerData.favoriteEvents">
+                                                <div class="atbd_info_title"><i class="fa fa-ticket"
+                                                        aria-hidden="true"></i>
+                                                    Favorite Events:</div>
+                                                <div class="atbd_info">
+                                                    <ul *ngFor="let event of volunteerData.favoriteEvents"
+                                                        style="display: inline-flex">
+                                                        <li><a href="">{{event.title}}</a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li *ngIf="volunteerData.favoriteOrganizations">
+                                                <div class="atbd_info_title"><i class="fa fa-users"
+                                                        aria-hidden="true"></i>
+                                                    Favorite Org:</div>
+                                                <div class="atbd_info">
+                                                    <ul *ngFor="let org of volunteerData.favoriteOrganizations"
+                                                        style="display: inline-flex">
+                                                        <li><a href="">{{org.name}}</a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="atbd_content_module">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <h4>Comments</h4>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label for="review_content"
+                                            class="btn btn-secondary btn-icon-left btn-sm not_empty btn-comment"
+                                            style="float: right;" (click)="addCommentBar()">+ Add Comment</label>
+                                    </div>
+                                </div>
+
+                                <hr>
+                                <div class="atbdb_content_module_contents">
+                                    <div id="client_review_list">
+                                        <div class="atbd_single_review atbdp_static"
+                                            *ngFor="let comment of resources.comments; let i = index">
+
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                    <i style="font-size: 30px;" class="fa fa-user-circle-o"
+                                                        aria-hidden="true"></i>
+                                                </div>
+                                                <div class="col_md-1">
+                                                    <h5 style="margin-top: 5px;">{{comment.creator}}</h5>
+                                                </div>
+
+                                            </div>
+                                            <div style="margin-top: 5px;">
+                                                <p>{{comment.body}}
+                                                </p>
+                                            </div>
+
+                                            <div class="review_content">
+                                                <div>
+                                                    <span class="review_time">{{comment.created_date}}</span>
+                                                    <a class="pull-right" style="cursor: pointer;"
+                                                        (click)="deleteComment(i, comment.comment_uuid)">
+                                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+
+                                                <hr>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row" *ngIf="volunteerComments.length">
+                                            <div class="col-lg-12">
+                                                <nav class="navigation pagination d-flex justify-content-end"
+                                                    role="navigation">
+                                                    <div class="nav-links">
+                                                        <a class="prev page-numbers mr-0"
+                                                            *ngIf="0!=pagination.current-1"
+                                                            (click)="paggination(pagination.current-1)">
+                                                            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+
+                                                        </a>
+                                                        <div *ngFor="let i of pagination.max;let index = index">
+                                                            <a class="page-numbers"
+                                                                [ngClass]="{'current' : i == pagination.current}"
+                                                                (click)="paggination(i)">{{i}}</a>
+                                                        </div>
+                                                        <a class="next page-numbers"
+                                                            (click)="paggination(pagination.current+1)"
+                                                            *ngIf="pagination.max.length != pagination.current">
+                                                            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+
+                                                        </a>
+                                                    </div>
+                                                </nav>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="atbd_content_module atbd_review_form" *ngIf="showAddComment">
+                        <div class="atbd_content_module__tittle_area">
+                            <div class="atbd_area_title">
+
+
+                                <h5>Add Comment</h5>
+                                <div style="float: right; margin-top: -30px;">
+                                    <a style="cursor: pointer;" (click)="closeAddComment()">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                        <div class="atbdb_content_module_contents atbd_give_review_area">
+                            <form action="/" id="atbdp_review_form" method="post">
+                                <div class="form-group">
+                                    <textarea name="content" id="review_content" rows=2 class="form-control"
+                                        placeholder="Message" [(ngModel)]="comment.body"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="col-12">
+                                            <button class="btn btn-comment pull-right btn-sm" type="submit"
+                                                id="atbdp_review_form_submit" (click)="addComment()">Submit
+                                                Comment</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-delete btn-sm" data-toggle="modal"
+                        data-target="#deactivate-profile-modal">Deactivate Profile</button>
+
+
+                </div>
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <cdk-virtual-scroll-viewport style="height: 943px;" itemSize="90">
+                                <div class="atbd_content_module" style="width: 450px;">
+                                    <h5><i class="fa fa-list" aria-hidden="true"></i>
+                                        &nbsp;Volunteer events attendence</h5>
+                                    <hr>
+                                    <div class="atbdb_content_module_contents">
+                                        <div class="atbd_contact_info">
+                                            <ul *ngFor="let event of eventAttendance;">
+                                                <li *ngIf="event.title">
+
+                                                    <div class="atbd_info"><a style="color: #3a7dfd; font-size: 25px;"
+                                                            href="">{{event.title}}</a></div>
+
+                                                </li>
+                                                <li *ngIf="event.category">
+                                                    <div class="atbd_info_title">Category:</div>
+                                                    <div class="atbd_info">{{event.category}}</div>
+
+                                                </li>
+                                                <li *ngIf="event.city; else other_virtual">
+                                                    <div class="atbd_info_title">Location:</div>
+                                                    <div class="atbd_info">{{event.city}}&nbsp;<span
+                                                            *ngIf="event.country">{{event.country}}</span></div>
+
+                                                </li>
+                                                <ng-template #other_virtual>
+                                                    <li>
+                                                        <div class="atbd_info"><span
+                                                                style="background-color: #32cc6f;padding: 5px; border-radius: 3px;">Virtual
+                                                                Event</span> </div>
+                                                    </li>
+                                                </ng-template>
+
+                                                <hr>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </cdk-virtual-scroll-viewport>
+                            <br>
+                            <br>
+
+                            <cdk-virtual-scroll-viewport style="height: 900px" itemSize="90">
+                                <div class="atbd_content_module" style="width: 450px;">
+                                    <h5><i class="fa fa-list" aria-hidden="true"></i>
+                                        &nbsp;Events Invitations</h5>
+                                    <hr>
+                                    <div class="atbdb_content_module_contents">
+                                        <div class="atbd_contact_info">
+                                            <ul *ngFor="let event of eventInvitations;">
+                                                <li *ngIf="event.title">
+
+                                                    <div class="atbd_info"><a style="color: #3a7dfd; font-size: 25px;"
+                                                            href="">{{event.title}}</a></div>
+
+                                                </li>
+                                                <li *ngIf="event.category">
+                                                    <div class="atbd_info_title">Category:</div>
+                                                    <div class="atbd_info">{{event.category}}</div>
+
+                                                </li>
+                                                <li *ngIf="event.city; else other_virtual">
+                                                    <div class="atbd_info_title">Location:</div>
+                                                    <div class="atbd_info">{{event.city}}&nbsp;<span
+                                                            *ngIf="event.country">{{event.country}}</span></div>
+
+                                                </li>
+                                                <ng-template #other_virtual>
+                                                    <li>
+                                                        <div class="atbd_info"><span
+                                                                style="background-color: #32cc6f;padding: 5px; border-radius: 3px;">Virtual
+                                                                Event</span> </div>
+                                                    </li>
+                                                </ng-template>
+
+                                                <hr>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </cdk-virtual-scroll-viewport>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="modal fade" id="moda_claim_listing" tabindex="-1" role="dialog" aria-labelledby="claim_listing_label"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="claim_listing_label"><i class="la la-check-square"></i> Edit Volunteer
+                </h5>
+            </div>
+
+            <div class="modal-body">
+                <form action="/">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-4">
+                                * First Name
+                                <input type="text" placeholder="Insert first name" class="form-control" required
+                                    onFocusOut
+                                    (focusout)="volunteerData.first_name ? editVolunteer(volunteerData.first_name, 'first_name'): this.toastr.warning('Mandatory field')"
+                                    [(ngModel)]="volunteerData.first_name" [ngModelOptions]="{standalone: true}">
+                            </div>
+                            <div class="col-md-4">
+                                Middle Name
+                                <input type="text" placeholder="Insert middle name" class="form-control" onFocusOut
+                                    (focusout)="editVolunteer(volunteerData.middle_name, 'middle_name')"
+                                    [(ngModel)]="volunteerData.middle_name" [ngModelOptions]="{standalone: true}">
+                            </div>
+                            <div class="col-md-4">
+                                * Last Name
+                                <input type="text" placeholder="Insert last name" class="form-control" required
+                                    onFocusOut
+                                    (focusout)="volunteerData.last_name ? editVolunteer(volunteerData.last_name, 'last_name'): this.toastr.warning('Mandatory field')"
+                                    [(ngModel)]="volunteerData.last_name" [ngModelOptions]="{standalone: true}">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                Gender
+                                <ng-select (open)="getGenders()" [items]="genders" placeholder="Select gender"
+                                    bindLabel="description" [(ngModel)]="volunteerData.genderType"
+                                    [ngModelOptions]="{standalone: true}" dropdownPosition="bottom"
+                                    (change)="editVolunteer(volunteerData.genderType.value, 'gender')">
+                                </ng-select>
+                            </div>
+
+                            <div class="col-md-6">
+                                Date of birth
+                                <input type="date" data-date-format="DD MMMM YYYY" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]='volunteerData.dob' onFocusOut class="form-control"
+                                    (focusout)="editVolunteer(volunteerData.dob, 'dob')">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                Nationality
+                                <ng-select (open)="getNationalities()" [items]="nationalities"
+                                    placeholder="Select nationality" bindLabel="nationality"
+                                    [(ngModel)]="volunteerData.nationality" [ngModelOptions]="{standalone: true}"
+                                    dropdownPosition="bottom"
+                                    (change)="editVolunteer(volunteerData.nationality.nationality, 'nationality')">
+                                </ng-select>
+                            </div>
+                            <div class="col-md-6">
+                                Photo url
+                                <input type="text" placeholder="Insert photo Url" class="form-control"
+                                    [(ngModel)]="volunteerData.photo" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editVolunteer(volunteerData.photo, 'photo')">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                My causes
+
+                            </div>
+                            <div class="col-md-6">
+                                Skills
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                CV
+
+                            </div>
+                            <div class="col-md-6">
+                                Location
+                                <ng-select bindLabel="name" dropdownPosition="bottom"
+                                    (change)="editVolunteer(volunteerData.location.name, 'city')"
+                                    (open)="getAllCities()" [(ngModel)]="volunteerData.location"
+                                    placeholder="Select city" [items]="cities" [ngModelOptions]="{standalone: true}">
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <hr>
+
+
+                    <h6>Social Media</h6>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                LinkedIn
+                                <input type="text" placeholder="Insert LinkedIn" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]='volunteerData.linkedIn' onFocusOut class="form-control"
+                                    (focusout)="editVolunteer(volunteerData.linkedIn, 'linkedIn')">
+                            </div>
+                            <div class="col-md-6">
+                                Facebook
+                                <input type="text" placeholder="Insert Facebook" class="form-control"
+                                    [(ngModel)]="volunteerData.facebook" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editVolunteer(volunteerData.facebook, 'facebook')">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                Twitter
+                                <input type="text" placeholder="Insert Twitter" class="form-control"
+                                    [(ngModel)]="volunteerData.twitter" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editVolunteer(volunteerData.twitter, 'twitter')">
+                            </div>
+                            <div class="col-md-6">
+                                Instagram
+                                <input type="text" placeholder="Insert Instagram" class="form-control"
+                                    [(ngModel)]="volunteerData.instagram" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editVolunteer(volunteerData.instagram, 'instagram')">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                Skype
+                                <input type="text" placeholder="Insert Skype" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]='volunteerData.skype' onFocusOut class="form-control"
+                                    (focusout)="editVolunteer(volunteerData.skype, 'skype')">
+                            </div>
+                            <div class="col-md-6">
+                                Phone number
+                                <input type="text" placeholder="Insert phone number"
+                                    [ngModelOptions]="{standalone: true}" [(ngModel)]='volunteerData.phone_number'
+                                    onFocusOut class="form-control"
+                                    (focusout)="editVolunteer(volunteerData.phone_number, 'phone_number')">
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary btn-sm" data-dismiss="modal"
+                    id="closeEdit">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deactivate-profile-modal" tabindex="-1" role="dialog" aria-hidden="true"
+    aria-labelledby="deactivate-profile-modal-label">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form action="/" id="atbdp-report-abuse-form" class="form-vertical">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="deactivate-profile-modal-label">Deactivate Volunteer Profile</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to deactivate your profile ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"
+                        id="closeDelete">No</button>
+                    <button type="submit" class="btn btn-secondary btn-sm" (click)="deleteVolunteer()">Yes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="add-education-modal" tabindex="-1" role="dialog" aria-hidden="true"
+    aria-labelledby="add-education-modal-label">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form action="/" id="atbdp-report-abuse-form" class="form-vertical">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="add-education-modal-label">Add Education</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="/">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Institution Name
+                                    <input type="text" placeholder="Institution name" class="form-control"
+                                        [(ngModel)]="addEducation.institution_name"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Degree Name
+                                    <input type="text" placeholder="Degree name" class="form-control"
+                                        [(ngModel)]="addEducation.degree_name" [ngModelOptions]="{standalone: true}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Major
+                                    <input type="text" placeholder="Major" class="form-control"
+                                        [(ngModel)]="addEducation.major" [ngModelOptions]="{standalone: true}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    Start Date
+                                    <input type="date" data-date-format="DD MMMM YYYY"
+                                        [ngModelOptions]="{standalone: true}" [(ngModel)]='addEducation.start_date'
+                                        onFocusOut class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    Graduation Date
+                                    <input type="date" data-date-format="DD MMMM YYYY"
+                                        [ngModelOptions]="{standalone: true}" [(ngModel)]='addEducation.graduation_date'
+                                        onFocusOut class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-secondary btn-sm"
+                                (click)="newEducation()">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="edit_education_modal" tabindex="-1" role="dialog" aria-labelledby="claim_listing_label"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="claim_listing_label"><i class="la la-check-square"></i> Edit Education
+                </h5>
+            </div>
+            <div class="modal-body">
+                <form action="/">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                Institution name
+                                <input type="text" placeholder="Institution name" class="form-control"
+                                    (focusout)="editEducation(selectedEducation.institution_name, 'institution_name')"
+                                    [(ngModel)]="selectedEducation.institution_name"
+                                    [ngModelOptions]="{standalone: true}">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                Degree name
+                                <input type="text" placeholder="Degree name" class="form-control"
+                                    (focusout)="editEducation(selectedEducation.degree_name, 'degree_name')"
+                                    [(ngModel)]="selectedEducation.degree_name" [ngModelOptions]="{standalone: true}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                Major
+                                <input type="text" placeholder="Institution name" class="form-control"
+                                    (focusout)="editEducation(selectedEducation.major, 'major')"
+                                    [(ngModel)]="selectedEducation.major" [ngModelOptions]="{standalone: true}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                Start Date
+                                <input type="date" data-date-format="DD MMMM YYYY" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editEducation(selectedEducation.start_date, 'start_date')"
+                                    [(ngModel)]='selectedEducation.start_date' class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                End Date
+                                <input type="date" data-date-format="DD MMMM YYYY" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editEducation(selectedEducation.graduation_date, 'graduation_date')"
+                                    [(ngModel)]='selectedEducation.graduation_date' class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </form>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-secondary btn-sm" data-dismiss="modal"
+                        id="closeEdit">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="add-experience-modal" tabindex="-1" role="dialog" aria-hidden="true"
+    aria-labelledby="add-experience-modal-label">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form action="/" id="atbdp-report-abuse-form" class="form-vertical">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="add-experience-modal-label">Add Experience</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="/">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Job Title
+                                    <input type="text" placeholder="Job Title" class="form-control"
+                                        [(ngModel)]="addExperience.job_title" [ngModelOptions]="{standalone: true}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Company Name
+                                    <input type="text" placeholder="Company name" class="form-control"
+                                        [(ngModel)]="addExperience.company_name" [ngModelOptions]="{standalone: true}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    City
+                                    <ng-select bindLabel="name" bindValue="name" dropdownPosition="bottom"
+                                        [(ngModel)]="addExperience.city" placeholder="Select city"
+                                        (open)="getAllCities()" [items]="cities" [ngModelOptions]="{standalone: true}">
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    Start Date
+                                    <input type="date" data-date-format="DD MMMM YYYY"
+                                        [ngModelOptions]="{standalone: true}" [(ngModel)]='addExperience.start_date'
+                                        onFocusOut class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    End Date
+                                    <input type="date" data-date-format="DD MMMM YYYY"
+                                        [ngModelOptions]="{standalone: true}"
+                                        [(ngModel)]='addExperience.graduation_date' onFocusOut class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-secondary btn-sm"
+                                (click)="newExperience()">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="edit_experience_modal" tabindex="-1" role="dialog" aria-labelledby="claim_listing_label"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="claim_listing_label"><i class="la la-check-square"></i> Edit Experience
+                </h5>
+            </div>
+            <div class="modal-body">
+                <form action="/">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                Job Title
+                                <input type="text" placeholder="Job title" class="form-control"
+                                    (focusout)="editExperience(selectedExperience.job_title, 'job_title')"
+                                    [(ngModel)]="selectedExperience.job_title" [ngModelOptions]="{standalone: true}">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                Company name
+                                <input type="text" placeholder="Comapny name" class="form-control"
+                                    (focusout)="editExperience(selectedExperience.company_name, 'company_name')"
+                                    [(ngModel)]="selectedExperience.company_name" [ngModelOptions]="{standalone: true}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                City
+                                <ng-select bindLabel="name" bindValue="name" dropdownPosition="bottom"
+                                    (change)="editExperience(selectedExperience.city, 'city')" (open)="getAllCities()"
+                                    [(ngModel)]="selectedExperience.city" placeholder="Select city" [items]="cities"
+                                    [ngModelOptions]="{standalone: true}">
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                Start Date
+                                <input type="date" data-date-format="DD MMMM YYYY" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editExperience(selectedExperience.start_date, 'start_date')"
+                                    [(ngModel)]='selectedExperience.start_date' class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                End Date
+                                <input type="date" data-date-format="DD MMMM YYYY" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editExperience(selectedExperience.end_date, 'end_date')"
+                                    [(ngModel)]='selectedExperience.end_date' class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </form>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-secondary btn-sm" data-dismiss="modal"
+                        id="closeEdit">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="add-language-modal" tabindex="-1" role="dialog" aria-hidden="true"
+    aria-labelledby="add-language-modal-label">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form action="/" id="atbdp-report-abuse-form" class="form-vertical">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="add-language-modal-label">Add Language</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="/">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Language
+                                    <ng-select bindLabel="language" bindValue="language" dropdownPosition="bottom"
+                                        [(ngModel)]="addLanguage.language" placeholder="Select language"
+                                        (open)="getAllLanguages()" [items]="allLanguages"
+                                        [ngModelOptions]="{standalone: true}">
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Language level
+                                    <ng-select bindLabel="description" bindValue="value" dropdownPosition="bottom"
+                                        [(ngModel)]="addLanguage.level" placeholder="Select language level"
+                                        (open)="getLanguageLevels()" [items]="languageLevels"
+                                        [ngModelOptions]="{standalone: true}">
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-secondary btn-sm"
+                                (click)="newLanguage()">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

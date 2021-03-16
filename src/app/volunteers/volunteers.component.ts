@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { AppComponent } from '../app.component';
 import { VolunteersService } from './volunteers.service';
 
 @Component({
@@ -15,7 +18,8 @@ export class VolunteersComponent implements OnInit {
   seletedCountry: null;
   search: null;
 
-  constructor(private volunteersService: VolunteersService) { }
+  constructor(private volunteersService: VolunteersService, private globals: AppComponent, 
+    private router: Router, public toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getAllVolunteers();
@@ -23,7 +27,7 @@ export class VolunteersComponent implements OnInit {
   }
 
   getAllVolunteers() {
-    this.volunteersService.getVolunteers().subscribe(
+    this.volunteersService.getVolunteers(this.globals.user.accessToken).subscribe(
       (data) => {
         this.volunteers = data;
         console.log(this.volunteers);
@@ -32,7 +36,7 @@ export class VolunteersComponent implements OnInit {
   }
 
   getAllCities() {
-    this.volunteersService.getcities().subscribe(
+    this.volunteersService.getcities(this.globals.user.accessToken).subscribe(
       (data) => {
         this.cities = data.slice(0, 1000);
        // this.cities = data;
@@ -41,7 +45,7 @@ export class VolunteersComponent implements OnInit {
   }
 
   getAllCountries() {
-    this.volunteersService.getCountries().subscribe(
+    this.volunteersService.getCountries(this.globals.user.accessToken).subscribe(
       (data) => {
         this.countries = data;
       }
@@ -49,7 +53,7 @@ export class VolunteersComponent implements OnInit {
   }
 
   applyFilter(selectedCityy, selectedCountryy) {
-    this.volunteersService.getVolunteers(selectedCityy, selectedCountryy).subscribe(
+    this.volunteersService.getVolunteers(this.globals.user.accessToken,selectedCityy, selectedCountryy).subscribe(
       (vol) =>
       {
         this.volunteers = vol;
@@ -62,12 +66,22 @@ clearFilters() {
 }
 
 applySearch(applySearch) {
-  this.volunteersService.getVolunteers(null,null,applySearch).subscribe(
+  this.volunteersService.getVolunteers(this.globals.user.accessToken,null,null,applySearch).subscribe(
     (vol) =>
     {
       this.volunteers = vol;
     }
  )
+}
+
+openVolunteerByUuid(uuid) {
+  this.globals.volunteer = uuid;
+  this.router.navigate(['/volunteer'],
+    {
+      queryParams: {
+        uuid: uuid
+      }
+    });
 }
 
 

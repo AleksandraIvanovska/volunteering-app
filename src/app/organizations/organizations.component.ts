@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { OrganizationsService } from './organizations.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AppComponent } from '../app.component';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -20,17 +23,18 @@ seletedCountry: null;
 search: null;
 
 
-  constructor(private organizationService: OrganizationsService) { }
+  constructor(private organizationService: OrganizationsService, private globals: AppComponent, 
+    private router: Router, public toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getAllOrganizations();
   }
 
   getAllOrganizations() {
-      this.organizationService.getOrganizations().subscribe(
+      this.organizationService.getOrganizations(this.globals.user.accessToken).subscribe(
         (data) => {
           this.organizations = data;
-         // console.log(this.organizations);
+          console.log(this.organizations);
          // this.organizations = data.slice(0, 6);
 
         }
@@ -38,7 +42,7 @@ search: null;
   }
 
   getAllCities() {
-    this.organizationService.getcities().subscribe(
+    this.organizationService.getcities(this.globals.user.accessToken).subscribe(
       (data) => {
         this.cities = data.slice(0, 1000);
        // this.cities = data;
@@ -47,7 +51,7 @@ search: null;
   }
 
   getAllCountries() {
-    this.organizationService.getCountries().subscribe(
+    this.organizationService.getCountries(this.globals.user.accessToken).subscribe(
       (data) => {
         this.countries = data;
       }
@@ -55,7 +59,7 @@ search: null;
   }
 
   getAllCategories() {
-    this.organizationService.getCategories().subscribe(
+    this.organizationService.getCategories(this.globals.user.accessToken).subscribe(
       (data) => {
         this.categories = data;
         console.log(this.categories);
@@ -64,7 +68,7 @@ search: null;
   }
 
   applyFilter(selectedCategoryy, selectedCityy, selectedCountryy) {
-        this.organizationService.getOrganizations(selectedCategoryy, selectedCityy, selectedCountryy).subscribe(
+        this.organizationService.getOrganizations(this.globals.user.accessToken,selectedCategoryy, selectedCityy, selectedCountryy).subscribe(
           (org) =>
           {
             this.organizations = org;
@@ -79,12 +83,22 @@ search: null;
   }
 
   applySearch(applySearch) {
-     this.organizationService.getOrganizations(null,null,null,applySearch).subscribe(
+     this.organizationService.getOrganizations(this.globals.user.accessToken,null,null,null,applySearch).subscribe(
        (org) =>
        {
          this.organizations = org;
        }
     )
+  }
+
+  openOrganizationByUuid(uuid) {
+    this.globals.organization = uuid;
+    this.router.navigate(['/organization'],
+      {
+        queryParams: {
+          uuid: uuid
+        }
+      });
   }
 
 }
