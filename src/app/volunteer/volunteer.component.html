@@ -18,7 +18,7 @@
                                         {{volunteerData.last_name}}
                                     </h3>&nbsp;
 
-                                    <button type="submit" class="btn btn-edit btn-sm" data-toggle="modal"
+                                    <button  *ngIf="globals.user.id == volunteerData.user_id" type="submit" class="btn btn-edit btn-sm" data-toggle="modal"
                                         data-target="#moda_claim_listing" style="height: 30px;width: 110px;">Edit
                                         Profile
                                     </button>
@@ -155,10 +155,9 @@
                                         <h4>Experiences</h4>
                                     </div>
                                     <div class="col-md-5">
-                                        <button data-target="#add-experience-modal" type="submit" data-toggle="modal"
+                                        <button *ngIf="globals.user.id == volunteerData.user_id" data-target="#add-experience-modal" type="submit" data-toggle="modal"
                                             class="btn btn-secondary btn-icon-left btn-sm not_empty btn-comment"
                                             style="float: right;" data-toggle="modal">+ Add Experience</button>
-
                                     </div>
                                 </div>
                                 <hr>
@@ -187,13 +186,75 @@
                                                 </ul>
 
                                             </li>
-                                            <div style="float: right;margin-top: -10px;">
+                                            <div  *ngIf="globals.user.id == volunteerData.user_id" style="float: right;margin-top: -10px;">
                                                 <a style="cursor: pointer; " data-toggle="modal"
                                                     data-target="#edit_experience_modal"
                                                     (click)="editExperienceSelected(experience)">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </a>&nbsp;
                                                 <a style="cursor: pointer;" (click)="deleteExperience(experience.uuid)">
+                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                            <hr>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="atbd_content_module">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <h4>Educations</h4>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <button  *ngIf="globals.user.id == volunteerData.user_id" data-target="#add-education-modal" type="submit" data-toggle="modal"
+                                            class="btn btn-secondary btn-icon-left btn-sm not_empty btn-comment"
+                                            style="float: right;" data-toggle="modal">+ Add Education</button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="atbdb_content_module_contents">
+                                    <div class="atbd_contact_info">
+                                        <ul *ngFor="let education of educations;">
+                                            <li>
+                                                <ul>
+                                                    <li>
+                                                        <h6><i class="fa fa-building-o" aria-hidden="true"></i>
+                                                            {{education.institution_name}}</h6>
+                                                    </li>
+                                                    <li *ngIf="education.degree_name"><i class="fa fa-graduation-cap"
+                                                            aria-hidden="true"></i>&nbsp;
+                                                        <span style="color: gray;"> Degree: </span>&nbsp;
+                                                        {{education.degree_name}}
+                                                    </li>
+                                                    <li *ngIf="education.major"><i class="fa fa-clipboard"
+                                                        aria-hidden="true"></i>&nbsp;
+                                                    <span style="color: gray;"> Major: </span>&nbsp;
+                                                    {{education.major}}
+                                                </li>
+                                                    <li>
+                                                        <span *ngIf="education.start_date"><i class="fa fa-calendar"
+                                                                aria-hidden="true"></i>
+                                                            {{education.start_date}} </span>
+                                                        <span
+                                                            *ngIf="education.end_date">&nbsp;-&nbsp;{{education.graduation_date}}</span>
+                                                    </li>
+                                                </ul>
+
+                                            </li>
+                                            <div *ngIf="globals.user.id == volunteerData.user_id" style="float: right;margin-top: -10px;">
+                                                <a style="cursor: pointer; " data-toggle="modal"
+                                                    data-target="#edit_education_modal"
+                                                    (click)="editEducationSelected(education)">
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                </a>&nbsp;
+                                                <a style="cursor: pointer;" (click)="deleteEducation(education.uuid)">
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </a>
                                             </div>
@@ -216,7 +277,7 @@
                                         <h4>Languages</h4>
                                     </div>
                                     <div class="col-md-5">
-                                        <button data-target="#add-language-modal" type="submit" data-toggle="modal"
+                                        <button *ngIf="globals.user.id == volunteerData.user_id" data-target="#add-language-modal" type="submit" data-toggle="modal"
                                             class="btn btn-secondary btn-icon-left btn-sm not_empty btn-comment"
                                             style="float: right;" data-toggle="modal">+ Add Language</button>
 
@@ -232,18 +293,19 @@
                                                     <li>
                                                         <h5>{{language.language}} - <span
                                                                 style="color: gray;font-size: 17px;">
-                                                                {{language.level}}</span></h5>
+                                                                {{language.level_description}}</span></h5>
                                                     </li>
                                                 </ul>
 
                                             </li>
-                                            <div style="float: right;margin-top: -10px;">
+                                            <div *ngIf="globals.user.id == volunteerData.user_id" style="float: right;margin-top: -10px;">
                                                 <a style="cursor: pointer; " data-toggle="modal"
                                                     data-target="#edit_language_modal"
                                                     (click)="editLanguageSelected(language)">
                                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </a>&nbsp;
-                                                <a style="cursor: pointer;" (click)="deleteLanguage(language.uuid)">
+
+                                                <a style="cursor: pointer;" (click)="deleteLanguage(language.language_uuid)">
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </a>
                                             </div>
@@ -345,7 +407,7 @@
                                             <div class="review_content">
                                                 <div>
                                                     <span class="review_time">{{comment.created_date}}</span>
-                                                    <a class="pull-right" style="cursor: pointer;"
+                                                    <a *ngIf="globals.user.id == comment.creator_id" class="pull-right" style="cursor: pointer;"
                                                         (click)="deleteComment(i, comment.comment_uuid)">
                                                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                     </a>
@@ -427,7 +489,7 @@
                     </div>
 
 
-                    <button type="submit" class="btn btn-delete btn-sm" data-toggle="modal"
+                    <button  *ngIf="globals.user.id == volunteerData.user_id" type="submit" class="btn btn-delete btn-sm" data-toggle="modal"
                         data-target="#deactivate-profile-modal">Deactivate Profile</button>
 
 
@@ -479,6 +541,8 @@
                             <br>
                             <br>
 
+
+                            <!-- render here only those who don;t exits in attendence -->
                             <cdk-virtual-scroll-viewport style="height: 900px" itemSize="90">
                                 <div class="atbd_content_module" style="width: 450px;">
                                     <h5><i class="fa fa-list" aria-hidden="true"></i>
@@ -1074,6 +1138,56 @@
                     </form>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="edit_language_modal" tabindex="-1" role="dialog" aria-labelledby="edit_language_modal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="edit_language_modal"><i class="la la-check-square"></i> Edit Language
+                </h5>
+            </div>
+            <div class="modal-body">
+                <form action="/">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                Language
+                                 <ng-select bindLabel="language" bindValue="language" dropdownPosition="bottom"
+                                    (change)="editLanguage(selectedLanguage.language, 'language')" (open)="getAllLanguages()"
+                                    [(ngModel)]="selectedLanguage.language" placeholder="Select language" [items]="allLanguages"
+                                    [ngModelOptions]="{standalone: true}">
+                                </ng-select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                Level
+                                <ng-select bindLabel="description" bindValue="value" dropdownPosition="bottom"
+                                (change)="editLanguage(selectedLanguage.level, 'level')" (open)="getLanguageLevels()"
+                                [(ngModel)]="selectedLanguage.level_description" placeholder="Select language level"
+                                [items]="languageLevels" [ngModelOptions]="{standalone: true}" >
+                            </ng-select>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-secondary btn-sm" data-dismiss="modal"
+                        id="closeEdit">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

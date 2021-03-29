@@ -1,1 +1,64 @@
-<p>notification works!</p>
+<!-- <div class="scroll" 
+[ngClass]="globals.checkIfExists('permission', 'global_search') ? 'internal': 'client pt-4'"
+> -->
+<div class="scroll" >
+    <div class="col-12">
+      <div *ngIf="notifications.length>0; then showNotifications else showMessage;"></div>
+      <ng-template #showMessage>
+        <p class="ng-tns-c5-01">Empty</p>
+      </ng-template>
+      <ng-template #showNotifications>
+        <div class="row">
+          <div class="col-12">
+            <button (click)="readAllNotification()" class="btn bg-secondary-color pull-right">
+              Read all 
+            </button>
+          </div>
+        </div>
+        <div class="card" *ngFor="let notification of notifications;let i = index">
+          <div class="card-body">
+            <div class="card-header cursor-pointer" [ngClass]="{'unread-notification': !notification.is_read}">
+              <div class="media" (click)="notificationAction(notification, i)">
+                <!-- <img class="media-object align-self-center d-flex mr-3 height-40 width-40 rounded-circle"
+                  [src]="notification.image_url ? notification.image_url : globals.avatar"
+                  (error)="notification.image_url = globals.avatar" /> -->
+                <div class="media-body mt-2">
+                  <div class="media-body-title mt-1 mb-0" *ngIf="notification.title" [innerHTML]=notification.title>
+                    <span class="media-time-ago"> {{notification.created_at }}
+                    </span>
+                  </div>
+                  <div class="media-body-title">
+                    <span class="media-time-ago"> {{notification.created_at  }}
+                    </span>
+                  </div>
+                </div>
+                <div class="mt-1 mr-3">
+                  <div class="pull-right" *ngIf="notification.type=='calibration'">
+                    <i class="icon-list tag bg-big-search-primary-color"></i>
+                  </div>
+                  <div class="pull-right" *ngIf="notification.type=='cit'">
+                    <i class="icon-ttintroducedcandidates tag bg-big-search-primary-color"></i>
+                  </div>
+                  <div class="pull-right" *ngIf="notification.type=='job'">
+                    <i class="icon-ttcareer tag bg-big-search-primary-color"></i>
+                  </div>
+                  <div class="pull-right" *ngIf="notification.type=='comment'">
+                    <i class="icon-ttinterview tag bg-big-search-primary-color"></i>
+                  </div>
+                  <div class="pull-right" *ngIf="notification.type=='feedback'">
+                    <i class="icon-ttreport tag bg-big-search-primary-color"></i>
+                  </div>
+                  <div class="pull-right" *ngIf="notification.type=='user'">
+                    <i class="icon-ttuserr tag bg-big-search-primary-color"></i>
+                  </div>
+                  <div class="pull-right" *ngIf="notification.type=='solve'">
+                    <i class="icon-ttsolve tag bg-big-search-primary-color"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>

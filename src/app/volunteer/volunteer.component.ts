@@ -86,7 +86,7 @@ export class VolunteerComponent implements OnInit {
 
 
   constructor(private volunteerService: VolunteerService,public toastr: ToastrService, 
-    private globals: AppComponent, private activatedRoute: ActivatedRoute, private router: Router,
+    public globals: AppComponent, private activatedRoute: ActivatedRoute, private router: Router,
     private organizationsService: OrganizationsService) { 
 
       router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
@@ -317,13 +317,13 @@ export class VolunteerComponent implements OnInit {
         (data) => {
           this.initNewEducation();
             this.toastr.success(data.message);
-            document.getElementById("closeNewEvent").click();
+            document.getElementById("add-education-modal").click();
             this.getVolunteer(this.globals.volunteer);
 
         }
       ,
       (error) => {
-        document.getElementById("closeNewEvent").click();
+        document.getElementById("add-education-modal").click();
         this.toastr.error(error.message)
       })
   }
@@ -428,13 +428,13 @@ export class VolunteerComponent implements OnInit {
         (data) => {
           this.initNewLanguage();
             this.toastr.success(data.message);
-            document.getElementById("closeNewEvent").click();
+            document.getElementById("add-language-modal").click();
             this.getVolunteer(this.globals.volunteer);
 
         }
       ,
       (error) => {
-        document.getElementById("closeNewEvent").click();
+        document.getElementById("add-language-modal").click();
         this.toastr.error(error.message)
       })
   }
@@ -462,7 +462,7 @@ export class VolunteerComponent implements OnInit {
   }
 
   updateLanguage(body) {
-    this.volunteerService.updateLanguage(this.globals.user.accessToken,body, this.selectedLanguage.uuid).subscribe(
+    this.volunteerService.updateLanguage(this.globals.user.accessToken, body, this.selectedLanguage.language_uuid).subscribe(
       (data) => {
         this.toastr.success(data.message);
       },

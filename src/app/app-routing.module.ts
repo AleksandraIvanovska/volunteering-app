@@ -7,6 +7,8 @@ import { VolunteerComponent } from './volunteer/volunteer.component';
 import { VolunteeringEventComponent } from './volunteering-event/volunteering-event.component';
 import { VolunteeringEventsComponent } from './volunteering-events/volunteering-events.component';
 import { VolunteersComponent } from './volunteers/volunteers.component';
+import { NotificationComponent } from './notification/notification.component';
+
 
 
 const appRoutes: Routes = [
@@ -58,7 +60,14 @@ const appRoutes: Routes = [
     data: {
       title: 'Volunteer'
     }
-  }
+  },
+  {
+    path: 'notifications',
+    component: NotificationComponent,
+    data: {
+      title: 'Notifications'
+    }
+  },
 
   
 ];

@@ -31,35 +31,52 @@
 
   <div id="navbarSupportedContent-4">
     <ul class="navbar-nav ml-auto">
-      <li [ngClass]="{'d-none': !show.user}" style="margin-top: 1px;" *ngIf="isOrganization">
-        <a data-toggle="modal" data-target="#add_listing" style="color: white; border: 1px solid rgba(255,255,255, .3);"
+      <li [ngClass]="{'d-none': !show.user}" style="margin-top: 1px;">
+        <a *ngIf="isOrganization" data-toggle="modal" data-target="#add_listing" style="color: white; border: 1px solid rgba(255,255,255, .3);"
           class="btn">
           <span class="la la-plus"></span> + Create Volunteering Event
         </a>
       </li>
-      <li class="nav-item active" [ngClass]="{'d-none': !show.user}">
-        <a class="nav-link waves-effect waves-light">1
-          <!--this numer should be button for the notifications-->
-          <i class="fa fa-bell"></i>
-          <!-- 
-                <a class="nav-link position-relative" id="dropdownBasic2" style="display: inline-flex;"
-                (click)="navigateTo('/notifications')" data-toggle="tooltip" data-placement="bottom"
-                [title]="globals.labels.tooltips.shared_page.notification">
-                <div id="notification">
-                  <i class="icon-ttnotifications tt-icon-lg"></i>
-                  <span *ngIf="unreadNotification" style="right: -20px"
-                    class="notification badge-inverse badge-pill badge-big-search-primary-inverse">{{unreadNotification}}</span>
-                </div>
-              </a> -->
-
+      <li class="nav-item active" >
+      
+      <li [ngClass]="{'d-none': !show.user}" class="nav-item dropdown" ngbDropdown placement="bottom-right">
+        <a class="nav-link position-relative" id="dropdownBasic2" ngbDropdownToggle
+          style="display: inline-flex; margin-top: 10px;" (click)="getNotification()" data-toggle="tooltip"
+          data-placement="bottom" >
+          <div id="notification" style="margin-top: -9px">
+            <i class="fa fa-bell"></i>
+            <span *ngIf="unreadNotification" style="margin-left: -5px;margin-right: -8px;"
+              class="notification badge-inverse badge-pill badge-big-search-primary-inverse">{{unreadNotification}}</span>
+          </div>
         </a>
-      </li>
-
-
-      <li style="margin-top: 2px;" [ngClass]="{'d-none': show.user}">
-        <a href="" class="access-link" data-toggle="modal" data-target="#login_modal"><strong>Login </strong> </a>
-        <span>or</span>
-        <a href="" class="access-link" data-toggle="modal" data-target="#signup_modal"><strong> Register</strong></a>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="notification-dropdown card-shadow">
+          <div class="scroll" style="height: 47vh;">
+            <div *ngFor="let notification of notifications;let i = index">
+              <a class="dropdown-item noti-container py-3 border-bottom border-bottom-   border-bottom-lighten-4"
+                (click)="notificationAction(notification, i)"
+                [ngClass]="{'unread-notification': !notification.is_read}">
+                <span class="media" style="padding: 0.5rem 0rem 0rem 0rem">
+                  <span class="noti-wrapper">
+                    <div *ngIf="notification.title" class="valign-child">
+                      <div class="text-bold-300" style="line-height: 1.5;"
+                        [innerHTML]=notification.title></div>
+                    </div>
+                    <span
+                      class="noti-text">{{notification.created_at}}</span>
+                  </span>
+                </span>
+              </a>
+            </div>
+          </div>
+          <hr>
+          <div class="row m-0">
+            <div class="col-12 p-0">
+              <a (click)="readAllNotification()" class="dropdown-item py-1 secondary-color text-center">
+                Read all
+              </a>
+            </div>
+          </div>
+        </div>
       </li>
 
 
@@ -68,21 +85,28 @@
           aria-expanded="false">
           <i class="fa fa-user"></i> Profile </a>
         <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-          <a *ngIf="isOrganization; else other_con" class="dropdown-item" [routerLink]="" 
-          >
-            <!-- <a *ngIf="isOrganization; else other_con" class="dropdown-item" data-toggle="modal" data-target="#add_listing"> -->
-
-            
+          <a *ngIf="isOrganization; else other_con" class="dropdown-item" routerLink="/organization" 
+            [queryParams]="{uuid: globals.user.uuid}" >
             My account 
           </a>
           <ng-template #other_con>
-            <a class="dropdown-item" [routerLink]="">
+            <a class="dropdown-item" routerLink="/volunteer"
+            [queryParams]="{uuid: globals.user.uuid}">
               My account
             </a>         
            </ng-template>  
           <a class="dropdown-item" (click)="logoutUser()">Log out</a>
         </div>
-      </li>
+      </li>     
+
+      <li [ngClass]="{'d-none': show.user}">
+        <a href="" class="access-link" data-toggle="modal"
+            data-target="#login_modal"><strong>Login</strong></a>
+        <span> or </span>
+        <a href="" class="access-link" data-toggle="modal"
+            data-target="#signup_modal"><strong>Register</strong></a>
+    </li>
+    
 
     </ul>
   </div>

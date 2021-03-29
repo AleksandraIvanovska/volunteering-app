@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -11,14 +11,26 @@ export class NotificationService {
 
   constructor(private httpClient: HttpClient) { }
 
-    getNotifications(): Observable<any> {
-        return this.httpClient.get(environment.backendURL + '/events');
+    getNotifications(accessToken): Observable<any> {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`
+      })
+        return this.httpClient.get(environment.backendURL + '/api/events', { headers: headers });
     }
-    markAsRead(uuid): Observable<any> {
-        return this.httpClient.get(environment.backendURL + '/events/' + uuid + '/markAsRead');
+    markAsRead(accessToken,uuid): Observable<any> {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`
+      })
+        return this.httpClient.get(environment.backendURL + '/api/events/' + uuid + '/markAsRead', { headers: headers });
     }
-    readAllNotification(): Observable<any> {
-        return this.httpClient.get(environment.backendURL + '/events/markAllAsRead');
+    readAllNotification(accessToken): Observable<any> {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`
+      })
+        return this.httpClient.get(environment.backendURL + '/api/events/markAllAsRead', { headers: headers });
     }
 
 }

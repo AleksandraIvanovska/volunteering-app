@@ -23,7 +23,7 @@ seletedCountry: null;
 search: null;
 
 
-  constructor(private organizationService: OrganizationsService, private globals: AppComponent, 
+  constructor(private organizationService: OrganizationsService, public globals: AppComponent, 
     private router: Router, public toastr: ToastrService) { }
 
   ngOnInit(): void {

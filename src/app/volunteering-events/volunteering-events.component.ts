@@ -35,7 +35,7 @@ export class VolunteeringEventsComponent implements OnInit {
 
 
   constructor(private eventsService: VolunteeringEventsService, private router: Router, private organizationsService: OrganizationsService,
-    private voluneeringEventService: VolunteeringEventService, public toastr: ToastrService, private globals: AppComponent) { }
+    private voluneeringEventService: VolunteeringEventService, public toastr: ToastrService, public globals: AppComponent) { }
 
   ngOnInit(): void {
     document.body.scrollTop = 0;

@@ -21,7 +21,7 @@
               <div class="event_header">
                 <h2>{{eventHeaderData.title}}</h2>
               </div>
-              <div class="edit-delete">
+              <div *ngIf="globals.user.id == eventHeaderData.organization.user_id" class="edit-delete">
                 <button type="submit" class="btn btn-edit" data-toggle="modal" data-target="#moda_claim_listing">Edit
                   Event</button>
                 &nbsp;
@@ -35,8 +35,8 @@
             <div class="col-md-12">
               <h5 *ngIf="eventHeaderData.organization" style="margin-left: 10px;">
                 By Organization:
-                <a href="/">
-                   {{eventHeaderData.organization.title}}
+                <a routerLink="/organization" [queryParams]="{uuid: eventHeaderData.organization.uuid}">
+                  {{eventHeaderData.organization.title}}
                 </a>
               </h5>
             </div>
@@ -54,7 +54,8 @@
                   <div class="atbd_contact_info">
                     <ul>
                       <li *ngIf="eventHeaderData.description">
-                        <div class="atbd_info_title"><i class="fa fa-file-text-o" aria-hidden="true"></i>Event description:</div>
+                        <div class="atbd_info_title"><i class="fa fa-file-text-o" aria-hidden="true"></i>Event
+                          description:</div>
                         <div class="atbd_info">{{eventHeaderData.description}}</div>
                       </li>
                       <li *ngIf="eventHeaderData.category">
@@ -137,7 +138,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="atbd_content_module">
-                <h4><i class="fa fa-map-marker" aria-hidden="true"></i> 
+                <h4><i class="fa fa-map-marker" aria-hidden="true"></i>
                   Location</h4>
                 <hr>
                 <div class="atbdb_content_module_contents">
@@ -249,7 +250,7 @@
                       <li *ngIf="eventHeaderAssets.length > 0">
                         <div class="atbd_info_title"><i class="fa fa-files-o" aria-hidden="true"></i>
                           Assets:</div>
-                        <div class="atbd_info" style="margin-left: -45px;">
+                        <div class="atbd_info" style="margin-left: -45px;margin-top: 30px;">
                           <ul class="list-unstyled" *ngFor="let asset of eventHeaderAssets">
                             <li
                               style="float: left; border: 1px solid rgba(235, 213, 235, 0.7);border-radius: 0.26667rem;">
@@ -258,8 +259,26 @@
                                 class="btn bg-primary-color" style="float: left;">
                                 {{asset.asset_name}}
                               </button>
+                              <a *ngIf="globals.user.id == eventHeaderData.organization.user_id" class="pull-right"
+                                style="cursor: pointer;" (click)="deleteAsset(asset.uuid)">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                              </a>
                             </li>
                           </ul>
+
+                          <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+                            (fileOver)="fileOverBase($event)" [uploader]="uploader"
+                            class="p-3 text-center grey my-drop-zone">
+                            <button *ngIf="globals.user.id == eventHeaderData.organization.user_id"
+                              class="btn btn-secondary btn-icon-left btn-sm not_empty btn-comment" style="float: right;"
+                              (click)="fileInputFile.click()">
+                              Upload file
+                            </button>
+                          </div>
+                          <input style="display: none;" class="hiddenInput m-0 p-0 position-absolute overflow-hidden"
+                            type="file" ng2FileSelect [uploader]="uploader" #fileInputFile
+                            (change)="OnContentChangeFile($event)">
+
                         </div>
                       </li>
                     </ul>
@@ -268,6 +287,62 @@
               </div>
             </div>
           </div>
+
+          <br>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="atbd_content_module">
+                <h4><i class="fa fa-address-book-o" aria-hidden="true"></i>
+                  Volunteers Applications</h4>
+                <hr>
+                <div class="atbdb_content_module_contents">
+                  <div class="atbd_contact_info">
+                    <ul *ngFor="let item of eventHeaderData.volunteer_invitations">
+                      <li>
+
+                        <div class="atbd_info_title col-6">
+                          <h5><a style="color: black;" routerLink="/volunteer"
+                              [queryParams]="{uuid: item.volunteer_uuid}" target="_blank">{{item.name}}</a></h5>
+                          <p *ngIf="item.gender">{{item.gender}}</p>
+                          <p *ngIf="item.location" style="margin-top: -15px;">{{item.location.city}}
+                            {{item.location.country}}</p>
+                        </div>
+                        <div class="col-6">
+                          Application Status:
+                          <h5 style="color: #348AC7;">
+                            <strong>{{item.status}} </strong>
+                            <a *ngIf="globals.user.id == eventHeaderData.organization.user_id" data-toggle="modal"
+                              data-target="#edit_application_modal" style="cursor: pointer;"
+                              (click)="editApplicationSelected(item)">
+                              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </a>
+                          </h5>
+
+                          <div>
+
+                          </div>
+                          <div
+                            *ngIf="item.status == 'Request sent' && globals.user.id == eventHeaderData.organization.user_id">
+
+                            <button class="dropdown-item" class="btn btn-success btn-sm" type="submit"
+                              (click)="approveApplication(item.application_uuid)">
+                              Accept</button>
+                            &nbsp;
+                            <button class="dropdown-item" class="btn btn-danger btn-sm" type="submit"
+                              (click)="rejectApplication(item.application_uuid)">Reject
+                            </button>
+                          </div>
+                        </div>
+
+                      </li>
+                      <hr>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
 
         </div>
         <div class="vr_line"></div>
@@ -288,33 +363,125 @@
           </div>
 
           <div *ngIf="isOrganization; else other_con">
-            <button class="dropdown-item" class="btn btn-grad btn-lg" 
-            data-toggle="modal"
-                  data-target="#invite-volunteer" >Invite Volunteer</button>
+            <button *ngIf="globals.user.id == eventHeaderData.organization.user_id" class="dropdown-item"
+              class="btn btn-grad btn-lg" data-toggle="modal" data-target="#invite-volunteer">Invite Volunteer</button>
           </div>
+          <!-- <ng-template #other_con>
+           
+            <div *ngIf="!isVolunteerApplicationSTatusInvited; else application_response"> 
+              <div *ngIf="!volunteerApplicationExists; else application_exists">
+                <button class="dropdown-item" class="btn btn-grad btn-lg" type="submit" (click)="applyToEvent()">Apply
+                  Here</button>
+              </div>
+              <ng-template #application_exists>
+                <h5>Your Applications Status </h5>
+                <h5>is <strong>{{applicationStatus}}</strong></h5>
+              </ng-template>
+            </div>
+
+            <ng-template #application_response>
+              <hr>
+              <div style="margin-left: 15px;">
+                <h5>You have been invited </h5>
+                <h5>to this Event</h5>
+                <button class="dropdown-item" class="btn btn-success btn-lg" type="submit"
+                  (click)="approveApplication(item.application_uuid)">
+                  Accept</button>
+                &nbsp;
+                <button class="dropdown-item" class="btn btn-danger btn-lg" type="submit"
+                  (click)="rejectApplication(item.application_uuid)">Reject
+                </button>
+              </div>
+            </ng-template>
+          </ng-template> -->
+
+          <!-- <ng-template #other_con>
+
+            <div *ngIf="!applicationStatus; else application_exists">
+              <div *ngIf="!isVolunteerApplicationSTatusInvited; else application_response">
+                <button class="dropdown-item" class="btn btn-grad btn-lg" type="submit" (click)="applyToEvent()">Apply
+                  Here</button>
+              </div>
+              <ng-template #application_response>
+                <hr>
+                <div style="margin-left: 15px;">
+                  <h5>You have been invited </h5>
+                  <h5>to this Event</h5>
+                  <button class="dropdown-item" class="btn btn-success btn-lg" type="submit"
+                    (click)="approveApplication(item.application_uuid)">
+                    Accept</button>
+                  &nbsp;
+                  <button class="dropdown-item" class="btn btn-danger btn-lg" type="submit"
+                    (click)="rejectApplication(item.application_uuid)">Reject
+                  </button>
+                </div>
+              </ng-template>
+            </div>
+            <ng-template #application_exists>
+              
+              <h5>Your Applications </h5>
+              <h5>Status is <strong>{{applicationStatus}}</strong></h5>
+            </ng-template>
+
+          </ng-template> -->
+
           <ng-template #other_con>
-            <button class="dropdown-item" class="btn btn-grad btn-lg" type="submit" (click)="applyToEvent()">Apply Here</button>
-           </ng-template>  
+
+            <div *ngIf="applicationStatus; else application_exists">
+
+              <div *ngIf="!isInvited; else application_response">
+                <hr>
+                <div style="margin-left: 20px;">
+                  <h5>Your Applications Status is</h5>
+                  <h5 style="color: #348AC7;"> <strong>{{applicationStatus}}</strong></h5>
+                </div>
+              </div>
+
+              <ng-template #application_response>
+                <hr>
+                <div style="margin-left: 15px;">
+                  <h5>You have been invited </h5>
+                  <h5>to this Event</h5>
+                  <button class="dropdown-item" class="btn btn-success btn-lg" type="submit"
+                    (click)="approveApplicationInvitation()">
+                    Accept</button>
+                  &nbsp;
+                  <button class="dropdown-item" class="btn btn-danger btn-lg" type="submit"
+                    (click)="rejectApplicationInvitation()">Reject
+                  </button>
+                </div>
+              </ng-template>
+            </div>
+
+            <ng-template #application_exists>
+              <button class="dropdown-item" class="btn btn-grad btn-lg" type="submit" (click)="applyToEvent()">Apply
+                Here</button>
+            </ng-template>
+
+          </ng-template>
+
+
+
 
           <br><br>
           <div class="atbd_contact_info1">
             <ul>
-              <li *ngIf="eventHeaderData.contacts">
+              <li *ngIf="eventHeaderData.contacts.length > 0">
                 <div class="atbd_info_title">Contacts</div>
                 <div class="atbd_info">
                   <ul *ngFor="let contact of eventHeaderContacts">
                     <li>
                       <div class="contact_item">
-                          <ul>
-                            <li>{{contact.name}}</li>
-                            <li>{{contact.email | slice:0:25}}</li>
-                            <li>{{contact.phone_number}}</li>
-                            <li><a href="{{contact.facebook}}"
-                              target="_blank">{{contact.facebook | slice:0:20}}</a></li>
-                            <li><a href="{{contact.linkedIn}}"
-                              target="_blank">{{contact.linkedIn | slice:0:20}}</a></li>
-                            <li>{{contact.skype}}</li>
-                          </ul>   
+                        <ul>
+                          <li>{{contact.name}}</li>
+                          <li>{{contact.email | slice:0:25}}</li>
+                          <li>{{contact.phone_number}}</li>
+                          <li><a href="{{contact.facebook}}" target="_blank">{{contact.facebook | slice:0:20}}</a>
+                          </li>
+                          <li><a href="{{contact.linkedIn}}" target="_blank">{{contact.linkedIn | slice:0:20}}</a>
+                          </li>
+                          <li>{{contact.skype}}</li>
+                        </ul>
                       </div>
                     </li>
                   </ul>
@@ -610,10 +777,10 @@
             <div class="row">
               <div class="col-md-12">
                 Contacts
-              <ng-select (open)="getOrganizationContacts()" [items]="organization_contacts" placeholder="Select Contacts"
-                [multiple]="true"  (change)="editEventContacts()"
-                bindLabel="name" [(ngModel)]="eventHeaderContacts" [ngModelOptions]="{standalone: true}">
-              </ng-select>
+                <ng-select (open)="getOrganizationContacts()" [items]="organization_contacts"
+                  placeholder="Select Contacts" [multiple]="true" (change)="editEventContacts()" bindLabel="name"
+                  [(ngModel)]="eventHeaderContacts" [ngModelOptions]="{standalone: true}">
+                </ng-select>
               </div>
             </div>
           </div>
@@ -661,13 +828,71 @@
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
         </div>
         <div class="modal-body">
-          Are you sure you want to delete the Volunteering Event ?
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-12">
+                Volunteers
+                <ng-select bindLabel="bind_name" bindValue="user_id" dropdownPosition="bottom"
+                  [(ngModel)]="addInvitation.volunteer" placeholder="Select volunteer" (open)="getAllVolunteers()"
+                  [items]="volunteers" [ngModelOptions]="{standalone: true}">
+                </ng-select>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" id="closeDelete">No</button>
-          <button type="submit" class="btn btn-secondary btn-sm" (click)="deleteEvent()">Yes</button>
+          <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" id="closeDelete">Close</button>
+          <button type="submit" class="btn btn-secondary btn-sm"
+            (click)="inviteVolunteerToEvent(addInvitation.volunteer)">Invite</button>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="edit_application_modal" tabindex="-1" role="dialog" aria-labelledby="edit_application_modal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="edit_application_modal"><i class="la la-check-square"></i> Edit Application
+        </h5>
+      </div>
+      <div class="modal-body">
+        <form action="/">
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-12">
+                Application Status
+                <!-- <ng-select bindLabel="language" bindValue="language" dropdownPosition="bottom"
+                                    (change)="editLanguage(selectedLanguage.language, 'language')" (open)="getAllLanguages()"
+                                    [(ngModel)]="selectedLanguage.language" placeholder="Select language" [items]="allLanguages"
+                                    [ngModelOptions]="{standalone: true}">
+                                </ng-select> -->
+
+                <ng-select bindLabel="description" bindValue="value" dropdownPosition="bottom"
+                  (change)="editApplicationStatus(selectedApplication.status, 'status')"
+                  (open)="getApplicationStatuses()" [(ngModel)]="selectedApplication.status" placeholder="Select status"
+                  [items]="applicationStatuses" [ngModelOptions]="{standalone: true}">
+                </ng-select>
+
+                <!-- <ng-select bindLabel="name" dropdownPosition="bottom"
+                                (change)="editEventLocation(eventHeaderLocationData.location.name, 'city')" (open)="getAllCities()"
+                                [(ngModel)]="eventHeaderLocationData.location" placeholder="Select city" [items]="cities"
+                                [ngModelOptions]="{standalone: true}">
+                              </ng-select> -->
+              </div>
+            </div>
+          </div>
+
+
+        </form>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-secondary btn-sm" data-dismiss="modal" id="closeEdit">Close</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

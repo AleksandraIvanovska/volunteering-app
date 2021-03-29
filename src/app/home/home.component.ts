@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   volunteering_events:[];
 
 
-  constructor(private eventsService: VolunteeringEventsService, private globals: AppComponent) { }
+  constructor(private eventsService: VolunteeringEventsService, public globals: AppComponent) { }
 
   ngOnInit(): void {
     this.getEvents();

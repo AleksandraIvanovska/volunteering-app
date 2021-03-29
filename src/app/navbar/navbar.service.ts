@@ -69,6 +69,45 @@ export class NavbarService {
     return this.http.get(environment.backendURL + '/api/users/isUserOrganization', { headers: headers });
   }
 
+  addOrganization(accessToken,body): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    })
+    return this.http.post(environment.backendURL + '/api/organizations', body, { headers: headers });
+  }
+
+  addVolunteer(accessToken, body): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    })
+    return this.http.post(environment.backendURL + '/api/volunteers', body, { headers: headers });
+  }
+
+  getNotifications(accessToken): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    })
+    return this.http.get(environment.backendURL + '/api/events/latest', { headers: headers });
+}
+
+markAsRead(accessToken, uuid): Observable<any> {
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${accessToken}`
+  })
+    return this.http.get(environment.backendURL + '/api/events/' + uuid + '/markAsRead', { headers: headers });
+}
+
+readAllNotification(accessToken): Observable<any> {
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${accessToken}`
+  })
+    return this.http.get(environment.backendURL + '/api/events/markAllAsRead', { headers: headers });
+}
  
 
 }

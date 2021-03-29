@@ -31,6 +31,8 @@ import { OrganizationService } from './organization/organization.service';
 import { VolunteerComponent } from './volunteer/volunteer.component';
 import { VolunteerService } from './volunteer/volunteer.service';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { FileUploadModule } from 'ng2-file-upload';
+import { CommunicationService } from './service/notification.service';
 
 
 
@@ -52,7 +54,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       closeButton: true,
-      enableHtml: true,
+      enableHtml: true
+     
     }),
     BrowserModule,
     FormsModule,
@@ -62,7 +65,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     HttpClientModule,
     NgSelectModule,
     NgOptionHighlightModule,
-    ScrollingModule
+    ScrollingModule,
+    FileUploadModule
   ],
   providers: [
     NavbarService,
@@ -72,6 +76,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     VolunteeringEventService,
     VolunteeringEventsService,
     VolunteersService,  
+    CommunicationService,
     VolunteerService,
     { provide: APP_BASE_HREF, useValue: '/' },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

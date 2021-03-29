@@ -1,0 +1,17 @@
+.tag {
+    color: white;
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-clip: padding-box;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 40px;
+    margin-right: 5px;
+    float: left;
+  }
+  .solve-icon {
+    width: 45px !important;
+    padding-right: 5px !important;
+    margin-right: 0px !important;
+  }

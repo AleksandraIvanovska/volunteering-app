@@ -18,7 +18,7 @@ export class VolunteersComponent implements OnInit {
   seletedCountry: null;
   search: null;
 
-  constructor(private volunteersService: VolunteersService, private globals: AppComponent, 
+  constructor(private volunteersService: VolunteersService, public globals: AppComponent, 
     private router: Router, public toastr: ToastrService) { }
 
   ngOnInit(): void {

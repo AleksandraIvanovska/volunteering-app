@@ -19,8 +19,9 @@
                         </div>
                         <div class="col-md-5">
                             <div class="edit-delete">
-                                <button type="submit" class="btn btn-edit btn" data-toggle="modal"
-                                    data-target="#moda_claim_listing">Edit Profile
+                                <button *ngIf="globals.user.id == organizationData.user_id" type="submit"
+                                    class="btn btn-edit btn" data-toggle="modal" data-target="#moda_claim_listing">Edit
+                                    Profile
                                 </button>
                                 &nbsp;
                             </div>
@@ -138,7 +139,7 @@
                                     </div>
 
                                     <div class="col-md-5">
-                                        <button data-target="#add-contact-modal" type="submit" data-toggle="modal"
+                                        <button *ngIf="globals.user.id == organizationData.user_id" data-target="#add-contact-modal" type="submit" data-toggle="modal"
                                             class="btn btn-secondary btn-icon-left btn-sm not_empty btn-comment"
                                             style="float: right;" (click)="addContactBar()">+ Add Contact</button>
                                     </div>
@@ -179,7 +180,7 @@
 
                                                         </div>
                                                         <div class="row">
-                                                            <a style="cursor: pointer; margin-left: 565px;"
+                                                            <a *ngIf="globals.user.id == contact.creator_id" style="cursor: pointer; margin-left: 565px;"
                                                                 (click)="deleteContact(contact.contact_uuid)">
                                                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                             </a>
@@ -277,7 +278,7 @@
                                             <div class="review_content">
                                                 <div>
                                                     <span class="review_time">{{comment.created_date}}</span>
-                                                    <a class="pull-right" style="cursor: pointer;"
+                                                    <a *ngIf="globals.user.id == comment.creator_id" class="pull-right" style="cursor: pointer;"
                                                         (click)="deleteComment(i, comment.comment_uuid)">
                                                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                     </a>
@@ -359,11 +360,8 @@
                         </div>
                     </div>
 
-
-
-
-
-                    <button type="submit" class="btn btn-delete btn-sm" data-toggle="modal"
+                    <button *ngIf="globals.user.id == organizationData.user_id" type="submit"
+                        class="btn btn-delete btn-sm" data-toggle="modal"
                         data-target="#deactivate-profile-modal">Deactivate Profile</button>
                 </div>
 
@@ -380,10 +378,9 @@
                                     <div class="atbd_contact_info">
                                         <ul *ngFor="let event of organizationEvents;">
                                             <li *ngIf="event.title">
-
                                                 <div class="atbd_info"><a style="color: #3a7dfd; font-size: 25px;"
-                                                        href="">{{event.title}}</a></div>
-
+                                                    routerLink="/volunteeringEvent"
+                                                    [queryParams]="{uuid: event.uuid}">{{event.title}}</a></div>
                                             </li>
                                             <li *ngIf="event.category">
                                                 <div class="atbd_info_title">Category:</div>
@@ -615,12 +612,12 @@
                                 </div>
                                 <div class="col-md-4">
                                     Middle Name
-                                    <input type="text" placeholder="Middle name" class="form-control" 
+                                    <input type="text" placeholder="Middle name" class="form-control"
                                         [(ngModel)]="addContact.middle_name" [ngModelOptions]="{standalone: true}">
                                 </div>
                                 <div class="col-md-4">
                                     Last Name
-                                    <input type="text" placeholder="Last name" class="form-control" 
+                                    <input type="text" placeholder="Last name" class="form-control"
                                         [(ngModel)]="addContact.last_name" [ngModelOptions]="{standalone: true}">
                                 </div>
                             </div>
@@ -631,12 +628,12 @@
                                 <div class="col-md-6">
                                     Date of birth
                                     <input type="date" data-date-format="DD MMMM YYYY"
-                                        [ngModelOptions]="{standalone: true}" [(ngModel)]='addContact.dob'
-                                        onFocusOut class="form-control">
+                                        [ngModelOptions]="{standalone: true}" [(ngModel)]='addContact.dob' onFocusOut
+                                        class="form-control">
                                 </div>
                                 <div class="col-md-6">
                                     Photo Url
-                                    <input type="text" placeholder="Photo Url" class="form-control" 
+                                    <input type="text" placeholder="Photo Url" class="form-control"
                                         [(ngModel)]="addContact.photo" [ngModelOptions]="{standalone: true}">
                                 </div>
                             </div>
@@ -651,7 +648,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     Facebook
-                                    <input type="text" placeholder="Insert facebook" class="form-control" 
+                                    <input type="text" placeholder="Insert facebook" class="form-control"
                                         [(ngModel)]="addContact.facebook" [ngModelOptions]="{standalone: true}">
                                 </div>
                             </div>
@@ -666,7 +663,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     Twiter
-                                    <input type="text" placeholder="Insert twitter" class="form-control" 
+                                    <input type="text" placeholder="Insert twitter" class="form-control"
                                         [(ngModel)]="addContact.twitter" [ngModelOptions]="{standalone: true}">
                                 </div>
                             </div>
@@ -681,7 +678,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     Skype
-                                    <input type="text" placeholder="Insert skype" class="form-control" 
+                                    <input type="text" placeholder="Insert skype" class="form-control"
                                         [(ngModel)]="addContact.skype" [ngModelOptions]="{standalone: true}">
                                 </div>
                             </div>

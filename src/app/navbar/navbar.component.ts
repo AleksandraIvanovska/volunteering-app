@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { timer } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { AppComponent } from '../app.component';
 import { OrganizationsService } from '../organizations/organizations.service';
+import { CommunicationService } from '../service/notification.service';
 import { VolunteeringEventsService } from '../volunteering-events/volunteering-events.service';
 import { NavbarService } from './navbar.service';
 
@@ -112,12 +115,25 @@ export class NavbarComponent implements OnInit {
 
   isOrganization: null;
 
+  notifications: any = [];
+  unreadNotification: number;
+
+
+
 
 
   constructor(private router: Router, private route: ActivatedRoute, private navbarService: NavbarService, 
     public toastr: ToastrService, private organizationsService: OrganizationsService,
-    private eventsService: VolunteeringEventsService, private globals: AppComponent
-    ) { }
+    private eventsService: VolunteeringEventsService, public globals: AppComponent, 
+    public communicationService: CommunicationService
+    ) { 
+
+      // this.communicationService.onNotificationSelected$.takeWhile(() => this.componentAlive)
+      // .subscribe((notificationCounter) =>
+      // {
+      //   notificationCounter ? this.unreadNotification = 0 : this.unreadNotification -= 1;
+      // });
+    }
 
   ngOnInit(): void {
     this.initNewEvent();
@@ -132,9 +148,11 @@ export class NavbarComponent implements OnInit {
         id: localStorage.getItem('id'),
         uuid: localStorage.getItem('uuid')
       }
+      this.isUserOrganization();
       console.log(this.globals)
     }
-    this.isUserOrganization();
+    
+    this.getNotification();
   }
 
   onNewEvent() {
@@ -244,7 +262,7 @@ openContact(uuid)
 
 
 
-  loginUser() {
+  async loginUser() {
     if (this.login.email && this.login.password) {
       if (!this.validateEmail(this.login.email)) {
         this.toastr.error("Invalid email")
@@ -262,7 +280,8 @@ openContact(uuid)
                 accessToken: response.access_token,
                 name: response.user.name,
                 email: response.user.email,
-                id: response.user.id
+                id: response.user.id,
+                uuid: response.uuid
               }
               this.toastr.success('Welcome ' + response.user.name);
               document.getElementById("close").click();
@@ -277,6 +296,57 @@ openContact(uuid)
     } else {
       this.toastr.error("All fields are mandatory")
     }
+
+    if (this.register.name != null &&
+      this.register.email != null) {
+      await timer(1000).pipe(take(1)).toPromise();
+
+      let body: any = {};
+      this.isUserOrganization();
+      await timer(1000).pipe(take(1)).toPromise();
+  
+      if (this.isOrganization) {
+  
+        body.user_id = this.globals.user.id;
+        body.name = this.register.name;
+  
+        this.navbarService.addOrganization(this.globals.user.accessToken, body).subscribe(
+          (data) => {
+            this.globals.user.uuid = data.uuid
+            this.toastr.success('Successfully registered user');
+          },
+          (error) => {
+            this.toastr.error(error.message)
+          })
+      
+      }
+      else {
+        body.user_id = this.globals.user.id;
+        body.first_name = this.register.name;
+  
+        console.log(body);
+  
+        this.navbarService.addVolunteer(this.globals.user.accessToken, body).subscribe(
+          (data) => {
+            this.globals.user.uuid = data.uuid
+            this.toastr.success('Successfully registered user');
+          },
+          (error) => {
+            this.toastr.error(error.message)
+          })
+      }
+  
+      this.register.name = null,
+      this.register.email = null,
+      this.register.password = null,
+      this.register.password_confirmation = null,
+      this.register.role = null
+
+  
+    }
+
+    
+
   }
 
   registerUser() {
@@ -300,7 +370,7 @@ openContact(uuid)
             this.login.email = this.register.email;
             this.login.password = this.register.password
             document.getElementById("login").click();
-            this.toastr.success('Successfully registered user');
+            this.toastr.success('Successfully registered user');          
           },
           (error) => {
             this.toastr.error(error.message)
@@ -309,6 +379,7 @@ openContact(uuid)
     } else {
       this.toastr.error("All fields are mandatory")
     }
+  
   }
 
   validateEmail(email) {
@@ -318,6 +389,8 @@ openContact(uuid)
 
   logoutUser() {
     this.show.user = false;
+    this.isOrganization = null;
+
     this.globals.user = {
       emailVerifiedAt: null,
       accessToken: null,
@@ -326,6 +399,7 @@ openContact(uuid)
       id: null
     }
     localStorage.clear()
+    this.router.navigate(['']);
   }
 
   // resetPasswordTraveller() {
@@ -393,6 +467,60 @@ openContact(uuid)
         this.isOrganization = data;
       }
     )
+  }
+
+
+  readAllNotification()
+  {
+    this.navbarService.readAllNotification(this.globals.user.accessToken)
+      .subscribe(
+        (data) =>
+        {
+          this.emitToNotification('read_all');
+          this.unreadNotification = 0;
+        }
+      )
+  }
+
+  notificationAction(notification, i)
+  {
+    if (!this.notifications[i].is_read) {
+      this.unreadNotification -= 1;
+      this.emitToNotification(notification.uuid);
+    }
+    this.notifications[i].is_read = 1;
+    this.navbarService.markAsRead(this.globals.user.accessToken,notification.uuid).subscribe();
+    if (notification.navigation_url) {
+      if (notification.is_route) {
+        window.open(notification.navigation_url);
+      } else {
+        let params = JSON.parse('{"' + decodeURI(notification.navigation_url.replace(/\?/g, '')).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
+        this.router.navigate([],
+          {
+            relativeTo: this.route,
+            queryParams: params
+          });
+      }
+    }
+  }
+
+  getNotification()
+  {
+    console.log("Notifications od navbar povikano")
+    this.navbarService.getNotifications(this.globals.user.accessToken)
+      .subscribe(
+        (data) =>
+        {
+          console.log("Vleze vo data da zeme")
+          this.notifications = data.events;
+          this.unreadNotification = data.eventsCount;
+        }
+      )
+  }
+
+  emitToNotification(notification: any)
+  {
+    this.communicationService.emitToNotification(notification);
   }
 
 

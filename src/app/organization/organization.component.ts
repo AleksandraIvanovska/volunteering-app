@@ -64,7 +64,7 @@ export class OrganizationComponent implements OnInit {
 
 
   constructor(private organizationService: OrganizationService, private organizationsService: OrganizationsService,
-    public toastr: ToastrService, private globals: AppComponent, private activatedRoute: ActivatedRoute, private router: Router) { 
+    public toastr: ToastrService, public globals: AppComponent, private activatedRoute: ActivatedRoute, private router: Router) { 
 
       router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
         let checkURL = this.router.parseUrl(this.router.url).root.children.primary

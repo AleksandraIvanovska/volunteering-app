@@ -48,10 +48,55 @@ a:hover {
   }
 
 
+  .unread-notification {
+    background-color: white;
+  }
   
+  .navbar .notification {
+    right: 5px;
+    top: -13px;
+  }
 
 
+  .notification-dropdown {
+    margin-top: 9px;
+    margin-left: -550px;
+  }
+
+  .scroll{
+    overflow-y: scroll;
+    height: 100vh;
+}
+
+  /* .notification-dropdown{
+    .noti-list{
+      position: relative;
+      height: 290px;
+    }
+    &.dropdown-menu{
+      padding: 0;
+    }
+    .noti-text{
+      color: $gray-600;
+      font-size: 90%;
+    }
   
+    .dropdown-item:focus, .dropdown-item:hover{
+      background-color: $selected-element;
+      i{
+        color:  $secondary-color;
+        background-color: $selected-element;
+      }
+    }
+  
+    .dropdown-item.active, .dropdown-item:active{
+      background-color: none;
+      i,.noti-title, .noti-text{
+        color:  $secondary-color;
+        background-color: $selected-element;
+      }
+    }
+  }   */
   
   
 
