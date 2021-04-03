@@ -61,6 +61,7 @@ a:hover {
   .notification-dropdown {
     margin-top: 9px;
     margin-left: -550px;
+    width: 700px;
   }
 
   .scroll{

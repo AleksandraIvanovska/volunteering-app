@@ -175,5 +175,23 @@ export class VolunteerService {
     })
     return this.http.get(environment.backendURL + '/api/resources/languageLevels', { headers: headers });
   }
+
+  removeEventFromFavorite(accessToken, favorite_event_uuid): Observable<any>
+  {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    })
+    return this.http.delete(environment.backendURL + '/api/volunteers/favoriteEvent/' + favorite_event_uuid, { headers: headers });
+  }
+
+  removeOrganizationFromFavorite(accessToken, favorite_organization_uuid): Observable<any>
+  {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    })
+    return this.http.delete(environment.backendURL + '/api/volunteers/favoriteOrganization/' + favorite_organization_uuid, { headers: headers });
+  }
   
 }

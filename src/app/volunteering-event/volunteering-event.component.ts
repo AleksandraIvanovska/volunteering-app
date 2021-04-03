@@ -258,8 +258,8 @@ export class VolunteeringEventComponent implements OnInit {
     this.voluneeringEventService.deleteEvent(this.globals.user.accessToken,this.globals.volunteeringEvent).subscribe(
       (data) => {
         this.eventHeaderData = {}
-        this.globals.volunteeringEvent = null;
         this.router.navigate(['']);
+        this.globals.volunteeringEvent = null;
         document.getElementById('closeDelete').click();
         this.toastr.success(data.message);
       },
@@ -391,6 +391,7 @@ export class VolunteeringEventComponent implements OnInit {
     this.voluneeringEventService.createApplication(this.globals.user.accessToken, data).subscribe(
       (data) => {
         this.toastr.success(data.message);
+        this.getEvent(this.globals.volunteeringEvent)
         this.addInvitation = {};
       },
       (error) => {
@@ -556,7 +557,25 @@ export class VolunteeringEventComponent implements OnInit {
       (error) => {
         this.toastr.error(error.message)
       })
-
   }
+
+  addEeventToFavorites() {
+    let body: any = {};
+
+    body.volunteer_uuid = this.globals.user.uuid;
+    body.event_uuid = this.globals.volunteeringEvent;
+
+    console.log(body)
+
+    this.voluneeringEventService.addEventToFavorite(this.globals.user.accessToken, body).subscribe(
+      (data) => {
+        this.toastr.success(data.message);
+      },
+      (error) => {
+        this.toastr.error(error.message)
+      })
+  }
+
+
   
 }

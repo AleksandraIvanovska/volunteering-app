@@ -80,5 +80,15 @@ export class OrganizationService {
     return this.http.post(environment.backendURL + '/api/organizations/contact', data, { headers: headers });
   }
 
+  addOrganizationToFavorite(accessToken, body): Observable<any>
+  {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    })
+
+    return this.http.post(environment.backendURL + '/api/volunteers/favoriteOrganization', body, { headers: headers });  
+  }
+
 }
 

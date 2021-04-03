@@ -105,11 +105,15 @@ export class VolunteeringEventService {
     return this.http.put(environment.backendURL + '/api/volunteeringEvents/volunteerInvitation/' + uuid, body, { headers: headers });
   }
 
+  addEventToFavorite(accessToken, body): Observable<any>
+  {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    })
 
-
-
-
-
+    return this.http.post(environment.backendURL + '/api/volunteers/favoriteEvent', body, { headers: headers });  
+  }
 
 
 }

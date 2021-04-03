@@ -275,6 +275,7 @@ openContact(uuid)
               localStorage.setItem('name', response.user.name);
               localStorage.setItem('id', response.user.id);
               localStorage.setItem('email_verified_at', response.user.email_verified_at);
+              localStorage.setItem('uuid', response.uuid);
               this.globals.user = {
                 emailVerifiedAt: response.user.email_verified_at,
                 accessToken: response.access_token,
@@ -287,6 +288,7 @@ openContact(uuid)
               document.getElementById("close").click();
               this.show.user = true;
               this.show.profile = false;
+              console.log(this.globals.user);
             }
           },
           (error) => {
@@ -391,6 +393,7 @@ openContact(uuid)
     this.show.user = false;
     this.isOrganization = null;
 
+    this.router.navigate([''])
     this.globals.user = {
       emailVerifiedAt: null,
       accessToken: null,
@@ -399,66 +402,50 @@ openContact(uuid)
       id: null
     }
     localStorage.clear()
-    this.router.navigate(['']);
+    
   }
 
-  // resetPasswordTraveller() {
-  //   if (this.resetPassword.old_password && this.resetPassword.password && this.resetPassword.password_confirmation) {
-  //     if (this.resetPassword.password != this.resetPassword.password_confirmation) {
-  //       this.toastr.error("Passwords don't match")
-  //     } else {
-  //       this.resetPassword.email = this.globals.user.email;
-  //       this.resetPassword.token = localStorage.getItem('access_token');
-  //       this.navbarService.resetPassword(this.resetPassword).subscribe(
-  //         (data) => {
-  //           document.getElementById("closeModal").click();
-  //           this.toastr.success('Successfully changed password');
-  //         },
-  //         (error) => {
-  //           this.toastr.error(error.message)
-  //         })
-  //     }
-  //   } else {
-  //     this.toastr.error("All fields are mandatory")
-  //   }
-  // }
 
-  // forgotPasswordTraveller() {
-  //   if (this.forgotPassword.email) {
-  //     if (!this.validateEmail(this.forgotPassword.email)) {
-  //       this.toastr.error("Invalid email")
-  //     } else {
-  //       this.navbarService.forgotPassword(this.forgotPassword).subscribe(
-  //         (data) => {
-  //           this.login.email = this.register.email;
-  //           document.getElementById("login").click();
-  //           this.toastr.success('We have e-mailed your password reset link!');
-  //         },
-  //         (error) => {
-  //           this.toastr.error(error.message)
-  //         })
-  //     }
-  //   } else {
-  //     this.toastr.error("All fields are mandatory")
-  //   }
-  // }
-
-  // verifyEmailTraveller() {
-  //   this.navbarService.verifyEmail(this.globals.user.accessToken).subscribe(
-  //     (data) => {
-  //       this.toastr.success('We have e-mailed you confirmation link!');
-  //     },
-  //     (error) => {
-  //       this.toastr.error(error.message)
-  //     })
-  // }
-
-  forgotPasswordTraveller() {
-
+  forgotPasswordUser() {
+    if (this.forgotPassword.email) {
+      if (!this.validateEmail(this.forgotPassword.email)) {
+        this.toastr.error("Invalid email")
+      } else {
+        this.navbarService.forgotPassword(this.forgotPassword).subscribe(
+          (data) => {
+            this.login.email = this.register.email;
+            
+            document.getElementById("login").click();
+            this.toastr.success('We have e-mailed your password reset link!');
+          },
+          (error) => {
+            this.toastr.error(error.message)
+          })
+      }
+    } else {
+      this.toastr.error("All fields are mandatory")
+    }
   }
   
-  resetPasswordTraveller() {
-    
+  resetPasswordUser() {
+    if (this.resetPassword.old_password && this.resetPassword.password && this.resetPassword.password_confirmation) {
+      if (this.resetPassword.password != this.resetPassword.password_confirmation) {
+        this.toastr.error("Passwords don't match")
+      } else {
+        this.resetPassword.email = this.globals.user.email;
+        this.resetPassword.token = localStorage.getItem('access_token');
+        this.navbarService.resetPassword(this.resetPassword).subscribe(
+          (data) => {
+            document.getElementById("closeModal").click();
+            this.toastr.success('Successfully changed password');
+          },
+          (error) => {
+            this.toastr.error(error.message)
+          })
+      }
+    } else {
+      this.toastr.error("All fields are mandatory")
+    }
   }
 
   isUserOrganization() {
@@ -474,7 +461,7 @@ openContact(uuid)
   {
     this.navbarService.readAllNotification(this.globals.user.accessToken)
       .subscribe(
-        (data) =>
+        (data) => 
         {
           this.emitToNotification('read_all');
           this.unreadNotification = 0;

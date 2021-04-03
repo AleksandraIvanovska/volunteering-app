@@ -489,6 +489,11 @@
               </li>
             </ul>
           </div>
+          <br>
+          <div>
+            <button *ngIf="!isOrganization;" (click)="addEeventToFavorites()"
+              class="btn btn-fav">Add to Favorites</button>
+          </div>
         </div>
       </div>
     </div>

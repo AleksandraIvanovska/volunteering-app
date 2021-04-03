@@ -345,7 +345,10 @@
                                                 <div class="atbd_info">
                                                     <ul *ngFor="let event of volunteerData.favoriteEvents"
                                                         style="display: inline-flex">
-                                                        <li><a href="">{{event.title}}</a></li>
+                                                        <li><a href="">{{event.title}}</a>
+                                                        <button (click)="removeFavoriteEvent(event.favorite_event_uuid)"
+                                                        class="btn btn-sm"><i class="fa fa-times"></i></button>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </li>
@@ -356,7 +359,9 @@
                                                 <div class="atbd_info">
                                                     <ul *ngFor="let org of volunteerData.favoriteOrganizations"
                                                         style="display: inline-flex">
-                                                        <li><a href="">{{org.name}}</a></li>
+                                                        <li><a href="">{{org.name}}</a>
+                                                            <button (click)="removeFavoriteOrganization(org.favorite_organization_uuid)"
+                                                            class="btn btn-sm"><i class="fa fa-times"></i></button></li>
                                                     </ul>
                                                 </div>
                                             </li>

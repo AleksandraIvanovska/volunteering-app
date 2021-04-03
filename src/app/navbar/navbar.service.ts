@@ -44,21 +44,7 @@ export class NavbarService {
     return this.http.post<any>(environment.backendURL + '/api/users/register', body);
   }
 
-  // resetPassword(body): Observable<any> {
-  //   return this.http.post<any>(environment.api + '/api/password/reset', body);
-  // }
 
-  // forgotPassword(body): Observable<any> {
-  //   return this.http.post<any>(environment.api + '/api/password/email', body);
-  // }
-
-  // verifyEmail(accessToken): Observable<any> {
-  //   const headers = new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     Authorization: `Bearer ${accessToken}`
-  //   })
-  //   return this.http.get(environment.api + '/api/email/resend', { headers: headers });
-  // }
 
   getIsUserOrganization(accessToken): Observable<any>
   {
@@ -109,5 +95,20 @@ readAllNotification(accessToken): Observable<any> {
     return this.http.get(environment.backendURL + '/api/events/markAllAsRead', { headers: headers });
 }
  
+forgotPassword(body): Observable<any> {
+    return this.http.post<any>(environment.backendURL + '/api/users/forgotPassword', body);
+    return this.http.post<any>(environment.backendURL + '/api/password/email', body);
+}
+
+resetPassword(body): Observable<any> {
+  return this.http.post<any>(environment.backendURL + '/api/users/reset', body);
+}
+
+  // verifyEmail(accessToken): Observable<any> {
+  //   const headers = new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //   })
+  //   return this.http.get(environment.api + '/api/email/resend', { headers: headers });
+  // }
 
 }

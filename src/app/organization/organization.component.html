@@ -409,6 +409,10 @@
                             </div>
                         </div>
                     </div>
+                    <div>
+                        <button *ngIf="!isOrganization;" (click)="addOrganizationToFavorites()"
+                          class="btn btn-fav">Add to Favorites</button>
+                      </div>
                 </div>
             </div>
         </div>

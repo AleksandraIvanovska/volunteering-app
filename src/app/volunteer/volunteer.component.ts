@@ -475,4 +475,25 @@ export class VolunteerComponent implements OnInit {
     this.selectedLanguage =  language;
   }
 
+  removeFavoriteEvent(favorite_event_uuid) {
+    this.volunteerService.removeEventFromFavorite(this.globals.user.accessToken, favorite_event_uuid).subscribe(
+      (data) => {
+        this.toastr.success(data.message);
+        this.getVolunteer(this.globals.volunteer);
+      },
+      (error) => {
+        this.toastr.error(error.message)
+      })
+  }
+
+  removeFavoriteOrganization(remove_favorite_organization) {
+    this.volunteerService.removeOrganizationFromFavorite(this.globals.user.accessToken, remove_favorite_organization).subscribe(
+      (data) => {
+        this.toastr.success(data.message);
+        this.getVolunteer(this.globals.volunteer);
+      },
+      (error) => {
+        this.toastr.error(error.message)
+      })
+  }
 }

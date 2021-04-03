@@ -3,6 +3,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { filter } from 'rxjs/operators';
 import { AppComponent } from '../app.component';
+import { NavbarService } from '../navbar/navbar.service';
 import { OrganizationsService } from '../organizations/organizations.service';
 import { OrganizationService } from './organization.service';
 
@@ -42,6 +43,7 @@ export class OrganizationComponent implements OnInit {
   showAddComment = false;
   showAddContact = false;
   cities : any = [];
+  isOrganization: null;
 
   addContact: any = {}
   initNewContact() {
@@ -64,7 +66,8 @@ export class OrganizationComponent implements OnInit {
 
 
   constructor(private organizationService: OrganizationService, private organizationsService: OrganizationsService,
-    public toastr: ToastrService, public globals: AppComponent, private activatedRoute: ActivatedRoute, private router: Router) { 
+    public toastr: ToastrService, public globals: AppComponent, private activatedRoute: ActivatedRoute, private router: Router,
+    public navbarService: NavbarService) { 
 
       router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
         let checkURL = this.router.parseUrl(this.router.url).root.children.primary
@@ -81,6 +84,7 @@ export class OrganizationComponent implements OnInit {
   ngOnInit(): void {
 
     this.initNewContact();
+    this.isUserOrganization();
   }
 
   getOrganization(uuid) {
@@ -306,6 +310,30 @@ export class OrganizationComponent implements OnInit {
 
   }
 
+  addOrganizationToFavorites() {
+    let body: any = {};
+
+    body.volunteer_uuid = this.globals.user.uuid;
+    body.organization_uuid = this.globals.organization;
+
+    console.log(body)
+
+    this.organizationService.addOrganizationToFavorite(this.globals.user.accessToken, body).subscribe(
+      (data) => {
+        this.toastr.success(data.message);
+      },
+      (error) => {
+        this.toastr.error(error.message)
+      })
+  }
+
+  isUserOrganization() {
+    this.navbarService.getIsUserOrganization(this.globals.user.accessToken).subscribe(
+      (data) => {
+        this.isOrganization = data;
+      }
+    )
+  }
 
   
 

@@ -434,9 +434,9 @@
         <div class="form-excerpts">
           <ul class="list-unstyled">
             <li>Already a member? <a id="login" data-toggle="modal" data-dismiss="modal" aria-label="Close"
-                data-target="#login_modal">Login</a></li>
+                data-target="#login_modal" style="color: indianred;">Login</a></li>
             <li><a id="register" data-toggle="modal" data-dismiss="modal" aria-label="Close"
-                data-target="#forgot_modal">Forgot Password?</a></li>
+                data-target="#forgot_modal" style="color: indianred;">Forgot Password?</a></li>
           </ul>
         </div>
       </div>
@@ -493,7 +493,7 @@
             class="form-control" id="email" name="email" required placeholder="Email" email
             [(ngModel)]="forgotPassword.email" [ngModelOptions]="{standalone: true}" />
           <button type="submit" class="btn btn-block btn-lg btn-gradient btn-gradient-two"
-            (click)="forgotPasswordTraveller()">Send</button>
+            (click)="forgotPasswordUser()">Send</button>
         </form>
         <div class="form-excerpts">
           <ul class="list-unstyled">
@@ -526,7 +526,7 @@
             required minlength="8" [(ngModel)]="resetPassword.password_confirmation"
             [ngModelOptions]="{standalone: true}">
           <button type="submit" class="btn btn-block btn-lg btn-gradient btn-gradient-two"
-            (click)="resetPasswordTraveller()">Reset password</button>
+            (click)="resetPasswordUser()">Reset password</button>
         </form>
       </div>
     </div>

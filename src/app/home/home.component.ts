@@ -15,16 +15,17 @@ export class HomeComponent implements OnInit {
   constructor(private eventsService: VolunteeringEventsService, public globals: AppComponent) { }
 
   ngOnInit(): void {
-    this.getEvents();
+   // this.getEvents();
   }
 
-  getEvents() {
-    this.eventsService.getEvents(this.globals.user.accessToken).subscribe(
-            (data) => {
-              this.volunteering_events =  data.slice(0, 3);
-              //console.log(this.volunteering_events);
-         }
-    )
-  }
+  //Na home ke hardkodiram 3 eventi
+  // getEvents() {
+  //   this.eventsService.getEvents(this.globals.user.accessToken).subscribe(
+  //           (data) => {
+  //             this.volunteering_events =  data.slice(0, 3);
+  //             //console.log(this.volunteering_events);
+  //        }
+  //   )
+  // }
 
 }
