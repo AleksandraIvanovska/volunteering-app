@@ -139,7 +139,8 @@
                                     </div>
 
                                     <div class="col-md-5">
-                                        <button *ngIf="globals.user.id == organizationData.user_id" data-target="#add-contact-modal" type="submit" data-toggle="modal"
+                                        <button *ngIf="globals.user.id == organizationData.user_id"
+                                            data-target="#add-contact-modal" type="submit" data-toggle="modal"
                                             class="btn btn-secondary btn-icon-left btn-sm not_empty btn-comment"
                                             style="float: right;" (click)="addContactBar()">+ Add Contact</button>
                                     </div>
@@ -172,19 +173,12 @@
                                                                     style="margin-top: 10px;margin-left: 15px;font-size: 18px; float: right;">
                                                                     {{contact.name}}
                                                                 </div>
-                                                                <!-- <span >
-                                                                        {{contact.dob}}
-                                                                    </span>            -->
+
                                                             </div>
 
 
                                                         </div>
-                                                        <div class="row">
-                                                            <a *ngIf="globals.user.id == contact.creator_id" style="cursor: pointer; margin-left: 565px;"
-                                                                (click)="deleteContact(contact.contact_uuid)">
-                                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                                            </a>
-                                                        </div>
+
 
 
                                                         <div class="row">
@@ -223,6 +217,30 @@
                                                                         &nbsp;</label><span>{{contact.skype}}</span>
                                                                 </div>
                                                             </div>
+
+                                                            <div style="float: right;">
+                                                                <div *ngIf="contact.dob">
+                                                                    <label class="style-label">DOB: &nbsp;</label>
+                                                                    <span>
+                                                                       {{contact.dob}}
+                                                                    </span>
+                                                                </div>
+                                                    
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row" style="margin-top: -20px;">
+                                                            <a *ngIf="globals.user.id == contact.creator_id"
+                                                                style="cursor: pointer;  margin-left: 540px;"
+                                                                data-toggle="modal" data-target="#edit_contact_modal"
+                                                                (click)="editContactSelected(contact)">
+                                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                            </a>&nbsp;
+                                                            <a *ngIf="globals.user.id == contact.creator_id"
+                                                                style="cursor: pointer;"
+                                                                (click)="deleteContact(contact.contact_uuid)">
+                                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                            </a>
                                                         </div>
 
 
@@ -278,7 +296,8 @@
                                             <div class="review_content">
                                                 <div>
                                                     <span class="review_time">{{comment.created_date}}</span>
-                                                    <a *ngIf="globals.user.id == comment.creator_id" class="pull-right" style="cursor: pointer;"
+                                                    <a *ngIf="globals.user.id == comment.creator_id" class="pull-right"
+                                                        style="cursor: pointer;"
                                                         (click)="deleteComment(i, comment.comment_uuid)">
                                                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                     </a>
@@ -379,8 +398,8 @@
                                         <ul *ngFor="let event of organizationEvents;">
                                             <li *ngIf="event.title">
                                                 <div class="atbd_info"><a style="color: #3a7dfd; font-size: 25px;"
-                                                    routerLink="/volunteeringEvent"
-                                                    [queryParams]="{uuid: event.uuid}">{{event.title}}</a></div>
+                                                        routerLink="/volunteeringEvent"
+                                                        [queryParams]="{uuid: event.uuid}">{{event.title}}</a></div>
                                             </li>
                                             <li *ngIf="event.category">
                                                 <div class="atbd_info_title">Category:</div>
@@ -410,9 +429,9 @@
                         </div>
                     </div>
                     <div>
-                        <button *ngIf="!isOrganization;" (click)="addOrganizationToFavorites()"
-                          class="btn btn-fav">Add to Favorites</button>
-                      </div>
+                        <button *ngIf="!isOrganization;" (click)="addOrganizationToFavorites()" class="btn btn-fav">Add
+                            to Favorites</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -698,6 +717,121 @@
                     <button type="submit" class="btn btn-secondary btn-sm" (click)="newContact()">Create</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="edit_contact_modal" tabindex="-1" role="dialog" aria-labelledby="claim_listing_label"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="claim_listing_label"><i class="la la-check-square"></i> Edit Contact
+                </h5>
+            </div>
+            <div class="modal-body">
+                <form action="/">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-4">
+                                * First Name
+                                <input type="text" placeholder="First name" class="form-control" required
+                                    [(ngModel)]="selectedContact.first_name" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editContact(selectedContact.first_name, 'first_name')">
+                            </div>
+                            <div class="col-md-4">
+                                Middle Name
+                                <input type="text" placeholder="Middle name" class="form-control"
+                                    [(ngModel)]="selectedContact.middle_name" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editContact(selectedContact.middle_name, 'middle_name')">
+                            </div>
+                            <div class="col-md-4">
+                                Last Name
+                                <input type="text" placeholder="Last name" class="form-control"
+                                    [(ngModel)]="selectedContact.last_name" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editContact(selectedContact.last_name, 'last_name')">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                Date of birth
+                                <input type="date" data-date-format="DD MMMM YYYY" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]='selectedContact.dob' onFocusOut class="form-control"
+                                    (focusout)="editContact(selectedContact.dob, 'dob')">
+                            </div>
+                            <div class="col-md-6">
+                                Photo Url
+                                <input type="text" placeholder="Photo Url" class="form-control"
+                                    [(ngModel)]="selectedContact.photo" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editContact(selectedContact.photo, 'photo')">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                * Email
+                                <input type="text" placeholder="Insert Email" class="form-control" required
+                                    [(ngModel)]="selectedContact.email" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editContact(selectedContact.email, 'email')">
+                            </div>
+                            <div class="col-md-6">
+                                Facebook
+                                <input type="text" placeholder="Insert facebook" class="form-control"
+                                    [(ngModel)]="selectedContact.facebook" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editContact(selectedContact.facebook, 'facebook')">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                LinkedIn
+                                <input type="text" placeholder="Insert LinkedIn" class="form-control" required
+                                    [(ngModel)]="selectedContact.linkedIn" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editContact(selectedContact.linkedIn, 'linkedIn')">
+                            </div>
+                            <div class="col-md-6">
+                                Twiter
+                                <input type="text" placeholder="Insert twitter" class="form-control"
+                                    [(ngModel)]="selectedContact.twitter" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editContact(selectedContact.twitter, 'twitter')">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                Phone number
+                                <input type="text" placeholder="Insert phone number" class="form-control" required
+                                    [(ngModel)]="selectedContact.phone_number" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editContact(selectedContact.phone_number, 'phone_number')">
+                            </div>
+                            <div class="col-md-6">
+                                Skype
+                                <input type="text" placeholder="Insert skype" class="form-control"
+                                    [(ngModel)]="selectedContact.skype" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editContact(selectedContact.skype, 'skype')">
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-secondary btn-sm" data-dismiss="modal"
+                        id="closeEdit">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

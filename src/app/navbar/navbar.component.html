@@ -166,16 +166,9 @@
             <div class="row">
               <div class="col-md-6">
                 Country
-
                 <ng-select (open)="getAllCountries()" [items]="countries" placeholder="Select country" bindLabel="name"
                   bindValue="name" [(ngModel)]="seletedCountry" [ngModelOptions]="{standalone: true}">
                 </ng-select>
-                <!-- <ng-select bindLabel="description" bindValue="value" dropdownPosition="bottom"
-                                  [(ngModel)]="addEvent.category.value" placeholder="Select category" 
-                                  (open)="getAllCategories()" [items]="categories" 
-                                  [ngModelOptions]="{standalone: true}">
-                              </ng-select> -->
-
               </div>
               <div class="col-md-6">
                 * City
@@ -201,8 +194,9 @@
           </div>
 
           <ng-template #other_content>
-            Virtual Event Informations (Need too add new field in database)
-            <input type="text" placeholder="Insert virtual event info" class="form-control">
+            Virtual Event Informations 
+            <input type="text" placeholder="Insert virtual event info" class="form-control"
+            [(ngModel)]="addEvent.virtual_info" [ngModelOptions]="{standalone: true}">
           </ng-template>
           <hr>
 

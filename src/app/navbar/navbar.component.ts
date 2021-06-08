@@ -166,6 +166,7 @@ export class NavbarComponent implements OnInit {
             this.toastr.success(data.message);
             //this.toastr.success('Volunteering Event successfully created!');
             document.getElementById("closeNewEvent").click();
+            this.seletedCountry = null;
         }
       ,
       (error) => {

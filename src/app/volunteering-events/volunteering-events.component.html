@@ -145,11 +145,8 @@
                                </div> 
                            </div>
                             <ul class="list-unstyled">
-                                <li style="height: 50px;">
-                                    <p *ngIf="volunteering_event.volunteering_location"><span class="text-grey">Location: </span> {{volunteering_event.volunteering_location ? volunteering_event.volunteering_location.address + ', ' + volunteering_event.volunteering_location.city + ', ' + (volunteering_event.volunteering_location.country | slice:0:30) : ''}}</p>
-                                   <!-- <div *ngIf="!volunteering_event.is_virtual">
-                                        <p *ngIf="volunteering_event.volunteering_location">Location: {{volunteering_event.volunteering_location ? volunteering_event.volunteering_location.address + ', ' + volunteering_event.volunteering_location.city + ', ' + volunteering_event.volunteering_location.country : ''}}</p>
-                                   </div> -->  
+                                <li style="height: 50px;" *ngIf="!volunteering_event.is_virtual">
+                                    <p *ngIf="volunteering_event.volunteering_location"><span class="text-grey">Location: </span> {{volunteering_event.volunteering_location ? volunteering_event.volunteering_location.address + ', ' + volunteering_event.volunteering_location.location.name + ', ' + (volunteering_event.volunteering_location.location.country.name | slice:0:30) : ''}}</p>
                                 </li>
 
                                 <li style="height: 20px;"><p *ngIf="volunteering_event.category"><span class="text-grey">Category:</span> {{volunteering_event.category.description}}</p></li>

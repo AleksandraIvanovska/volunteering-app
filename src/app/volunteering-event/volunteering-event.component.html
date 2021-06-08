@@ -247,7 +247,17 @@
                           Benefits:</div>
                         <div class="atbd_info">{{eventHeaderData.benefits}}</div>
                       </li>
-                      <li *ngIf="eventHeaderAssets.length > 0">
+                      <li *ngIf="eventHeaderData.notes">
+                        <div class="atbd_info_title"><i class="fa fa-plus" aria-hidden="true"></i>
+                          Notes:</div>
+                        <div class="atbd_info">{{eventHeaderData.notes}}</div>
+                      </li>
+                      <li *ngIf="eventHeaderData.tags">
+                        <div class="atbd_info_title"><i class="fa fa-plus" aria-hidden="true"></i>
+                          Additional Tags:</div>
+                        <div class="atbd_info">{{eventHeaderData.tags}}</div>
+                      </li>
+                      <li >
                         <div class="atbd_info_title"><i class="fa fa-files-o" aria-hidden="true"></i>
                           Assets:</div>
                         <div class="atbd_info" style="margin-left: -45px;margin-top: 30px;">
@@ -260,7 +270,7 @@
                                 {{asset.asset_name}}
                               </button>
                               <a *ngIf="globals.user.id == eventHeaderData.organization.user_id" class="pull-right"
-                                style="cursor: pointer;" (click)="deleteAsset(asset.uuid)">
+                                style="cursor: pointer;" (click)="deleteAsset(asset.event_asset_uuid)">
                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
                               </a>
                             </li>
@@ -700,8 +710,8 @@
               <div class="col-md-6">
                 Minimum age
                 <input type="text" placeholder="Minimum age" class="form-control"
-                  [(ngModel)]="eventHeaderRequirementsData.min_age" [ngModelOptions]="{standalone: true}"
-                  (change)="editEventRequirements(eventHeaderRequirementsData.min_age, 'min_age')">
+                  [(ngModel)]="eventHeaderRequirementsData.minimum_age" [ngModelOptions]="{standalone: true}"
+                  (change)="editEventRequirements(eventHeaderRequirementsData.minimum_age, 'minimum_age')">
               </div>
             </div>
           </div>

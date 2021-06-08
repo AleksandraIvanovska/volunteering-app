@@ -76,9 +76,15 @@
           <br>
           <br>
           <!-- /.row (nested) -->
-          <div class="text-center text">
+          <div class="text-center text" *ngIf="globals.user.id;else other_content ">
             <a routerLink="/events" class="view-more">View More Events</a>
           </div>
+          <ng-template #other_content>
+            <div class="text-center text">
+              <a routerLink="" class="view-more">View More Events</a>
+            </div>
+        </ng-template>
+
         </div>
         <!-- /.col-lg-10 -->
       </div>

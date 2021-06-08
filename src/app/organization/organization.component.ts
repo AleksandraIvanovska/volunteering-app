@@ -63,6 +63,9 @@ export class OrganizationComponent implements OnInit {
     }
   }
 
+  selectedContact: any = {};
+
+
 
 
   constructor(private organizationService: OrganizationService, private organizationsService: OrganizationsService,
@@ -71,6 +74,7 @@ export class OrganizationComponent implements OnInit {
 
       router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
         let checkURL = this.router.parseUrl(this.router.url).root.children.primary
+     //   if (checkURL && checkURL.segments[0].toString() == 'organization') {
           this.activatedRoute.queryParams.subscribe(params => {
             if (params.uuid) {
               console.log(params.uuid);
@@ -197,8 +201,22 @@ export class OrganizationComponent implements OnInit {
         this.organizationData = {}
         this.globals.organization = null;
         this.router.navigate(['']);
+
+        // this.isOrganization = null;
+
+        // this.globals.user = {
+        //   emailVerifiedAt: null,
+        //   accessToken: null,
+        //   name: null,
+        //   email: null,
+        //   id: null
+        // }
+        // localStorage.clear()
+
         document.getElementById('closeDelete').click();
         this.toastr.success(data.message);
+
+       
       },
       (error) => {
         this.toastr.error(error.message)
@@ -336,6 +354,26 @@ export class OrganizationComponent implements OnInit {
   }
 
   
+  editContact(value, key) {
+    let body;
+    body = this.recreateJobObject(key, value)
+    this.updateContact(body);
+  }
+
+  updateContact(body) {
+    this.organizationService.updateContact(this.globals.user.accessToken,body, this.selectedContact.contact_uuid).subscribe(
+      (data) => {
+        this.toastr.success(data.message);
+      },
+      (error) => {
+        this.toastr.error(error.message)
+      })
+  }
+
+  editContactSelected(contact) {
+    this.selectedContact =  contact;
+    console.log(this.selectedContact);
+  }
 
 
 }

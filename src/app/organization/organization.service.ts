@@ -90,5 +90,15 @@ export class OrganizationService {
     return this.http.post(environment.backendURL + '/api/volunteers/favoriteOrganization', body, { headers: headers });  
   }
 
+  updateContact(accessToken,body, uuid): Observable<any>
+  {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    })
+
+    return this.http.put(environment.backendURL + '/api/organizations/contact/' + uuid, body, { headers: headers });
+  }
+
 }
 

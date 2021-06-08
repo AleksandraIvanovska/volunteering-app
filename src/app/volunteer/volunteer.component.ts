@@ -91,6 +91,7 @@ export class VolunteerComponent implements OnInit {
 
       router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
         let checkURL = this.router.parseUrl(this.router.url).root.children.primary
+      //  if (checkURL && checkURL.segments[0].toString() == 'volunteer') {
           this.activatedRoute.queryParams.subscribe(params => {
             if (params.uuid) {
               this.globals.volunteer = params.uuid            
@@ -372,9 +373,8 @@ export class VolunteerComponent implements OnInit {
         (data) => {
           this.initNewExperience();
             this.toastr.success(data.message);
-            document.getElementById("closeNewEvent").click();
+            document.getElementById("add-experience-modal").click();
             this.getVolunteer(this.globals.volunteer);
-
         }
       ,
       (error) => {
