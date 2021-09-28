@@ -44,8 +44,9 @@ img {
    }
 
 
-   .btn-edit {background-image: linear-gradient(to right, #7474BF 0%, #348AC7  51%, #7474BF  100%)}
+   /* .btn-edit {background-image: linear-gradient(to right, #7474BF 0%, #348AC7  51%, #7474BF  100%)} */
    .btn-edit {
+	  background-color: #f1c111;
 	  text-transform: uppercase;
 	  transition: 0.5s;
 	  background-size: 200% auto;

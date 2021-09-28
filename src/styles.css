@@ -209,12 +209,14 @@ body { margin: 0; font-family: Plain-Light, sans-serif; }
 }
 
 .pagination .nav-links .page-numbers.current {
-  background: #4A569D;
+  /* background: #4A569D; */
+  background: #f1c111;
   color: white;
 }
 
 
-.btn-comment {background-image: linear-gradient(to right, #DC2424 0%, #4A569D  51%, #DC2424  100%)}
+/* .btn-comment {background-image: linear-gradient(to right, #FFBD44 0%, #404040  51%, #FFBD44  100%)} */
+.btn-comment {background-image: linear-gradient(to right, #4CA1AF 0%, #C4E0E5  51%, #4CA1AF  100%)}
 .btn-comment {
    margin: 10px;
    text-align: center;

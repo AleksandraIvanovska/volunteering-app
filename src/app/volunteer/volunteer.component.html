@@ -19,7 +19,7 @@
                                     </h3>&nbsp;
 
                                     <button  *ngIf="globals.user.id == volunteerData.user_id" type="submit" class="btn btn-edit btn-sm" data-toggle="modal"
-                                        data-target="#moda_claim_listing" style="height: 30px;width: 110px;">Edit
+                                        data-target="#moda_claim_listing" style="height: 30px;width: 110px; margin-top: 3px;">Edit
                                         Profile
                                     </button>
 
@@ -502,8 +502,8 @@
                 <div class="col-md-5">
                     <div class="row">
                         <div class="col-md-12">
-
-                            <cdk-virtual-scroll-viewport style="height: 943px;" itemSize="90">
+                          
+                            <cdk-virtual-scroll-viewport *ngIf="this.eventAttendance.length > 0" itemSize="90" style="height: 270px">
                                 <div class="atbd_content_module" style="width: 450px;">
                                     <h5><i class="fa fa-list" aria-hidden="true"></i>
                                         &nbsp;Volunteer events attendence</h5>
@@ -513,7 +513,7 @@
                                             <ul *ngFor="let event of eventAttendance;">
                                                 <li *ngIf="event.title">
 
-                                                    <div class="atbd_info"><a style="color: #3a7dfd; font-size: 25px;"
+                                                    <div class="atbd_info"><a style="color: #057a8d; font-size: 25px; font-weight: bold;" 
                                                             href="">{{event.title}}</a></div>
 
                                                 </li>
@@ -531,7 +531,7 @@
                                                 <ng-template #other_virtual>
                                                     <li>
                                                         <div class="atbd_info"><span
-                                                                style="background-color: #32cc6f;padding: 5px; border-radius: 3px;">Virtual
+                                                                style="background-color: #f1c111; opacity: .6;padding: 5px; border-radius: 3px;">Virtual
                                                                 Event</span> </div>
                                                     </li>
                                                 </ng-template>
@@ -544,11 +544,9 @@
                                 </div>
                             </cdk-virtual-scroll-viewport>
                             <br>
-                            <br>
-
-
+                            
                             <!-- render here only those who don;t exits in attendence -->
-                            <cdk-virtual-scroll-viewport style="height: 900px" itemSize="90">
+                            <cdk-virtual-scroll-viewport *ngIf="this.eventInvitations.length > 0"  style="height: 270px" itemSize="90">
                                 <div class="atbd_content_module" style="width: 450px;">
                                     <h5><i class="fa fa-list" aria-hidden="true"></i>
                                         &nbsp;Events Invitations</h5>
@@ -558,7 +556,7 @@
                                             <ul *ngFor="let event of eventInvitations;">
                                                 <li *ngIf="event.title">
 
-                                                    <div class="atbd_info"><a style="color: #3a7dfd; font-size: 25px;"
+                                                    <div class="atbd_info"><a style="color: #057a8d; font-size: 25px; font-weight: bold;"
                                                             href="">{{event.title}}</a></div>
 
                                                 </li>
@@ -576,7 +574,7 @@
                                                 <ng-template #other_virtual>
                                                     <li>
                                                         <div class="atbd_info"><span
-                                                                style="background-color: #32cc6f;padding: 5px; border-radius: 3px;">Virtual
+                                                                style="background-color: #f1c111; opacity: .6;padding: 5px; border-radius: 3px;">Virtual
                                                                 Event</span> </div>
                                                     </li>
                                                 </ng-template>

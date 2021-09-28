@@ -137,7 +137,6 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.initNewEvent();
-
     if (localStorage.getItem('access-token')) {
       this.show.user = true;
       this.globals.user = {
@@ -149,11 +148,12 @@ export class NavbarComponent implements OnInit {
         uuid: localStorage.getItem('uuid')
       }
       this.isUserOrganization();
-      console.log(this.globals)
-    }
-    
+     }
     this.getNotification();
+
   }
+
+
 
   onNewEvent() {
 
@@ -290,6 +290,7 @@ openContact(uuid)
               this.show.user = true;
               this.show.profile = false;
               console.log(this.globals.user);
+              this.isUserOrganization();
             }
           },
           (error) => {

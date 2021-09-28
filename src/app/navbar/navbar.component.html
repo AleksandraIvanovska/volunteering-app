@@ -71,7 +71,7 @@
             <a class="dropdown-item" (click)="logoutUser()">Log out</a>
           </div>
         </li>
-        <li [ngClass]="{'d-none': !show.user}">
+        <li [ngClass]="{'d-none': !show.user}" *ngIf="isOrganization">
           <a data-toggle="modal" data-target="#add_listing" style="color: white; border: 1px solid rgba(255,255,255, .3);" class="nav-link contact">
             <span class="la la-plus"></span> Create event
           </a>

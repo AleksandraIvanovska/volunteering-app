@@ -28,6 +28,7 @@ export class VolunteerComponent implements OnInit {
   addLanguage: any = {};
   allLanguages: any = [];
   languageLevels: any = [];
+  cdkVirtualScrollViewport: any = {};
 
   initNewEducation() {
     this.addEducation = {
@@ -496,4 +497,6 @@ export class VolunteerComponent implements OnInit {
         this.toastr.error(error.message)
       })
   }
+
+
 }

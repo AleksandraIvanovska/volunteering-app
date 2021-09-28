@@ -22,9 +22,9 @@
           <br>
           <div class="row">
             <div class="col-md-12">
-              <h5 *ngIf="eventHeaderData.organization" style="margin-left: 10px;">
+              <h5 *ngIf="eventHeaderData.organization" style="margin-left: 10px; ">
                 By Organization:
-                <a routerLink="/organization" [queryParams]="{uuid: eventHeaderData.organization.uuid}">
+                <a routerLink="/organization" [queryParams]="{uuid: eventHeaderData.organization.uuid}" style="font-weight: bold;">
                   {{eventHeaderData.organization.title}}
                 </a>
               </h5>
@@ -355,7 +355,7 @@
               </li>
               <hr style="margin-left: -20px;">
               <li *ngIf="eventHeaderData.deadline">
-                <div class="atbd_info_title">Application deadline</div>
+                <div class="atbd_info_title">Aapplication deadline</div>
                 <div class="atbd_info">{{eventHeaderData.deadline}}</div>
               </li>
             </ul>
