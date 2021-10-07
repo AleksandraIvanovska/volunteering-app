@@ -10,7 +10,7 @@
               <div class="event_header">
                 <h2>{{eventHeaderData.title}}</h2>
               </div>
-              <div *ngIf="globals.user.id == eventHeaderData.organization.user_id" class="edit-delete">
+              <div  class="edit-delete">
                 <button type="submit" class="btn btn-edit" data-toggle="modal" data-target="#moda_claim_listing">Edit
                   Event</button>
                 &nbsp;
@@ -241,12 +241,12 @@
                           Notes:</div>
                         <div class="atbd_info">{{eventHeaderData.notes}}</div>
                       </li>
-                      <li *ngIf="eventHeaderData.tags">
+                      <!-- <li *ngIf="eventHeaderData.tags">
                         <div class="atbd_info_title"><i class="fa fa-plus" aria-hidden="true"></i>
                           Additional Tags:</div>
                         <div class="atbd_info">{{eventHeaderData.tags}}</div>
-                      </li>
-                      <li >
+                      </li> -->
+                      <!-- <li >
                         <div class="atbd_info_title"><i class="fa fa-files-o" aria-hidden="true"></i>
                           Assets:</div>
                         <div class="atbd_info" style="margin-left: -45px;margin-top: 30px;">
@@ -279,7 +279,7 @@
                             (change)="OnContentChangeFile($event)">
 
                         </div>
-                      </li>
+                      </li> -->
                     </ul>
                   </div>
                 </div>
@@ -463,7 +463,7 @@
 
 
           <br><br>
-          <div class="atbd_contact_info1">
+          <!-- <div class="atbd_contact_info1">
             <ul>
               <li *ngIf="eventHeaderData.contacts.length > 0">
                 <div class="atbd_info_title">Contacts</div>
@@ -488,7 +488,7 @@
               </li>
             </ul>
           </div>
-          <br>
+          <br> -->
           <div>
             <button *ngIf="!isOrganization;" (click)="addEeventToFavorites()"
               class="btn btn-fav">Add to Favorites</button>
@@ -709,11 +709,15 @@
             <div class="row">
               <div class="col-md-6">
                 Languages
-                Array of languages
+                <input type="text" placeholder="Languages" class="form-control"
+                  [(ngModel)]="eventHeaderRequirementsData.languages" [ngModelOptions]="{standalone: true}"
+                  (change)="editEventRequirements(eventHeaderRequirementsData.languages, 'languages')">             
               </div>
               <div class="col-md-6">
                 Other
-                Array of Other data
+                <input type="text" placeholder="Other" class="form-control"
+                  [(ngModel)]="eventHeaderRequirementsData.other" [ngModelOptions]="{standalone: true}"
+                  (change)="editEventRequirements(eventHeaderRequirementsData.other, 'other')">  
               </div>
             </div>
           </div>
@@ -755,13 +759,11 @@
 
           <div class="form-group">
             <div class="row">
-              <div class="col-md-6">
-                Skills needed
-                Array of skills
-              </div>
-              <div class="col-md-6">
-                Additional tags
-                How do Insert array od tags
+              <div class="col-md-12">
+                Additional Skills needed
+                <input type="text" placeholder="Insert additional skills" class="form-control"
+                  [(ngModel)]="eventHeaderData.skills_needed" [ngModelOptions]="{standalone: true}"
+                  (focusout)="editEvent(eventHeaderData.skills_needed, 'skills_needed')">
               </div>
             </div>
           </div>
@@ -777,7 +779,7 @@
             </div>
           </div>
 
-          <div class="form-group">
+          <!-- <div class="form-group">
             <div class="row">
               <div class="col-md-12">
                 Contacts
@@ -787,7 +789,7 @@
                 </ng-select>
               </div>
             </div>
-          </div>
+          </div> -->
 
         </form>
       </div>

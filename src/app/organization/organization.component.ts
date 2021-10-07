@@ -261,8 +261,8 @@ export class OrganizationComponent implements OnInit {
   getAllCities() {
     this.organizationsService.getcities(this.globals.user.accessToken).subscribe(
       (data) => {
-        this.cities = data.slice(0, 100);
-       // this.cities = data;
+        //this.cities = data.slice(0, 100);
+        this.cities = data;
       }
     )
   }

@@ -397,7 +397,7 @@
                                     <div class="atbd_contact_info">
                                         <ul *ngFor="let event of organizationEvents;">
                                             <li *ngIf="event.title">
-                                                <div class="atbd_info"><a style="color: #3a7dfd; font-size: 25px;"
+                                                <div class="atbd_info"><a style="color: #057a8d; font-size: 25px; font-weight: bold;"
                                                         routerLink="/volunteeringEvent"
                                                         [queryParams]="{uuid: event.uuid}">{{event.title}}</a></div>
                                             </li>
@@ -415,7 +415,7 @@
                                             <ng-template #other_virtual>
                                                 <li>
                                                     <div class="atbd_info"><span
-                                                            style="background-color: #32cc6f;padding: 5px; border-radius: 3px;">Virtual
+                                                            style="background-color: #f1c111; opacity: .6;padding: 5px; border-radius: 3px;">Virtual
                                                             Event</span> </div>
                                                 </li>
                                             </ng-template>

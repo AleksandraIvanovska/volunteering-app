@@ -85,7 +85,6 @@ export class VolunteerComponent implements OnInit {
   genders: any = [];
 
 
-
   constructor(private volunteerService: VolunteerService,public toastr: ToastrService, 
     public globals: AppComponent, private activatedRoute: ActivatedRoute, private router: Router,
     private organizationsService: OrganizationsService) { 

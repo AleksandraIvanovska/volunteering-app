@@ -136,36 +136,36 @@
                 <div class="grid-single">
                     <div class="card post--card shadow-sm" style="cursor: pointer;" (click)="openEventByUuid(volunteering_event.uuid)">
                         <div class="card-body">
-                            <h6><a>{{volunteering_event.title}}</a></h6>
-                            <!-- <a (click)="openPlaceById(place.id)"
-                                                        class="cursor-pointer">{{place.name}}</a> -->
-                            <div *ngIf="volunteering_event.is_virtual">
-                               <div style="float: right; color: chartreuse;">
-                                <strong>Virtual event</strong> 
-                               </div> 
-                           </div>
-                            <ul class="list-unstyled">
-                                <li style="height: 50px;" *ngIf="!volunteering_event.is_virtual">
-                                    <p *ngIf="volunteering_event.volunteering_location"><span class="text-grey">Location: </span> {{volunteering_event.volunteering_location ? volunteering_event.volunteering_location.address + ', ' + volunteering_event.volunteering_location.location.name + ', ' + (volunteering_event.volunteering_location.location.country.name | slice:0:30) : ''}}</p>
-                                </li>
-
-                                <li style="height: 20px;"><p *ngIf="volunteering_event.category"><span class="text-grey">Category:</span> {{volunteering_event.category.description}}</p></li>
-                            </ul>
-                            <div style="height: 63px;">
-                                <p *ngIf="volunteering_event.description" class="text-grey" style="font-size: 15px;">{{volunteering_event.description | slice:0:80}} ...</p>
+                            <div>
+                                <h6><a><strong style="color: black;">{{volunteering_event.title}}</strong></a></h6>
+                                <span *ngIf="volunteering_event.is_virtual" style="float: right; color: #f1c111; margin-top: -35px;">
+                                    <strong>Virtual event</strong> 
+                               </span>
                             </div>
-
+                           <hr>
                             <ul class="list-unstyled">
-                                <li style="text-align: center;">Spaces Available: {{volunteering_event.spaces_available}}</li>
-                                <li style="text-align: center;">Application Deadline: <strong>{{volunteering_event.deadline}}</strong></li>
-                                <li style="height: 20px;text-align: center;"><p *ngIf="volunteering_event.start_date">Start Date: {{volunteering_event.start_date}}</p></li>
+                                <li ><div *ngIf="volunteering_event.category" class="lower-font"><span class="text-grey">Category:</span> {{volunteering_event.category.description}}</div></li>
+                                <li>
+                                    <div class="lower-font"
+                                        *ngIf="volunteering_event.volunteering_location"><span class="text-grey">Location: </span> {{((volunteering_event.volunteering_location ? (volunteering_event.volunteering_location.address ? volunteering_event.volunteering_location.address + ',' : '') + ' ' + volunteering_event.volunteering_location.location.name + ', ' + volunteering_event.volunteering_location.location.country.name  : '') | slice:0:30)}}
+                                    </div>
+                                </li>
+                                <li class="lower-font"><span class="text-grey">Spaces Available:</span> <span> {{volunteering_event.spaces_available}}</span></li>
+                                <li class="lower-font"><span class="text-grey">Application Deadline: </span> <strong style="color: black;">{{volunteering_event.deadline}}</strong></li>
+                                <li style="text-align: center; font-size: 16px; height: 20px;margin-top: 5px;"><p class="text-grey" *ngIf="volunteering_event.start_date">Start Date: <span style="color: black;">{{volunteering_event.start_date}}</span></p></li>
                             </ul>
+
+                            <div style="height: 40px;">
+                                <p *ngIf="volunteering_event.description" class="text-grey" style="font-size: 15px;">{{volunteering_event.description | slice:0:80}}.. </p>
+                            </div>
                            
-                           
+                           <hr>
+                           <div class="lower-font">
                             <span class="text-grey pull-left">Created: {{volunteering_event.created_at}}</span>
-                            <p class="pull-right" *ngIf="volunteering_event.organization">
+                            <p class="pull-right lower-font" *ngIf="volunteering_event.organization">
                                 by <a href="">{{volunteering_event.organization.title}}</a>
                             </p>
+                           </div>
                         </div>
                     </div>
                 </div>

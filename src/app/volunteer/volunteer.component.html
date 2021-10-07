@@ -124,7 +124,7 @@
                                                     My causes:</div>
                                                 <div class="atbd_info">{{volunteerData.my_causes}}</div>
                                             </li>
-                                            <li *ngIf="volunteerData.asset">
+                                            <!-- <li *ngIf="volunteerData.asset">
                                                 <div class="atbd_info_title"><i class="fa fa-file-text-o"
                                                         aria-hidden="true"></i>CV:</div>
                                                 <div class="atbd_info">
@@ -138,7 +138,7 @@
                                                     </div>
 
                                                 </div>
-                                            </li>
+                                            </li> -->
                                         </ul>
                                     </div>
                                 </div>
@@ -514,7 +514,7 @@
                                                 <li *ngIf="event.title">
 
                                                     <div class="atbd_info"><a style="color: #057a8d; font-size: 25px; font-weight: bold;" 
-                                                            href="">{{event.title}}</a></div>
+                                                        routerLink="/volunteeringEvent" [queryParams]="{uuid: event.uuid}">{{event.title}}</a></div>
 
                                                 </li>
                                                 <li *ngIf="event.category">
@@ -557,7 +557,7 @@
                                                 <li *ngIf="event.title">
 
                                                     <div class="atbd_info"><a style="color: #057a8d; font-size: 25px; font-weight: bold;"
-                                                            href="">{{event.title}}</a></div>
+                                                        routerLink="/volunteeringEvent" [queryParams]="{uuid: event.uuid}">{{event.title}}</a></div>
 
                                                 </li>
                                                 <li *ngIf="event.category">
@@ -679,11 +679,15 @@
                         <div class="row">
                             <div class="col-md-6">
                                 My causes
-
+                                <input type="text" placeholder="Insert causes" class="form-control"
+                                    [(ngModel)]="volunteerData.my_causes" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editVolunteer(volunteerData.my_causes, 'my_causes')">
                             </div>
                             <div class="col-md-6">
                                 Skills
-
+                                <input type="text" placeholder="Insert skills" class="form-control"
+                                [(ngModel)]="volunteerData.skills" [ngModelOptions]="{standalone: true}"
+                                (focusout)="editVolunteer(volunteerData.skills, 'skills')">
                             </div>
 
                         </div>
@@ -691,15 +695,12 @@
 
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-6">
-                                CV
-
-                            </div>
-                            <div class="col-md-6">
+                            
+                            <div class="col-md-12">
                                 Location
                                 <ng-select bindLabel="name" dropdownPosition="bottom"
                                     (change)="editVolunteer(volunteerData.location.name, 'city')"
-                                    (open)="getAllCities()" [(ngModel)]="volunteerData.location"
+                                    (open)="getAllCities()" [(ngModel)]="volunteerData.location.name"
                                     placeholder="Select city" [items]="cities" [ngModelOptions]="{standalone: true}">
                                 </ng-select>
                             </div>

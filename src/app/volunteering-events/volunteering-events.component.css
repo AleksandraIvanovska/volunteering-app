@@ -4,10 +4,17 @@
 }
 
 a {
-    color: #EB233C;
+    color: #f1c111;
 }
 
 .card {
     height: 350px;
   }
+  
+.lower-font {
+    font-size: 15.5px;
+}  
 
+li {
+ height: 25px;
+}

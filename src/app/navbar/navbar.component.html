@@ -263,7 +263,7 @@
             <div class="row">
               <div class="col-md-6">
                 Languages
-                Array of languages
+                  <input type="text" placeholder="Languages" class="form-control" [(ngModel)]="addEvent.requirements.languages" [ngModelOptions]="{standalone: true}">
               </div>
               <div class="col-md-6">
                 Other
@@ -301,13 +301,9 @@
 
           <div class="form-group">
             <div class="row">
-              <div class="col-md-6">
-                Skills needed
-                Array of skills
-              </div>
-              <div class="col-md-6">
-                Additional tags
-                How do Insert array od tags
+              <div class="col-md-12">
+                Additional Skills needed
+                <input type="text" placeholder="Insert additional skills" class="form-control" [(ngModel)]="addEvent.Skills" [ngModelOptions]="{standalone: true}">
               </div>
             </div>
           </div>
