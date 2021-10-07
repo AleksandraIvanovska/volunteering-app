@@ -10,7 +10,7 @@
               <div class="event_header">
                 <h2>{{eventHeaderData.title}}</h2>
               </div>
-              <div  class="edit-delete">
+              <div *ngIf="globals.user.id == eventHeaderData.organization.user_id" class="edit-delete">
                 <button type="submit" class="btn btn-edit" data-toggle="modal" data-target="#moda_claim_listing">Edit
                   Event</button>
                 &nbsp;
