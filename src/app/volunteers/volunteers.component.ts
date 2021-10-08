@@ -63,6 +63,9 @@ export class VolunteersComponent implements OnInit {
 
 clearFilters() {
   this.getAllVolunteers();
+  this.selectedCity = null;
+  this.seletedCountry = null;
+  this.search = null;
 }
 
 applySearch(applySearch) {

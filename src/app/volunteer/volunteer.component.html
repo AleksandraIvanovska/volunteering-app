@@ -18,7 +18,7 @@
                                         {{volunteerData.last_name}}
                                     </h3>&nbsp;
 
-                                    <button  *ngIf="globals.user.id == volunteerData.user_id" type="submit" class="btn btn-edit btn-sm" data-toggle="modal"
+                                    <button *ngIf="globals.user.id == volunteerData.user_id" type="submit" class="btn btn-edit btn-sm" data-toggle="modal"
                                         data-target="#moda_claim_listing" style="height: 30px;width: 110px; margin-top: 3px;">Edit
                                         Profile
                                     </button>
@@ -33,28 +33,32 @@
                                     <p><i class="fa fa-envelope" aria-hidden="true"></i>
                                         {{volunteerData.email}}</p>
                                 </div>
-                                <div class="row" *ngIf="volunteerData.linkedIn">
+                                <!-- <div class="row" *ngIf="volunteerData.linkedIn">
                                     <p><i class="fa fa-linkedin-square" aria-hidden="true"></i>
                                         {{volunteerData.linkedIn}}</p>
-                                </div>
+                                </div> -->
 
-                                <div class="row"
-                                    *ngIf="volunteerData.facebook || volunteerData.twitter || volunteerData.instagram">
+                                <!-- <div class="row"
+                                    *ngIf="volunteerData.facebook || volunteerData.twitter || volunteerData.instagram || volunteerData.linkedIn">
                                     <ul style="display: inline-flex; list-style-type: none;">
                                         <li *ngIf="volunteerData.facebook">
                                             <a href="{{volunteerData.faceboo}}"><i class="fa fa-facebook-square"
                                                     aria-hidden="true"></i></a>&nbsp;
                                         </li>
+                                        <li *ngIf="volunteerData.linkedIn">
+                                            <a href="{{volunteerData.linkedIn}}"><i class="fa fa-linkedin-square"
+                                                aria-hidden="true"></i></a>&nbsp;
+                                        </li>
                                         <li *ngIf="volunteerData.twitter">
-                                            <a href="{{volunteerData.faceboo}}"><i class="fa fa-twitter-square"
+                                            <a href="{{volunteerData.twitter}}"><i class="fa fa-twitter-square"
                                                     aria-hidden="true"></i></a>&nbsp;
                                         </li>
                                         <li *ngIf="volunteerData.instagram">
-                                            <a href="{{volunteerData.faceboo}}"><i class="fa fa-instagram"
+                                            <a href="{{volunteerData.instagram}}"><i class="fa fa-instagram"
                                                     aria-hidden="true"></i></a>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -88,7 +92,7 @@
                                                 <div class="atbd_info">{{volunteerData.nationality.nationality}}</div>
                                             </li>
                                             <li
-                                                *ngIf="volunteerData.facebook || volunteerData.twitter || volunteerData.instagram">
+                                                *ngIf="volunteerData.facebook || volunteerData.twitter || volunteerData.instagram || volunteerData.linkedIn">
                                                 <div class="atbd_info_title"><i class="fa fa-globe"
                                                         aria-hidden="true"></i>
 
@@ -96,17 +100,21 @@
                                                 <div class="atbd_info">
                                                     <ul style="display: inline-flex; list-style-type: none;">
                                                         <li *ngIf="volunteerData.facebook">
-                                                            <a href="{{volunteerData.faceboo}}"><i
+                                                            <a href="{{volunteerData.facebook}}"><i
                                                                     class="fa fa-facebook-square"
                                                                     aria-hidden="true"></i></a>
                                                         </li>
+                                                        <li *ngIf="volunteerData.linkedIn">
+                                                            <a href="{{volunteerData.linkedIn}}"><i class="fa fa-linkedin-square"
+                                                                aria-hidden="true"></i></a>&nbsp;
+                                                        </li>
                                                         <li *ngIf="volunteerData.twitter">
-                                                            <a href="{{volunteerData.faceboo}}"><i
+                                                            <a href="{{volunteerData.twitter}}"><i
                                                                     class="fa fa-twitter-square"
                                                                     aria-hidden="true"></i></a>
                                                         </li>
                                                         <li *ngIf="volunteerData.instagram">
-                                                            <a href="{{volunteerData.faceboo}}"><i
+                                                            <a href="{{volunteerData.instagram}}"><i
                                                                     class="fa fa-instagram" aria-hidden="true"></i></a>
                                                         </li>
                                                     </ul>
@@ -155,7 +163,7 @@
                                         <h4>Experiences</h4>
                                     </div>
                                     <div class="col-md-5">
-                                        <button *ngIf="globals.user.id == volunteerData.user_id" data-target="#add-experience-modal" type="submit" data-toggle="modal"
+                                        <button *ngIf="globals.user.id == volunteerData.user_id"  data-target="#add-experience-modal" type="submit" data-toggle="modal"
                                             class="btn btn-secondary btn-icon-left btn-sm not_empty btn-comment"
                                             style="float: right;" data-toggle="modal">+ Add Experience</button>
                                     </div>
@@ -186,7 +194,7 @@
                                                 </ul>
 
                                             </li>
-                                            <div  *ngIf="globals.user.id == volunteerData.user_id" style="float: right;margin-top: -10px;">
+                                            <div *ngIf="globals.user.id == volunteerData.user_id" style="float: right;margin-top: -10px;">
                                                 <a style="cursor: pointer; " data-toggle="modal"
                                                     data-target="#edit_experience_modal"
                                                     (click)="editExperienceSelected(experience)">
@@ -210,7 +218,7 @@
                             <div class="atbd_content_module">
                                 <div class="row">
                                     <div class="col-md-7">
-                                        <h4>Educations</h4>
+                                        <h4>Education</h4>
                                     </div>
                                     <div class="col-md-5">
                                         <button  *ngIf="globals.user.id == volunteerData.user_id" data-target="#add-education-modal" type="submit" data-toggle="modal"
@@ -243,12 +251,12 @@
                                                                 aria-hidden="true"></i>
                                                             {{education.start_date}} </span>
                                                         <span
-                                                            *ngIf="education.end_date">&nbsp;-&nbsp;{{education.graduation_date}}</span>
+                                                            *ngIf="education.graduation_date">&nbsp;-&nbsp;{{education.graduation_date}}</span>
                                                     </li>
                                                 </ul>
 
                                             </li>
-                                            <div *ngIf="globals.user.id == volunteerData.user_id" style="float: right;margin-top: -10px;">
+                                            <div *ngIf="globals.user.id == volunteerData.user_id"  style="float: right;margin-top: -10px;">
                                                 <a style="cursor: pointer; " data-toggle="modal"
                                                     data-target="#edit_education_modal"
                                                     (click)="editEducationSelected(education)">
@@ -700,7 +708,7 @@
                                 Location
                                 <ng-select bindLabel="name" dropdownPosition="bottom"
                                     (change)="editVolunteer(volunteerData.location.name, 'city')"
-                                    (open)="getAllCities()" [(ngModel)]="volunteerData.location.name"
+                                    (open)="getAllCities()" [(ngModel)]="volunteerData.location"
                                     placeholder="Select city" [items]="cities" [ngModelOptions]="{standalone: true}">
                                 </ng-select>
                             </div>

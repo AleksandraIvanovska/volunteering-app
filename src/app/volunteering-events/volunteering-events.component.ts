@@ -65,7 +65,17 @@ export class VolunteeringEventsComponent implements OnInit {
 
   clearFilters() {
     this.getAllEvents();
+    this.selectedGreatFor = null;
+    this.selectedDuration = null;
+    this.start_date = null;
+    this.selectVirtial = null;
+    this.selectedOrganization = null;
+    this.selectedCategory = null;
+    this.selectedCity = null;
+    this.selectedCountry = null;
+    this.search = null;
   }
+  
 
 
 
