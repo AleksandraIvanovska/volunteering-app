@@ -260,6 +260,7 @@ export class VolunteerComponent implements OnInit {
   updateVolunteer(body) {
     this.volunteerService.updateVolunteer(this.globals.user.accessToken, body, this.globals.volunteer).subscribe(
       (data) => {
+        this.getVolunteer(this.globals.volunteer);
         this.toastr.success(data.message);  
       },
       (error) => {
@@ -287,8 +288,8 @@ export class VolunteerComponent implements OnInit {
   getAllCities() {
     this.organizationsService.getcities(this.globals.user.accessToken).subscribe(
       (data) => {
-       // this.cities = data.slice(0, 50);
-        this.cities = data;
+        this.cities = data.slice(0, 50);
+       // this.cities = data;
        console.log(this.cities);
       }
     )

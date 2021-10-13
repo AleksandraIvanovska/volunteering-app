@@ -84,13 +84,17 @@
                                                 <div class="atbd_info_title"><i class="fa fa-globe"
                                                         aria-hidden="true"></i>
                                                     Website:</div>
-                                                <div class="atbd_info">{{organizationData.website}}</div>
+                                                <div class="atbd_info">
+                                                    <a href="{{organizationData.website}}">{{organizationData.website}} </a>
+                                                </div>
                                             </li>
                                             <li *ngIf="organizationData.linkedIn">
                                                 <div class="atbd_info_title"><i class="fa fa-linkedin-square"
                                                         aria-hidden="true"></i>
                                                     LinkedIn:</div>
-                                                <div class="atbd_info">{{organizationData.linkedIn}}</div>
+                                                <div class="atbd_info">
+                                                    <a href="{{organizationData.linkedIn}}">{{organizationData.linkedIn}} </a>
+                                                </div>
                                             </li>
                                             <li *ngIf="organizationData.email">
                                                 <div class="atbd_info_title"><i class="fa fa-envelope"
@@ -108,19 +112,26 @@
                                                 <div class="atbd_info_title"><i class="fa fa-facebook-square"
                                                         aria-hidden="true"></i>
                                                     Facebook:</div>
-                                                <div class="atbd_info">{{organizationData.facebook}}</div>
+                                                    
+                                                <div class="atbd_info">
+                                                    <a href="{{organizationData.facebook}}">{{organizationData.facebook | slice:0:44}} </a>
+                                                </div>
                                             </li>
                                             <li *ngIf="organizationData.twitter">
                                                 <div class="atbd_info_title"><i class="fa fa-twitter-square"
                                                         aria-hidden="true"></i>
                                                     Twitter:</div>
-                                                <div class="atbd_info">{{organizationData.twitter}}</div>
+                                                <div class="atbd_info">
+                                                    <a href="{{organizationData.twitter}}">{{organizationData.twitter}} </a>
+                                                </div>
                                             </li>
                                             <li *ngIf="organizationData.instagram">
                                                 <div class="atbd_info_title"><i class="fa fa-instagram"
                                                         aria-hidden="true"></i>
                                                     Instagram:</div>
-                                                <div class="atbd_info">{{organizationData.instagram}}</div>
+                                                <div class="atbd_info">
+                                                    <a href="{{organizationData.instagram}}">{{organizationData.instagram}} </a>
+                                                </div>
                                             </li>
                                         </ul>
                                     </div>
@@ -196,21 +207,22 @@
                                                                     <label class="style-label">LinkedIn:
                                                                         &nbsp;</label><a
                                                                         href="{{contact.linkedIn}}">{{contact.linkedIn |
-                                                                        slice:0:15}}</a>
+                                                                        slice:0:15}} ..</a>
                                                                 </div>
                                                             </div>
 
                                                             <div style="float: right;">
-                                                                <div *ngIf="contact.linkedIn">
-                                                                    <label class="style-label">Twitter: &nbsp;</label><a
+                                                                <div *ngIf="contact.twitter">
+                                                                    <label class="style-label">Twitter: 
+                                                                        &nbsp;</label><a
                                                                         href="{{contact.linkedIn}}">{{contact.twitter |
-                                                                        slice:0:15}}</a>
+                                                                        slice:0:15}} ..</a>
                                                                 </div>
                                                                 <div *ngIf="contact.facebook">
                                                                     <label class="style-label">Facebook:
                                                                         &nbsp;</label><a
                                                                         href="{{contact.facebook}}">{{contact.facebook |
-                                                                        slice:0:15}}</a>
+                                                                        slice:0:15}} ..</a>
                                                                 </div>
                                                                 <div *ngIf="contact.skype">
                                                                     <label class="style-label">Skype:

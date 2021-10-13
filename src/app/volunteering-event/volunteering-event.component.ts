@@ -55,6 +55,7 @@ export class VolunteeringEventComponent implements OnInit {
   applicationStatus = null;
   isInvited = false;
   
+
    
 
 
@@ -158,10 +159,10 @@ export class VolunteeringEventComponent implements OnInit {
     }
 
   getEvent(uuid) {
+    
     this.voluneeringEventService.getEvent(this.globals.user.accessToken,uuid).subscribe(
       (data) => {
-        console.log(data);
-          this.eventHeaderData = data;       
+          this.eventHeaderData = data;      
           if (data.volunteering_location) {
             this.eventHeaderLocationData = data.volunteering_location;
             this.location_uuid = data.volunteering_location.uuid;   
@@ -176,9 +177,12 @@ export class VolunteeringEventComponent implements OnInit {
             this.volunteerApplicationExists();
             this.isVolunteerApplicationSTatusInvited();
           },
+          
+          
       (error) => {
         this.toastr.error(error.message)
       })
+      
   }
 
   downloadCV(file)
@@ -190,7 +194,6 @@ export class VolunteeringEventComponent implements OnInit {
   editEvent(value, key) {
     let body;
     body = this.recreateJobObject(key, value)
-   // console.log(this.eventHeaderData);
     this.updateEvent(body);
   }
 
@@ -262,7 +265,6 @@ export class VolunteeringEventComponent implements OnInit {
       } else if (key == 'postal_code') {
         createLocation.postal_code = value;
       }
-     // console.log(createLocation);
 
       this.voluneeringEventService.createEventLocation(this.globals.user.accessToken, createLocation).subscribe(
         (data) => {
@@ -441,9 +443,6 @@ export class VolunteeringEventComponent implements OnInit {
   }
 
   inviteVolunteerToEvent(volunteer) {
-
-   // console.log(this.addInvitation.volunteer);
-    
     var data: any = {};
     var status:any = {};
     status.value = 'invitation_sent';
@@ -500,7 +499,6 @@ export class VolunteeringEventComponent implements OnInit {
 
   editApplicationSelected(application) {
     this.selectedApplication =  application;
-    //console.log(this.selectedApplication)
   }
 
 
@@ -513,6 +511,7 @@ export class VolunteeringEventComponent implements OnInit {
   updateApplicationStatus(body) {
     this.voluneeringEventService.updateApplicationStatus(this.globals.user.accessToken, body, this.selectedApplication.application_uuid).subscribe(
       (data) => {
+        this.getEvent(this.globals.volunteeringEvent);
         this.toastr.success(data.message);
       },
       (error) => {
@@ -559,7 +558,6 @@ export class VolunteeringEventComponent implements OnInit {
                 }
             }
         });
-      //  console.log(this.isInvited)
       return this.isInvited;
      }
   }
@@ -574,8 +572,6 @@ export class VolunteeringEventComponent implements OnInit {
           }
       });
     }
-
-    //console.log(this.applicationStatus)
     return this.applicationStatus;
   }
 
@@ -630,8 +626,6 @@ export class VolunteeringEventComponent implements OnInit {
     body.volunteer_uuid = this.globals.user.uuid;
     body.event_uuid = this.globals.volunteeringEvent;
 
-   // console.log(body)
-
     this.voluneeringEventService.addEventToFavorite(this.globals.user.accessToken, body).subscribe(
       (data) => {
         this.toastr.success(data.message);
@@ -641,6 +635,7 @@ export class VolunteeringEventComponent implements OnInit {
       })
   }
 
+  
 
   
 }

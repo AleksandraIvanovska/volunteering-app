@@ -77,7 +77,6 @@ export class OrganizationComponent implements OnInit {
      //   if (checkURL && checkURL.segments[0].toString() == 'organization') {
           this.activatedRoute.queryParams.subscribe(params => {
             if (params.uuid) {
-              console.log(params.uuid);
               this.globals.organization = params.uuid            
               this.getOrganization(params.uuid)
             }

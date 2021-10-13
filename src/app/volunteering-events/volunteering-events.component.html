@@ -20,7 +20,7 @@
         <br>
         <div class="row">
             <div class="container-fluid" style="margin-left: 20px;">
-                <h6>Filter organizations</h6>
+                <h6>Filter volunteering events</h6>
             </div>
         </div>
         <div class="row ">
@@ -84,10 +84,14 @@
                         </div>
 
                         <div class="col-md-3">
-                            <input type="date" data-date-format="DD MMMM YYYY"
+                            <!-- <input type="date" data-date-format="DD MMMM YYYY"  
                             [ngModelOptions]="{standalone: true}" value={{start_date}}
                             [(ngModel)]='start_date' [id]="start_date" onFocusOut
-                            class="form-control">
+                            class="form-control"> -->
+                            <input placeholder="Start date" class="form-control" type="text" onfocus="(this.type='date')" 
+                            [ngModelOptions]="{standalone: true}" value={{start_date}}
+                            [(ngModel)]='start_date' [id]="start_date" onFocusOut>
+
                         </div>
 
                         <div class="col-md-3">
@@ -151,7 +155,7 @@
                                     </div>
                                 </li>
                                 <li class="lower-font"><span class="text-grey">Spaces Available:</span> <span> {{volunteering_event.spaces_available}}</span></li>
-                                <li class="lower-font"><span class="text-grey">Application Deadline: </span> <strong style="color: black;">{{volunteering_event.deadline}}</strong></li>
+                                <li class="lower-font"><span class="text-grey">Application Deadline: </span> <strong style="color: black;">{{volunteering_event.deadline}}</strong><span style="color: #f1c111" *ngIf="volunteering_event.expiration"> {{volunteering_event.expiration.description}}</span></li>
                                 <li style="text-align: center; font-size: 16px; height: 20px;margin-top: 5px;"><p class="text-grey" *ngIf="volunteering_event.start_date">Start Date: <span style="color: black;">{{volunteering_event.start_date}}</span></p></li>
                             </ul>
 

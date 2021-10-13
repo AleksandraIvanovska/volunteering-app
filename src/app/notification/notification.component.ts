@@ -63,14 +63,12 @@ export class NotificationComponent implements OnInit {
   }
 
   getNotification() {
-    console.log("Notifications od notificatii")
     this.notificationService.getNotifications(this.globals.user.accessToken)
       .subscribe(
         (data) => {
           this.notifications = data;
         }
       )
-      console.log(this.notifications)
   }
 
   readAllNotification() {

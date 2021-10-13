@@ -355,14 +355,14 @@
               </li>
               <hr style="margin-left: -20px;">
               <li *ngIf="eventHeaderData.deadline">
-                <div class="atbd_info_title">Aapplication deadline</div>
+                <div class="atbd_info_title">Application deadline</div>
                 <div class="atbd_info">{{eventHeaderData.deadline}}</div>
               </li>
             </ul>
           </div>
 
           <div *ngIf="isOrganization; else other_con">
-            <button *ngIf="globals.user.id == eventHeaderData.organization.user_id" class="dropdown-item"
+            <button *ngIf="globals.user.id == eventHeaderData.organization.user_id && eventHeaderData.deadline > eventHeaderData.todayDate" class="dropdown-item"
               class="btn btn-grad btn-lg" data-toggle="modal" data-target="#invite-volunteer">Invite Volunteer</button>
           </div>
           <!-- <ng-template #other_con>
@@ -453,7 +453,7 @@
             </div>
 
             <ng-template #application_exists>
-              <button class="dropdown-item" class="btn btn-grad btn-lg" type="submit" (click)="applyToEvent()">Apply
+              <button class="dropdown-item" *ngIf="eventHeaderData.deadline > eventHeaderData.todayDate" class="btn btn-grad btn-lg" type="submit" (click)="applyToEvent()">Apply
                 Here</button>
             </ng-template>
 
@@ -871,23 +871,11 @@
             <div class="row">
               <div class="col-md-12">
                 Application Status
-                <!-- <ng-select bindLabel="language" bindValue="language" dropdownPosition="bottom"
-                                    (change)="editLanguage(selectedLanguage.language, 'language')" (open)="getAllLanguages()"
-                                    [(ngModel)]="selectedLanguage.language" placeholder="Select language" [items]="allLanguages"
-                                    [ngModelOptions]="{standalone: true}">
-                                </ng-select> -->
-
                 <ng-select bindLabel="description" bindValue="value" dropdownPosition="bottom"
                   (change)="editApplicationStatus(selectedApplication.status, 'status')"
                   (open)="getApplicationStatuses()" [(ngModel)]="selectedApplication.status" placeholder="Select status"
                   [items]="applicationStatuses" [ngModelOptions]="{standalone: true}">
                 </ng-select>
-
-                <!-- <ng-select bindLabel="name" dropdownPosition="bottom"
-                                (change)="editEventLocation(eventHeaderLocationData.location.name, 'city')" (open)="getAllCities()"
-                                [(ngModel)]="eventHeaderLocationData.location" placeholder="Select city" [items]="cities"
-                                [ngModelOptions]="{standalone: true}">
-                              </ng-select> -->
               </div>
             </div>
           </div>

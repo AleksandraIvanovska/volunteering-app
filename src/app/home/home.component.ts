@@ -26,12 +26,6 @@ export class HomeComponent implements OnInit {
 
   //hardcode 3 events
   getEvents() {
-    // this.eventsService.getEvents(this.globals.user.accessToken).subscribe(
-    //         (data) => {
-    //           this.volunteering_events =  data.slice(0, 3);
-    //           console.log(this.volunteering_events);
-    //      }
-    // )
     this.volunteering_events = this.hardcoded_events;
   }
  
