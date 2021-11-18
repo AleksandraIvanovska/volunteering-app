@@ -184,7 +184,7 @@ export class OrganizationComponent implements OnInit {
                   if(this.organizationComments.length){
                     this.paggination(1);
                   }
-
+            this.getOrganization(this.globals.organization);
             this.toastr.success(data.message)
 
           }

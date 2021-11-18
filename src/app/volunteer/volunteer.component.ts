@@ -210,7 +210,7 @@ export class VolunteerComponent implements OnInit {
                   if(this.volunteerComments.length){
                     this.paggination(1);
                   }
-
+            this.getVolunteer(this.globals.volunteer);
             this.toastr.success(data.message)
 
           }
@@ -419,6 +419,7 @@ export class VolunteerComponent implements OnInit {
 
   editExperienceSelected(experience) {
     this.selectedExperience =  experience;
+    console.log(experience)
   }
 
 

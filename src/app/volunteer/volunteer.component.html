@@ -354,7 +354,7 @@
                                                     <ul *ngFor="let event of volunteerData.favoriteEvents"
                                                         style="display: inline-flex">
                                                         <li><a href="">{{event.title}}</a>
-                                                        <button (click)="removeFavoriteEvent(event.favorite_event_uuid)"
+                                                        <button *ngIf="globals.user.id == volunteerData.user_id" (click)="removeFavoriteEvent(event.favorite_event_uuid)"
                                                         class="btn btn-sm"><i class="fa fa-times"></i></button>
                                                         </li>
                                                     </ul>
@@ -368,7 +368,7 @@
                                                     <ul *ngFor="let org of volunteerData.favoriteOrganizations"
                                                         style="display: inline-flex">
                                                         <li><a href="">{{org.name}}</a>
-                                                            <button (click)="removeFavoriteOrganization(org.favorite_organization_uuid)"
+                                                            <button *ngIf="globals.user.id == volunteerData.user_id" (click)="removeFavoriteOrganization(org.favorite_organization_uuid)"
                                                             class="btn btn-sm"><i class="fa fa-times"></i></button></li>
                                                     </ul>
                                                 </div>
@@ -706,9 +706,9 @@
                             
                             <div class="col-md-12">
                                 Location
-                                <ng-select bindLabel="name" dropdownPosition="bottom"
+                                <ng-select bindLabel="name" bindValue="name" dropdownPosition="bottom"
                                     (change)="editVolunteer(volunteerData.location.name, 'city')"
-                                    (open)="getAllCities()" [(ngModel)]="volunteerData.location"
+                                    (open)="getAllCities()" [(ngModel)]="volunteerData.location.city"
                                     placeholder="Select city" [items]="cities" [ngModelOptions]="{standalone: true}">
                                 </ng-select>
                             </div>
@@ -815,7 +815,7 @@
         <div class="modal-content">
             <form action="/" id="atbdp-report-abuse-form" class="form-vertical">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="add-education-modal-label">Add Education</h4>
+                    <h3 class="modal-title" id="add-education-modal-label">Add Education</h3>
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
@@ -917,7 +917,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 Major
-                                <input type="text" placeholder="Institution name" class="form-control"
+                                <input type="text" placeholder="Major" class="form-control"
                                     (focusout)="editEducation(selectedEducation.major, 'major')"
                                     [(ngModel)]="selectedEducation.major" [ngModelOptions]="{standalone: true}">
                             </div>
@@ -961,7 +961,7 @@
         <div class="modal-content">
             <form action="/" id="atbdp-report-abuse-form" class="form-vertical">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="add-experience-modal-label">Add Experience</h4>
+                    <h3 class="modal-title" id="add-experience-modal-label">Add Experience</h3>
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
@@ -1110,7 +1110,7 @@
         <div class="modal-content">
             <form action="/" id="atbdp-report-abuse-form" class="form-vertical">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="add-language-modal-label">Add Language</h4>
+                    <h3 class="modal-title" id="add-language-modal-label">Add Language</h3>
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">

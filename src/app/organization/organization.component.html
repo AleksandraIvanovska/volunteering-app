@@ -497,7 +497,7 @@
                                 City
                                 <ng-select bindLabel="name" dropdownPosition="bottom"
                                     (change)="editOrganization(organizationData.location.name, 'city')"
-                                    (open)="getAllCities()" [(ngModel)]="organizationData.location"
+                                    (open)="getAllCities()" [(ngModel)]="organizationData.location.city"
                                     placeholder="Select city" [items]="cities" [ngModelOptions]="{standalone: true}">
                                 </ng-select>
                             </div>
@@ -632,7 +632,7 @@
         <div class="modal-content">
             <form action="/" id="atbdp-report-abuse-form" class="form-vertical">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="add-contact-modal-label">Add Organization Contact</h4>
+                    <h5 class="modal-title" id="add-contact-modal-label">Add Organization Contact</h5>
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
