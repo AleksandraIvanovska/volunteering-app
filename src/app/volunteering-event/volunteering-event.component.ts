@@ -55,6 +55,7 @@ export class VolunteeringEventComponent implements OnInit {
   applicationStatus = null;
   isInvited = false;
   
+
    
 
 
@@ -64,56 +65,58 @@ export class VolunteeringEventComponent implements OnInit {
 
     router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
       let checkURL = this.router.parseUrl(this.router.url).root.children.primary
-     // if (checkURL && checkURL.segments[0].toString() == 'volunteeringEvent') {
+      if (checkURL && checkURL.segments[0].toString() == 'volunteeringEvent') {
         this.activatedRoute.queryParams.subscribe(params => {
           if (params.uuid) {
-            this.globals.volunteeringEvent = params.uuid            
+            this.globals.volunteeringEvent = params.uuid          
             this.getEvent(params.uuid)
+           
+
           }
         })
-    });
+    }});
 
-    const URL = environment.backendURL + '/assets';
-    this.uploader = new FileUploader({
-      url: URL,
-      isHTML5: true,
-      method: 'POST',
-      itemAlias: 'file',
-      authTokenHeader: 'authorization',
-      authToken: 'Bearer ' + localStorage.getItem('access-token'),
-    });
+    // const URL = environment.backendURL + '/assets';
+    // this.uploader = new FileUploader({
+    //   url: URL,
+    //   isHTML5: true,
+    //   method: 'POST',
+    //   itemAlias: 'file',
+    //   authTokenHeader: 'authorization',
+    //   authToken: 'Bearer ' + localStorage.getItem('access-token'),
+    // });
 
 
-    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) =>
-    {
-        this.loading = false;
-        const obj = JSON.parse(response);
-        if (status === 201) {
-            let name = ""
-            this.tmpFiles.uuid = obj.uuid;
-            this.tmpFiles.url = obj.file_url;
+    // this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) =>
+    // {
+    //     this.loading = false;
+    //     const obj = JSON.parse(response);
+    //     if (status === 201) {
+    //         let name = ""
+    //         this.tmpFiles.uuid = obj.uuid;
+    //         this.tmpFiles.url = obj.file_url;
           
-              name = obj.original_name;
+    //           name = obj.original_name;
             
           
-            this.tmpFiles.file = obj;
-            // this.tmpFiles.file.name = name;
-            this.tmpFiles.original_name = name;
-            //this.job.files.push(this.tmpFiles);
-            this.tmpFiles = {};
-        } else {
-            this.toastr.error('Something went wrong');
-        }
+    //         this.tmpFiles.file = obj;
+    //         // this.tmpFiles.file.name = name;
+    //         this.tmpFiles.original_name = name;
+    //         //this.job.files.push(this.tmpFiles);
+    //         this.tmpFiles = {};
+    //     } else {
+    //         this.toastr.error('Something went wrong');
+    //     }
 
-        this.hasBaseDropZoneOver = false;
-    };
-    this.uploader.onAfterAddingFile = (file) => {
-      file.withCredentials = false;
+    //     this.hasBaseDropZoneOver = false;
+    // };
+    // this.uploader.onAfterAddingFile = (file) => {
+    //   file.withCredentials = false;
      
-        file.file.name =  file.file.name;
+    //     file.file.name =  file.file.name;
       
-    };
-    this.uploader.uploadAll();
+    // };
+    // this.uploader.uploadAll();
 
    }
 
@@ -156,10 +159,10 @@ export class VolunteeringEventComponent implements OnInit {
     }
 
   getEvent(uuid) {
+    
     this.voluneeringEventService.getEvent(this.globals.user.accessToken,uuid).subscribe(
       (data) => {
-        console.log(data);
-          this.eventHeaderData = data;       
+          this.eventHeaderData = data;      
           if (data.volunteering_location) {
             this.eventHeaderLocationData = data.volunteering_location;
             this.location_uuid = data.volunteering_location.uuid;   
@@ -174,9 +177,12 @@ export class VolunteeringEventComponent implements OnInit {
             this.volunteerApplicationExists();
             this.isVolunteerApplicationSTatusInvited();
           },
+          
+          
       (error) => {
         this.toastr.error(error.message)
       })
+      
   }
 
   downloadCV(file)
@@ -188,7 +194,6 @@ export class VolunteeringEventComponent implements OnInit {
   editEvent(value, key) {
     let body;
     body = this.recreateJobObject(key, value)
-    console.log(this.eventHeaderData);
     this.updateEvent(body);
   }
 
@@ -234,6 +239,8 @@ export class VolunteeringEventComponent implements OnInit {
   }
 
   updateEventLocation(body) {
+    
+    if (this.eventHeaderLocationData.event_id) {
     this.voluneeringEventService.updateEventLocation(this.globals.user.accessToken,body, this.location_uuid).subscribe(
       (data) => {
         this.toastr.success(data.message);
@@ -241,16 +248,75 @@ export class VolunteeringEventComponent implements OnInit {
       (error) => {
         this.toastr.error(error.message)
       })
+    }
+    else {
+      let createLocation: any = {};
+      createLocation.event_uuid = this.globals.volunteeringEvent;
+      
+      let keys = Object.keys(body);
+      let values = Object.values(body);
+      let key = keys[0];
+      let value = values[0];
+
+      if (key == 'city') {
+        createLocation.city = value;
+      } else if (key == 'address') {
+        createLocation.address = value;
+      } else if (key == 'postal_code') {
+        createLocation.postal_code = value;
+      }
+
+      this.voluneeringEventService.createEventLocation(this.globals.user.accessToken, createLocation).subscribe(
+        (data) => {
+          this.toastr.success(data.message);
+          this.getEvent(this.globals.volunteeringEvent);
+        },
+        (error) => {
+          this.toastr.error(error.message)
+        })
+    }
   }
 
+
   updateEventRequirements(body) {
-    this.voluneeringEventService.updateEventRequirements(this.globals.user.accessToken,body, this.requirements_uuid).subscribe(
-      (data) => {
-        this.toastr.success(data.message);
-      },
-      (error) => {
-        this.toastr.error(error.message)
-      })
+    if (this.eventHeaderRequirementsData.event_id) {
+      this.voluneeringEventService.updateEventRequirements(this.globals.user.accessToken,body, this.requirements_uuid).subscribe(
+        (data) => {
+          this.toastr.success(data.message);
+        },
+        (error) => {
+          this.toastr.error(error.message)
+        })
+    }
+    else {
+      let createRequirements: any = {};
+      createRequirements.event_uuid = this.globals.volunteeringEvent;
+      
+      let keys = Object.keys(body);
+      let values = Object.values(body);
+      let key = keys[0];
+      let value = values[0];
+
+      if (key == 'driving_license') {
+        createRequirements.driving_license = value;
+      } else if (key == 'minimum_age') {
+        createRequirements.minimum_age = value;
+      } else if (key == 'languages') {
+        createRequirements.languages = value;
+      } else if (key == 'other') {
+        createRequirements.other = value;
+      }
+
+      this.voluneeringEventService.createEventRequirements(this.globals.user.accessToken, createRequirements).subscribe(
+        (data) => {
+          this.toastr.success(data.message);
+          this.getEvent(this.globals.volunteeringEvent);
+        },
+        (error) => {
+          this.toastr.error(error.message)
+        })
+    }
+    
   }
 
 
@@ -258,8 +324,8 @@ export class VolunteeringEventComponent implements OnInit {
     this.voluneeringEventService.deleteEvent(this.globals.user.accessToken,this.globals.volunteeringEvent).subscribe(
       (data) => {
         this.eventHeaderData = {}
-        this.globals.volunteeringEvent = null;
         this.router.navigate(['']);
+        this.globals.volunteeringEvent = null;
         document.getElementById('closeDelete').click();
         this.toastr.success(data.message);
       },
@@ -280,8 +346,8 @@ export class VolunteeringEventComponent implements OnInit {
   getAllCities() {
     this.organizationsService.getcities(this.globals.user.accessToken).subscribe(
       (data) => {
-        this.cities = data.slice(0, 100);
-       // this.cities = data;
+        //this.cities = data.slice(0, 100);
+        this.cities = data;
       }
     )
   }
@@ -377,9 +443,6 @@ export class VolunteeringEventComponent implements OnInit {
   }
 
   inviteVolunteerToEvent(volunteer) {
-
-    console.log(this.addInvitation.volunteer);
-    
     var data: any = {};
     var status:any = {};
     status.value = 'invitation_sent';
@@ -391,6 +454,7 @@ export class VolunteeringEventComponent implements OnInit {
     this.voluneeringEventService.createApplication(this.globals.user.accessToken, data).subscribe(
       (data) => {
         this.toastr.success(data.message);
+        this.getEvent(this.globals.volunteeringEvent)
         this.addInvitation = {};
       },
       (error) => {
@@ -410,6 +474,7 @@ export class VolunteeringEventComponent implements OnInit {
       this.voluneeringEventService.deleteAsset(this.globals.user.accessToken, this.globals.volunteeringEvent, asset_uuid).subscribe(
         (data) => {
           this.toastr.success(data.message);
+          this.getEvent(this.globals.volunteeringEvent);
         },
         (error) => {
           this.toastr.error(error.message)
@@ -434,7 +499,6 @@ export class VolunteeringEventComponent implements OnInit {
 
   editApplicationSelected(application) {
     this.selectedApplication =  application;
-    console.log(this.selectedApplication)
   }
 
 
@@ -447,6 +511,7 @@ export class VolunteeringEventComponent implements OnInit {
   updateApplicationStatus(body) {
     this.voluneeringEventService.updateApplicationStatus(this.globals.user.accessToken, body, this.selectedApplication.application_uuid).subscribe(
       (data) => {
+        this.getEvent(this.globals.volunteeringEvent);
         this.toastr.success(data.message);
       },
       (error) => {
@@ -493,7 +558,6 @@ export class VolunteeringEventComponent implements OnInit {
                 }
             }
         });
-        console.log(this.isInvited)
       return this.isInvited;
      }
   }
@@ -508,8 +572,6 @@ export class VolunteeringEventComponent implements OnInit {
           }
       });
     }
-
-    console.log(this.applicationStatus)
     return this.applicationStatus;
   }
 
@@ -556,7 +618,24 @@ export class VolunteeringEventComponent implements OnInit {
       (error) => {
         this.toastr.error(error.message)
       })
-
   }
+
+  addEeventToFavorites() {
+    let body: any = {};
+
+    body.volunteer_uuid = this.globals.user.uuid;
+    body.event_uuid = this.globals.volunteeringEvent;
+
+    this.voluneeringEventService.addEventToFavorite(this.globals.user.accessToken, body).subscribe(
+      (data) => {
+        this.toastr.success(data.message);
+      },
+      (error) => {
+        this.toastr.error(error.message)
+      })
+  }
+
+  
+
   
 }

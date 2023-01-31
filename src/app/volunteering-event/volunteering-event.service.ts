@@ -58,7 +58,27 @@ export class VolunteeringEventService {
       Authorization: `Bearer ${accessToken}`
     })
     
-      return this.http.put(environment.backendURL + '/api/requirements/location/' + uuid, body, { headers: headers });
+      return this.http.put(environment.backendURL + '/api/volunteeringEvents/requirements/' + uuid, body, { headers: headers });
+  }
+
+  createEventRequirements(accessToken,body): Observable<any>
+  {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    })
+    
+      return this.http.post(environment.backendURL + '/api/volunteeringEvents/requirements', body, { headers: headers });
+  }
+
+  createEventLocation(accessToken,body): Observable<any>
+  {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    })
+    
+      return this.http.post(environment.backendURL + '/api/volunteeringEvents/location', body, { headers: headers });
   }
 
   createApplication(accessToken,body): Observable<any>
@@ -105,11 +125,15 @@ export class VolunteeringEventService {
     return this.http.put(environment.backendURL + '/api/volunteeringEvents/volunteerInvitation/' + uuid, body, { headers: headers });
   }
 
+  addEventToFavorite(accessToken, body): Observable<any>
+  {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`
+    })
 
-
-
-
-
+    return this.http.post(environment.backendURL + '/api/volunteers/favoriteEvent', body, { headers: headers });  
+  }
 
 
 }

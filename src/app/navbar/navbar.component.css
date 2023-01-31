@@ -1,109 +1,57 @@
 a:hover {
-    cursor: pointer;
-  }
-
-  a {
-    color: white;
-  }
-
-
-  .vr_line {
-    border-left:1px solid rgba(255,255,255, .3);
-    height: 35px;
-    margin-right: 8px;
-  }
-
-
-  .navbar-color {
-    background-image: linear-gradient(#EB233C 0%, #500000 50%, #1C061A 100%);
-    opacity: 0.9;
-  }
-  .navbar-color  {
-     transition: 0.5s;
-     color: white;             
-  }
-
-  .logo {
-    background: url("../../assets/img/Volunteer-Icon.png");
- 
-  }
-
-  .navbackground {
-    
-
-    position:relative;
-    background-image:  url("../../assets/img/intro-background.jpg");
-    background-color: RGBA(15, 9, 20, 0.84);
-   
-    
-  }
-
-
-  i {
-    color: white;
-  }
-
-  .dropdown-item {
-    color: black;
-  }
-
-
-  .unread-notification {
-    background-color: white;
-  }
-  
-  .navbar .notification {
-    right: 5px;
-    top: -13px;
-  }
-
-
-  .notification-dropdown {
-    margin-top: 9px;
-    margin-left: -550px;
-  }
-
-  .scroll{
-    overflow-y: scroll;
-    height: 100vh;
+  cursor: pointer;
+  /* color: white !important; */
 }
 
-  /* .notification-dropdown{
-    .noti-list{
-      position: relative;
-      height: 290px;
-    }
-    &.dropdown-menu{
-      padding: 0;
-    }
-    .noti-text{
-      color: $gray-600;
-      font-size: 90%;
-    }
-  
-    .dropdown-item:focus, .dropdown-item:hover{
-      background-color: $selected-element;
-      i{
-        color:  $secondary-color;
-        background-color: $selected-element;
-      }
-    }
-  
-    .dropdown-item.active, .dropdown-item:active{
-      background-color: none;
-      i,.noti-title, .noti-text{
-        color:  $secondary-color;
-        background-color: $selected-element;
-      }
-    }
-  }   */
-  
-  
+a {
+  color: white;
+}
 
+i {
+  color: white;
+}
 
+.dropdown-item,
+.dropdown-item:hover {
+  color: black;
+}
 
+.unread-notification {
+  background-color: white;
+}
 
+.navbar .notification {
+  right: 5px;
+  top: -13px;
+}
 
-  
+.notification-dropdown {
+  margin-top: 9px;
+  margin-left: -550px;
+  width: 700px;
+}
 
-  
+.scroll {
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+.navbar-nav {
+  color: white;
+}
+
+.dropdown-toggle::after {
+  margin-top: 7px;
+}
+
+.contact:hover {
+  color: white !important;
+}
+
+.noti-wrapper {
+  white-space: break-spaces;
+}
+
+.dropdown-item:active {
+  background-color: #f8f9fa !important;
+}

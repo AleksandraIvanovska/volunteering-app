@@ -46,9 +46,9 @@ export class NavbarComponent implements OnInit {
 		    
 	    },
 	    deadline: null,
-	    expired: {
+	    // expired: {
 		    
-	    },
+	    // },
 	    status: {
 		    
 	    },
@@ -137,7 +137,6 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.initNewEvent();
-
     if (localStorage.getItem('access-token')) {
       this.show.user = true;
       this.globals.user = {
@@ -149,15 +148,14 @@ export class NavbarComponent implements OnInit {
         uuid: localStorage.getItem('uuid')
       }
       this.isUserOrganization();
-      console.log(this.globals)
-    }
-    
+     }
     this.getNotification();
+
   }
 
-  onNewEvent() {
 
-    console.log(this.addEvent);
+
+  onNewEvent() {
     if(this.addEvent.title) { //organizacijata se zima sama od Auth:usero id to
       this.navbarService.addEvent(this.globals.user.accessToken,this.addEvent)
       .subscribe(
@@ -166,6 +164,7 @@ export class NavbarComponent implements OnInit {
             this.toastr.success(data.message);
             //this.toastr.success('Volunteering Event successfully created!');
             document.getElementById("closeNewEvent").click();
+            this.seletedCountry = null;
         }
       ,
       (error) => {
@@ -192,16 +191,16 @@ getAllCities() {
   if (this.seletedCountry) {
     this.organizationsService.getcities(this.globals.user.accessToken,this.seletedCountry).subscribe(
       (data) => {
-        this.cities = data.slice(0, 1000);
-       // this.cities = data;
+      //  this.cities = data.slice(0, 1000);
+        this.cities = data;
       }
     )
   }
   else {
     this.organizationsService.getcities(this.globals.user.accessToken).subscribe(
       (data) => {
-        this.cities = data.slice(0, 1000);
-       // this.cities = data;
+       // this.cities = data.slice(0, 1000);
+        this.cities = data;
       }
     )
   }
@@ -275,6 +274,7 @@ openContact(uuid)
               localStorage.setItem('name', response.user.name);
               localStorage.setItem('id', response.user.id);
               localStorage.setItem('email_verified_at', response.user.email_verified_at);
+              localStorage.setItem('uuid', response.uuid);
               this.globals.user = {
                 emailVerifiedAt: response.user.email_verified_at,
                 accessToken: response.access_token,
@@ -287,6 +287,8 @@ openContact(uuid)
               document.getElementById("close").click();
               this.show.user = true;
               this.show.profile = false;
+             
+              this.isUserOrganization();
             }
           },
           (error) => {
@@ -324,7 +326,7 @@ openContact(uuid)
         body.user_id = this.globals.user.id;
         body.first_name = this.register.name;
   
-        console.log(body);
+   
   
         this.navbarService.addVolunteer(this.globals.user.accessToken, body).subscribe(
           (data) => {
@@ -358,7 +360,7 @@ openContact(uuid)
         this.register.role = "volunteer";
       }
 
-      console.log(this.register);
+
       
       if (!this.validateEmail(this.register.email)) {
         this.toastr.error("Invalid email")
@@ -391,6 +393,7 @@ openContact(uuid)
     this.show.user = false;
     this.isOrganization = null;
 
+    this.router.navigate([''])
     this.globals.user = {
       emailVerifiedAt: null,
       accessToken: null,
@@ -399,66 +402,50 @@ openContact(uuid)
       id: null
     }
     localStorage.clear()
-    this.router.navigate(['']);
+    
   }
 
-  // resetPasswordTraveller() {
-  //   if (this.resetPassword.old_password && this.resetPassword.password && this.resetPassword.password_confirmation) {
-  //     if (this.resetPassword.password != this.resetPassword.password_confirmation) {
-  //       this.toastr.error("Passwords don't match")
-  //     } else {
-  //       this.resetPassword.email = this.globals.user.email;
-  //       this.resetPassword.token = localStorage.getItem('access_token');
-  //       this.navbarService.resetPassword(this.resetPassword).subscribe(
-  //         (data) => {
-  //           document.getElementById("closeModal").click();
-  //           this.toastr.success('Successfully changed password');
-  //         },
-  //         (error) => {
-  //           this.toastr.error(error.message)
-  //         })
-  //     }
-  //   } else {
-  //     this.toastr.error("All fields are mandatory")
-  //   }
-  // }
 
-  // forgotPasswordTraveller() {
-  //   if (this.forgotPassword.email) {
-  //     if (!this.validateEmail(this.forgotPassword.email)) {
-  //       this.toastr.error("Invalid email")
-  //     } else {
-  //       this.navbarService.forgotPassword(this.forgotPassword).subscribe(
-  //         (data) => {
-  //           this.login.email = this.register.email;
-  //           document.getElementById("login").click();
-  //           this.toastr.success('We have e-mailed your password reset link!');
-  //         },
-  //         (error) => {
-  //           this.toastr.error(error.message)
-  //         })
-  //     }
-  //   } else {
-  //     this.toastr.error("All fields are mandatory")
-  //   }
-  // }
-
-  // verifyEmailTraveller() {
-  //   this.navbarService.verifyEmail(this.globals.user.accessToken).subscribe(
-  //     (data) => {
-  //       this.toastr.success('We have e-mailed you confirmation link!');
-  //     },
-  //     (error) => {
-  //       this.toastr.error(error.message)
-  //     })
-  // }
-
-  forgotPasswordTraveller() {
-
+  forgotPasswordUser() {
+    if (this.forgotPassword.email) {
+      if (!this.validateEmail(this.forgotPassword.email)) {
+        this.toastr.error("Invalid email")
+      } else {
+        this.navbarService.forgotPassword(this.forgotPassword).subscribe(
+          (data) => {
+            this.login.email = this.register.email;
+            
+            document.getElementById("login").click();
+            this.toastr.success('We have e-mailed your password reset link!');
+          },
+          (error) => {
+            this.toastr.error(error.message)
+          })
+      }
+    } else {
+      this.toastr.error("All fields are mandatory")
+    }
   }
   
-  resetPasswordTraveller() {
-    
+  resetPasswordUser() {
+    if (this.resetPassword.old_password && this.resetPassword.password && this.resetPassword.password_confirmation) {
+      if (this.resetPassword.password != this.resetPassword.password_confirmation) {
+        this.toastr.error("Passwords don't match")
+      } else {
+        this.resetPassword.email = this.globals.user.email;
+        this.resetPassword.token = localStorage.getItem('access_token');
+        this.navbarService.resetPassword(this.resetPassword).subscribe(
+          (data) => {
+            document.getElementById("closeModal").click();
+            this.toastr.success('Successfully changed password');
+          },
+          (error) => {
+            this.toastr.error(error.message)
+          })
+      }
+    } else {
+      this.toastr.error("All fields are mandatory")
+    }
   }
 
   isUserOrganization() {
@@ -474,7 +461,7 @@ openContact(uuid)
   {
     this.navbarService.readAllNotification(this.globals.user.accessToken)
       .subscribe(
-        (data) =>
+        (data) => 
         {
           this.emitToNotification('read_all');
           this.unreadNotification = 0;
@@ -506,12 +493,10 @@ openContact(uuid)
 
   getNotification()
   {
-    console.log("Notifications od navbar povikano")
     this.navbarService.getNotifications(this.globals.user.accessToken)
       .subscribe(
         (data) =>
         {
-          console.log("Vleze vo data da zeme")
           this.notifications = data.events;
           this.unreadNotification = data.eventsCount;
         }

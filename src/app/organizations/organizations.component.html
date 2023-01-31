@@ -5,7 +5,7 @@
                 <form class="input-group">
                     <input type="search" class="form-control" placeholder="Search by Title and Description"
                         aria-label="Search" [(ngModel)]="search" [ngModelOptions]="{standalone: true}" />
-                    <button class="btn btn-outline-white bg-dark" style="color: white;" type="button"
+                    <button class="btn btn-outline-white yellow_buttons" type="button"
                         (click)="applySearch(search)">Search</button>
                 </form>
             </div>
@@ -48,10 +48,10 @@
 
                     </div>
 
-                    <button class="btn btn-outline-white " style="color: white; background-color: #903af9;" type="button"
+                    <button class="btn btn-outline-white yellow_buttons" type="button"
                         (click)="applyFilter(selectedCategory, selectedCity, seletedCountry)">Apply filters</button>
                     &nbsp;
-                    <button class="btn btn-outline-white bg-dark" style="color: white;" type="button"
+                    <button class="btn btn-outline-white yellow_buttons" type="button"
                         (click)="clearFilters()">Clear filters</button>
                 </form>
             </div>
@@ -78,20 +78,20 @@
                             <ul class="post-meta  list-unstyled">
                                 <li style="height: 30px;">
                                     <div *ngIf="organization.location">Location: {{organization.location.city}},
-                                        {{organization.location.county | slice:0:15}}...</div>
+                                        {{organization.location.county | slice:0:14}}...</div>
                                 </li>
                                 <li style="height: 55px;">
                                     <div *ngIf="organization.description" style="font-size: 15px;margin-top: 5px;">
-                                        {{organization.description | slice:0:115}}...</div>
+                                        {{organization.description | slice:0:109}}...</div>
                                 </li>
                                 <br>
                                 <li>
                                     <div class="list-inline">
-                                        <a href="" class="mr-2 text-grey"><i class="fa fa-globe"></i></a>
-                                        <a href="" class="mr-2 text-grey"><i class="fa fa-facebook"></i></a>
-                                        <a href="" class="mr-2 text-grey"><i class="fa fa-twitter"></i></a>
-                                        <a href="" class="mr-2 text-grey"><i class="fa fa-linkedin"></i></a>
-                                        <a href="" class="mr-2 text-grey"><i class="fa fa-instagram"></i></a>
+                                        <a href="{{organization.website}}" target="_blank" class="mr-2 text-grey"><i class="fa fa-globe"></i></a>
+                                        <a href="{{organization.facebook}}" target="_blank" class="mr-2 text-grey"><i class="fa fa-facebook"></i></a>
+                                        <a href="{{organization.twitter}}" target="_blank" class="mr-2 text-grey"><i class="fa fa-twitter"></i></a>
+                                        <a href="{{organization.linkedIn}}" target="_blank" class="mr-2 text-grey"><i class="fa fa-linkedin"></i></a>
+                                        <a href="{{organization.instagram}}" target="_blank" class="mr-2 text-grey"><i class="fa fa-instagram"></i></a>
                                     </div>
                                 </li>
                             </ul>

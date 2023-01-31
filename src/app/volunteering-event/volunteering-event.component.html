@@ -1,16 +1,5 @@
 <section>
-  <div class="banner" id="banner">
-    <div class="bg-overlay">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  
   <!-- Event Data -->
   <div class="event">
     <div class="container">
@@ -33,9 +22,9 @@
           <br>
           <div class="row">
             <div class="col-md-12">
-              <h5 *ngIf="eventHeaderData.organization" style="margin-left: 10px;">
+              <h5 *ngIf="eventHeaderData.organization" style="margin-left: 10px; ">
                 By Organization:
-                <a routerLink="/organization" [queryParams]="{uuid: eventHeaderData.organization.uuid}">
+                <a routerLink="/organization" [queryParams]="{uuid: eventHeaderData.organization.uuid}" style="font-weight: bold;">
                   {{eventHeaderData.organization.title}}
                 </a>
               </h5>
@@ -247,7 +236,17 @@
                           Benefits:</div>
                         <div class="atbd_info">{{eventHeaderData.benefits}}</div>
                       </li>
-                      <li *ngIf="eventHeaderAssets.length > 0">
+                      <li *ngIf="eventHeaderData.notes">
+                        <div class="atbd_info_title"><i class="fa fa-plus" aria-hidden="true"></i>
+                          Notes:</div>
+                        <div class="atbd_info">{{eventHeaderData.notes}}</div>
+                      </li>
+                      <!-- <li *ngIf="eventHeaderData.tags">
+                        <div class="atbd_info_title"><i class="fa fa-plus" aria-hidden="true"></i>
+                          Additional Tags:</div>
+                        <div class="atbd_info">{{eventHeaderData.tags}}</div>
+                      </li> -->
+                      <!-- <li >
                         <div class="atbd_info_title"><i class="fa fa-files-o" aria-hidden="true"></i>
                           Assets:</div>
                         <div class="atbd_info" style="margin-left: -45px;margin-top: 30px;">
@@ -260,7 +259,7 @@
                                 {{asset.asset_name}}
                               </button>
                               <a *ngIf="globals.user.id == eventHeaderData.organization.user_id" class="pull-right"
-                                style="cursor: pointer;" (click)="deleteAsset(asset.uuid)">
+                                style="cursor: pointer;" (click)="deleteAsset(asset.event_asset_uuid)">
                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
                               </a>
                             </li>
@@ -280,7 +279,7 @@
                             (change)="OnContentChangeFile($event)">
 
                         </div>
-                      </li>
+                      </li> -->
                     </ul>
                   </div>
                 </div>
@@ -363,7 +362,7 @@
           </div>
 
           <div *ngIf="isOrganization; else other_con">
-            <button *ngIf="globals.user.id == eventHeaderData.organization.user_id" class="dropdown-item"
+            <button *ngIf="globals.user.id == eventHeaderData.organization.user_id && eventHeaderData.deadline > eventHeaderData.todayDate" class="dropdown-item"
               class="btn btn-grad btn-lg" data-toggle="modal" data-target="#invite-volunteer">Invite Volunteer</button>
           </div>
           <!-- <ng-template #other_con>
@@ -454,7 +453,7 @@
             </div>
 
             <ng-template #application_exists>
-              <button class="dropdown-item" class="btn btn-grad btn-lg" type="submit" (click)="applyToEvent()">Apply
+              <button class="dropdown-item" *ngIf="eventHeaderData.deadline > eventHeaderData.todayDate" class="btn btn-grad btn-lg" type="submit" (click)="applyToEvent()">Apply
                 Here</button>
             </ng-template>
 
@@ -464,7 +463,7 @@
 
 
           <br><br>
-          <div class="atbd_contact_info1">
+          <!-- <div class="atbd_contact_info1">
             <ul>
               <li *ngIf="eventHeaderData.contacts.length > 0">
                 <div class="atbd_info_title">Contacts</div>
@@ -488,6 +487,11 @@
                 </div>
               </li>
             </ul>
+          </div>
+          <br> -->
+          <div>
+            <button *ngIf="!isOrganization;" (click)="addEeventToFavorites()"
+              class="btn btn-fav">Add to Favorites</button>
           </div>
         </div>
       </div>
@@ -695,8 +699,8 @@
               <div class="col-md-6">
                 Minimum age
                 <input type="text" placeholder="Minimum age" class="form-control"
-                  [(ngModel)]="eventHeaderRequirementsData.min_age" [ngModelOptions]="{standalone: true}"
-                  (change)="editEventRequirements(eventHeaderRequirementsData.min_age, 'min_age')">
+                  [(ngModel)]="eventHeaderRequirementsData.minimum_age" [ngModelOptions]="{standalone: true}"
+                  (change)="editEventRequirements(eventHeaderRequirementsData.minimum_age, 'minimum_age')">
               </div>
             </div>
           </div>
@@ -705,11 +709,15 @@
             <div class="row">
               <div class="col-md-6">
                 Languages
-                Array of languages
+                <input type="text" placeholder="Languages" class="form-control"
+                  [(ngModel)]="eventHeaderRequirementsData.languages" [ngModelOptions]="{standalone: true}"
+                  (change)="editEventRequirements(eventHeaderRequirementsData.languages, 'languages')">             
               </div>
               <div class="col-md-6">
                 Other
-                Array of Other data
+                <input type="text" placeholder="Other" class="form-control"
+                  [(ngModel)]="eventHeaderRequirementsData.other" [ngModelOptions]="{standalone: true}"
+                  (change)="editEventRequirements(eventHeaderRequirementsData.other, 'other')">  
               </div>
             </div>
           </div>
@@ -751,13 +759,11 @@
 
           <div class="form-group">
             <div class="row">
-              <div class="col-md-6">
-                Skills needed
-                Array of skills
-              </div>
-              <div class="col-md-6">
-                Additional tags
-                How do Insert array od tags
+              <div class="col-md-12">
+                Additional Skills needed
+                <input type="text" placeholder="Insert additional skills" class="form-control"
+                  [(ngModel)]="eventHeaderData.skills_needed" [ngModelOptions]="{standalone: true}"
+                  (focusout)="editEvent(eventHeaderData.skills_needed, 'skills_needed')">
               </div>
             </div>
           </div>
@@ -773,7 +779,7 @@
             </div>
           </div>
 
-          <div class="form-group">
+          <!-- <div class="form-group">
             <div class="row">
               <div class="col-md-12">
                 Contacts
@@ -783,7 +789,7 @@
                 </ng-select>
               </div>
             </div>
-          </div>
+          </div> -->
 
         </form>
       </div>
@@ -865,23 +871,11 @@
             <div class="row">
               <div class="col-md-12">
                 Application Status
-                <!-- <ng-select bindLabel="language" bindValue="language" dropdownPosition="bottom"
-                                    (change)="editLanguage(selectedLanguage.language, 'language')" (open)="getAllLanguages()"
-                                    [(ngModel)]="selectedLanguage.language" placeholder="Select language" [items]="allLanguages"
-                                    [ngModelOptions]="{standalone: true}">
-                                </ng-select> -->
-
                 <ng-select bindLabel="description" bindValue="value" dropdownPosition="bottom"
                   (change)="editApplicationStatus(selectedApplication.status, 'status')"
                   (open)="getApplicationStatuses()" [(ngModel)]="selectedApplication.status" placeholder="Select status"
                   [items]="applicationStatuses" [ngModelOptions]="{standalone: true}">
                 </ng-select>
-
-                <!-- <ng-select bindLabel="name" dropdownPosition="bottom"
-                                (change)="editEventLocation(eventHeaderLocationData.location.name, 'city')" (open)="getAllCities()"
-                                [(ngModel)]="eventHeaderLocationData.location" placeholder="Select city" [items]="cities"
-                                [ngModelOptions]="{standalone: true}">
-                              </ng-select> -->
               </div>
             </div>
           </div>

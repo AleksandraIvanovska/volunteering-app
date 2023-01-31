@@ -1,163 +1,196 @@
-<section>
-<div class="banner" id="banner">
-        <div class="bg-overlay">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="banner-text">
-                  <h2>Welcome to <span>VolunteerUp</span></h2>
-                  <h3>Bringing People Together</h3>
-                  <p>We believe everyone should have the chance to make a difference. That's why we make it easy for good people and good causes to connect. We've connected millions of people with a great place to volunteer and helped tens of thousands of organizations better leverage volunteers to create real impact.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
-</div>
-<!-- Portfolio -->
-<div class="portfolio">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12  ">
-          <div class="text-center text">
-            <h3>Volunteering Events</h3>
-          </div>  
-          <div class="row" style="margin-left: 30px">
-
-            <!-- <div class="col-md-3 portfolio-item">
-              <a href="#"> <h5>Volunteering Evenet 1</h5> </a>  
-              <p>Lorem ipsum, or lipsum as itpesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.</p>
-            </div>
-            <div class="col-md-3 portfolio-item">
-              <a href="#"> <h5>Volunteering Evenet 1</h5> </a> 
-              <p>Lorem ipsum, or lipsum as itpesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.</p>
-            </div>
-            <div class="col-md-3 portfolio-item">
-              <a href="#"> <h5>Volunteering Evenet 1</h5> </a> 
-              <p>Lorem ipsum, or lipsum as itpesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.</p>
-            </div> -->
- 
-              <div class="col-lg-4 col-md-6" *ngFor="let volunteering_event of volunteering_events">
-                  <div class="grid-single">
-                      <div class="card post--card shadow-sm">
-                          <div class="card-body">
-                              <h6><a>{{volunteering_event.title}}</a></h6>
-                              <div *ngIf="volunteering_event.is_virtual">
-                                 <div style="float: right; color: chartreuse;">
-                                  <strong>Virtual event</strong> 
-                                 </div> 
-                             </div>
-                              <ul class="list-unstyled">
-                                  <li style="height: 50px;">
-                                      <p *ngIf="volunteering_event.volunteering_location"><span class="text-grey">Location: </span> {{volunteering_event.volunteering_location ? volunteering_event.volunteering_location.address + ', ' + volunteering_event.volunteering_location.city + ', ' + (volunteering_event.volunteering_location.country | slice:0:30) : ''}}</p>
-                                  </li>
-  
-                                  <li style="height: 20px;"><p *ngIf="volunteering_event.category"><span class="text-grey">Category:</span> {{volunteering_event.category.description}}</p></li>
-                              </ul>
-                              <div style="height: 63px; margin-bottom: 5px;">
-                                  <p *ngIf="volunteering_event.description" class="text-grey" style="font-size: 15px;">{{volunteering_event.description | slice:0:80}} ...</p>
-                              </div>
-  
-                              <ul class="list-unstyled">
-                                <li style="text-align: center;">Spaces Available: {{volunteering_event.spaces_available}}</li>
-                                <li style="text-align: center;">Application Deadline: <strong>{{volunteering_event.deadline}}</strong></li>
-                                <li style="height: 20px;text-align: center;"><p *ngIf="volunteering_event.start_date">Start Date: {{volunteering_event.start_date}}</p></li>
-                            </ul>
-                             
-                             
-                              <span class="text-grey pull-left">Created: {{volunteering_event.created_at}}</span>
-                              <p class="pull-right" *ngIf="volunteering_event.organization">
-                                  by <a href="">{{volunteering_event.organization.title}}</a>
-                              </p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <br>
-          <br>
-          <!-- /.row (nested) --> 
-          <div class="text-center text">
-            <a  routerLink="/events" class="view-more">View More Events</a>
-          </div>
-           </div>
-        <!-- /.col-lg-10 --> 
-      </div>
-      <!-- /.row --> 
-    </div>
-    <!-- /.container --> 
-  </div>
-
-
-
-  <div class="features">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center text">
-                <h3>The power of Volunteering</h3>
-            </div>
-        </div>
-        <br><br>
-      <div class="row">
-        <div class="col-md-4 col-sm-6 col-xs-12">
-        
-      
-            <div class="feature-text">
-              <h4>Gaining employability skills</h4>
-              <p class="feature-detail">The most obvious advantage is the opportunity to learn new occupational skills and get new experiences which will help our employability. However, a volunteering role does not have to be related to our chosen career path – volunteering has been shown to help the development of critical workplace skills, including communication, leadership, delegation and problem solving.</p>
-            </div>
-       
-        </div>
-        <div class="col-md-4 col-sm-6 col-xs-12">
-        
-           
-            <div class="feature-text">
-              <h4>Increasing happiness</h4>
-              <p class="feature-detail">Researchers at the London School of Economics examined the relationship between volunteering and measures of happiness in a large group of adults. They found the more people volunteered, the happier they were.</p>
-            </div>
-       
-        </div>
-        <div class="col-md-4 col-sm-6 col-xs-12">
-        
-          
-            <div class="feature-text">
-              <h4>Reducing stress</h4>
-              <p class="feature-detail">Many studies have also shown that volunteering reduces the incidence of depression and stress. 78% of people surveyed in the US who had volunteered in the previous 12 months said that volunteering had improved their mood and lowered their stress levels. Also youth who participate in volunteer activities tend to engage less in risk-taking behaviours such as smoking, drinking alcohol and using illicit drugs.</p>
-            
-          </div>
+<section class="hero hero-bg d-flex justify-content-center align-items-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-10 col-12 d-flex flex-column justify-content-center align-items-center">
+        <div class="hero-text">
+          <h1 class="text-white" data-aos="fade-up">Welcome to VolunteerUp</h1>
+          <a routerLink="/volunteers" class="custom-btn btn-bg btn mt-3 mb-3" data-aos="fade-up"
+            data-aos-delay="100">Bring People Together</a>
+          <strong class="d-block py-3 text-white" data-aos="fade-up" data-aos-delay="200">We believe everyone should
+            have the chance to make a difference. That's why we make it easy for good
+            people and good causes to connect. We've connected millions of people with a great place to volunteer
+            and helped tens of thousands of organizations better leverage volunteers to create real impact.</strong>
         </div>
       </div>
-      <br>
-      <div class="row">
-        <div class="col-md-4 col-sm-6 col-xs-12">
-      
-          
-            <div class="feature-text">
-              <h4>Supporting personal development</h4>
-              <p class="feature-detail">Volunteering can have benefits for people’s personal development. Building self-esteem and confidence are frequently referred to, as are experiencing a sense of achievement and personal satisfaction from being a part of something meaningful, helping others, and seeing the positive results of the work carried out.</p>
-          
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6 col-xs-12">
-          
-         
-            <div class="feature-text">
-              <h4>Making friends and expanding networks</h4>
-              <p class="feature-detail">Volunteering can provide an opportunity to make friends with people from different backgrounds and cultures and help to build understanding and community cohesion. In these days of social media, many people find volunteering is a great way to interact with people in the real world, and to get away from the computer screen.</p>
-            
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6 col-xs-12">
-         
-        
-            <div class="feature-text">
-              <h4>Strengthening communities</h4>
-              <p class="feature-detail">By bringing people together from different parts of the community, volunteering has been shown to bring about a greater awareness in people of the issues faced by their community or society more generally, and develop a greater sense of belonging.  Volunteers report that volunteering enriches their sense of purpose in life, and helps them learn valuable things about the world and about themselves.</p>
-           
-          </div>
+      <div class="col-lg-6 col-12">
+        <div class="hero-image" data-aos="fade-up" data-aos-delay="300">
+          <img src="assets/img/working-girl.png" class="img-fluid" alt="working girl">
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<section>
+  <!-- <div class="banner" id="banner">
+    <div class="bg-overlay">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="banner-text">
+              <h2>Welcome to <span>VolunteerUp</span></h2>
+              <h3>Bringing People Together</h3>
+              <p>We believe everyone should have the chance to make a difference. That's why we make it easy for good
+                people and good causes to connect. We've connected millions of people with a great place to volunteer
+                and helped tens of thousands of organizations better leverage volunteers to create real impact.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <!-- Portfolio -->
+  <div class="portfolio">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12  ">
+          <div class="text-center text">
+            <h3>Volunteering Events</h3>
+          </div>
+          <div class="row" style="margin-left: 30px">
+            <div class="col-lg-4 col-md-6" *ngFor="let volunteering_event of volunteering_events">
+              <div class="grid-single">
+                <div class="card post--card shadow-sm">
+
+                  <div class="card-body">
+                    <div>
+                      <h6><a><strong style="color: black;">{{volunteering_event.title}}</strong></a></h6>
+                      <span *ngIf="volunteering_event.is_virtual"
+                        style="float: right; color: #f1c111; margin-top: -35px;">
+                        <strong>Virtual event</strong>
+                      </span>
+                    </div>
+                    <hr>
+                    <ul class="list-unstyled">
+                      <li>
+                        <div *ngIf="volunteering_event.category" class="lower-font"><span
+                            class="text-grey">Category:</span> {{volunteering_event.category.description}}</div>
+                      </li>
+                      <li>
+                        <div class="lower-font" *ngIf="volunteering_event.volunteering_location"><span
+                            class="text-grey">Location: </span> {{((volunteering_event.volunteering_location ? (volunteering_event.volunteering_location.address ? volunteering_event.volunteering_location.address + ',' : '') + ' ' + volunteering_event.volunteering_location.location.name + ', ' + volunteering_event.volunteering_location.location.country.name  : '') | slice:0:30)}}
+                        </div>
+                      </li>
+                      <li class="lower-font"><span class="text-grey">Spaces Available:</span> <span>
+                          {{volunteering_event.spaces_available}}</span></li>
+                      <li class="lower-font"><span class="text-grey">Application Deadline: </span> <strong
+                          style="color: black;">{{volunteering_event.deadline}}</strong></li>
+                      <li style="text-align: center; font-size: 16px; height: 20px;margin-top: 5px;">
+                        <p class="text-grey" *ngIf="volunteering_event.start_date">Start Date: <span
+                            style="color: black;">{{volunteering_event.start_date}}</span></p>
+                      </li>
+                    </ul>
+
+                    <div style="height: 40px;">
+                      <p *ngIf="volunteering_event.description" class="text-grey" style="font-size: 15px;">
+                        {{volunteering_event.description | slice:0:77}}.. </p>
+                    </div>
+
+                    <hr>
+                    <div class="lower-font">
+                      <span class="text-grey pull-left">Created: {{volunteering_event.created_at}}</span>
+                      <p class="pull-right lower-font" *ngIf="volunteering_event.organization">
+                        by <a href="">{{volunteering_event.organization.title}}</a>
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <br>
+          <!-- /.row (nested) -->
+          <!-- <div class="text-center text" *ngIf="globals.user.id;else other_content ">
+            <a routerLink="/events" class="view-more">View More Events</a>
+          </div>
+          <ng-template #other_content>
+            <div class="text-center text">
+              <a routerLink="" class="view-more">View More Events</a>
+            </div>
+          </ng-template> -->
+          <div class="text-center text">
+            <a *ngIf="globals.user.id" routerLink="/events" class="view-more">View More Events</a>
+          </div>
+
+        </div>
+        <!-- /.col-lg-10 -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container -->
+  </div>
+
+
+  <div class="features">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center text">
+          <h3>The power of Volunteering</h3>
+        </div>
+      </div>
+      <br><br>
+      <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="feature-text">
+            <h4>Gaining employability skills</h4>
+            <p class="feature-detail">The most obvious advantage is the opportunity to learn new occupational skills and
+              get new experiences which will help our employability. However, a volunteering role does not have to be
+              related to our chosen career path – volunteering has been shown to help the development of critical
+              workplace skills, including communication, leadership, delegation and problem solving.</p>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="feature-text">
+            <h4>Increasing happiness</h4>
+            <p class="feature-detail">Researchers at the London School of Economics examined the relationship between
+              volunteering and measures of happiness in a large group of adults. They found the more people volunteered,
+              the happier they were.</p>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="feature-text">
+            <h4>Reducing stress</h4>
+            <p class="feature-detail">Many studies have also shown that volunteering reduces the incidence of depression
+              and stress. 78% of people surveyed in the US who had volunteered in the previous 12 months said that
+              volunteering had improved their mood and lowered their stress levels. Also youth who participate in
+              volunteer activities tend to engage less in risk-taking behaviours such as smoking, drinking alcohol and
+              using illicit drugs.</p>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="feature-text">
+            <h4>Supporting personal development</h4>
+            <p class="feature-detail">Volunteering can have benefits for people’s personal development. Building
+              self-esteem and confidence are frequently referred to, as are experiencing a sense of achievement and
+              personal satisfaction from being a part of something meaningful, helping others, and seeing the positive
+              results of the work carried out.</p>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="feature-text">
+            <h4>Making friends and expanding networks</h4>
+            <p class="feature-detail">Volunteering can provide an opportunity to make friends with people from different
+              backgrounds and cultures and help to build understanding and community cohesion. In these days of social
+              media, many people find volunteering is a great way to interact with people in the real world, and to get
+              away from the computer screen.</p>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="feature-text">
+            <h4>Strengthening communities</h4>
+            <p class="feature-detail">By bringing people together from different parts of the community, volunteering
+              has been shown to bring about a greater awareness in people of the issues faced by their community or
+              society more generally, and develop a greater sense of belonging. Volunteers report that volunteering
+              enriches their sense of purpose in life, and helps them learn valuable things about the world and about
+              themselves.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

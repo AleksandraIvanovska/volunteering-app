@@ -3,6 +3,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { filter } from 'rxjs/operators';
 import { AppComponent } from '../app.component';
+import { NavbarService } from '../navbar/navbar.service';
 import { OrganizationsService } from '../organizations/organizations.service';
 import { OrganizationService } from './organization.service';
 
@@ -42,6 +43,7 @@ export class OrganizationComponent implements OnInit {
   showAddComment = false;
   showAddContact = false;
   cities : any = [];
+  isOrganization: null;
 
   addContact: any = {}
   initNewContact() {
@@ -61,16 +63,20 @@ export class OrganizationComponent implements OnInit {
     }
   }
 
+  selectedContact: any = {};
+
+
 
 
   constructor(private organizationService: OrganizationService, private organizationsService: OrganizationsService,
-    public toastr: ToastrService, public globals: AppComponent, private activatedRoute: ActivatedRoute, private router: Router) { 
+    public toastr: ToastrService, public globals: AppComponent, private activatedRoute: ActivatedRoute, private router: Router,
+    public navbarService: NavbarService) { 
 
       router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
         let checkURL = this.router.parseUrl(this.router.url).root.children.primary
+     //   if (checkURL && checkURL.segments[0].toString() == 'organization') {
           this.activatedRoute.queryParams.subscribe(params => {
             if (params.uuid) {
-              console.log(params.uuid);
               this.globals.organization = params.uuid            
               this.getOrganization(params.uuid)
             }
@@ -81,6 +87,7 @@ export class OrganizationComponent implements OnInit {
   ngOnInit(): void {
 
     this.initNewContact();
+    this.isUserOrganization();
   }
 
   getOrganization(uuid) {
@@ -177,7 +184,7 @@ export class OrganizationComponent implements OnInit {
                   if(this.organizationComments.length){
                     this.paggination(1);
                   }
-
+            this.getOrganization(this.globals.organization);
             this.toastr.success(data.message)
 
           }
@@ -193,8 +200,22 @@ export class OrganizationComponent implements OnInit {
         this.organizationData = {}
         this.globals.organization = null;
         this.router.navigate(['']);
+
+        // this.isOrganization = null;
+
+        // this.globals.user = {
+        //   emailVerifiedAt: null,
+        //   accessToken: null,
+        //   name: null,
+        //   email: null,
+        //   id: null
+        // }
+        // localStorage.clear()
+
         document.getElementById('closeDelete').click();
         this.toastr.success(data.message);
+
+       
       },
       (error) => {
         this.toastr.error(error.message)
@@ -239,8 +260,8 @@ export class OrganizationComponent implements OnInit {
   getAllCities() {
     this.organizationsService.getcities(this.globals.user.accessToken).subscribe(
       (data) => {
-        this.cities = data.slice(0, 100);
-       // this.cities = data;
+        //this.cities = data.slice(0, 100);
+        this.cities = data;
       }
     )
   }
@@ -306,8 +327,52 @@ export class OrganizationComponent implements OnInit {
 
   }
 
+  addOrganizationToFavorites() {
+    let body: any = {};
+
+    body.volunteer_uuid = this.globals.user.uuid;
+    body.organization_uuid = this.globals.organization;
+
+    console.log(body)
+
+    this.organizationService.addOrganizationToFavorite(this.globals.user.accessToken, body).subscribe(
+      (data) => {
+        this.toastr.success(data.message);
+      },
+      (error) => {
+        this.toastr.error(error.message)
+      })
+  }
+
+  isUserOrganization() {
+    this.navbarService.getIsUserOrganization(this.globals.user.accessToken).subscribe(
+      (data) => {
+        this.isOrganization = data;
+      }
+    )
+  }
 
   
+  editContact(value, key) {
+    let body;
+    body = this.recreateJobObject(key, value)
+    this.updateContact(body);
+  }
+
+  updateContact(body) {
+    this.organizationService.updateContact(this.globals.user.accessToken,body, this.selectedContact.contact_uuid).subscribe(
+      (data) => {
+        this.toastr.success(data.message);
+      },
+      (error) => {
+        this.toastr.error(error.message)
+      })
+  }
+
+  editContactSelected(contact) {
+    this.selectedContact =  contact;
+    console.log(this.selectedContact);
+  }
 
 
 }
