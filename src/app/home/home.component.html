@@ -1,5 +1,28 @@
+<section class="hero hero-bg d-flex justify-content-center align-items-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-10 col-12 d-flex flex-column justify-content-center align-items-center">
+        <div class="hero-text">
+          <h1 class="text-white" data-aos="fade-up">Welcome to VolunteerUp</h1>
+          <a routerLink="/volunteers" class="custom-btn btn-bg btn mt-3 mb-3" data-aos="fade-up"
+            data-aos-delay="100">Bring People Together</a>
+          <strong class="d-block py-3 text-white" data-aos="fade-up" data-aos-delay="200">We believe everyone should
+            have the chance to make a difference. That's why we make it easy for good
+            people and good causes to connect. We've connected millions of people with a great place to volunteer
+            and helped tens of thousands of organizations better leverage volunteers to create real impact.</strong>
+        </div>
+      </div>
+      <div class="col-lg-6 col-12">
+        <div class="hero-image" data-aos="fade-up" data-aos-delay="300">
+          <img src="assets/img/working-girl.png" class="img-fluid" alt="working girl">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section>
-  <div class="banner" id="banner">
+  <!-- <div class="banner" id="banner">
     <div class="bg-overlay">
       <div class="container">
         <div class="row">
@@ -15,7 +38,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- Portfolio -->
   <div class="portfolio">
     <div class="container">
@@ -25,65 +48,71 @@
             <h3>Volunteering Events</h3>
           </div>
           <div class="row" style="margin-left: 30px">
-
-            <!-- <div class="col-lg-4 col-md-6" *ngFor="let volunteering_event of volunteering_events">
+            <div class="col-lg-4 col-md-6" *ngFor="let volunteering_event of volunteering_events">
               <div class="grid-single">
                 <div class="card post--card shadow-sm">
+
                   <div class="card-body">
-                    <h6><a>{{volunteering_event.title}}</a></h6>
-                    <div *ngIf="volunteering_event.is_virtual">
-                      <div style="float: right; color: chartreuse;">
+                    <div>
+                      <h6><a><strong style="color: black;">{{volunteering_event.title}}</strong></a></h6>
+                      <span *ngIf="volunteering_event.is_virtual"
+                        style="float: right; color: #f1c111; margin-top: -35px;">
                         <strong>Virtual event</strong>
-                      </div>
+                      </span>
                     </div>
+                    <hr>
                     <ul class="list-unstyled">
-                      <li style="height: 50px;">
-                        <p *ngIf="volunteering_event.volunteering_location"><span class="text-grey">Location: </span>
-                          {{volunteering_event.volunteering_location ? volunteering_event.volunteering_location.address
-                          + ', ' + volunteering_event.volunteering_location.city + ', ' +
-                          (volunteering_event.volunteering_location.country | slice:0:30) : ''}}</p>
+                      <li>
+                        <div *ngIf="volunteering_event.category" class="lower-font"><span
+                            class="text-grey">Category:</span> {{volunteering_event.category.description}}</div>
                       </li>
-
-                      <li style="height: 20px;">
-                        <p *ngIf="volunteering_event.category"><span class="text-grey">Category:</span>
-                          {{volunteering_event.category.description}}</p>
+                      <li>
+                        <div class="lower-font" *ngIf="volunteering_event.volunteering_location"><span
+                            class="text-grey">Location: </span> {{((volunteering_event.volunteering_location ? (volunteering_event.volunteering_location.address ? volunteering_event.volunteering_location.address + ',' : '') + ' ' + volunteering_event.volunteering_location.location.name + ', ' + volunteering_event.volunteering_location.location.country.name  : '') | slice:0:30)}}
+                        </div>
+                      </li>
+                      <li class="lower-font"><span class="text-grey">Spaces Available:</span> <span>
+                          {{volunteering_event.spaces_available}}</span></li>
+                      <li class="lower-font"><span class="text-grey">Application Deadline: </span> <strong
+                          style="color: black;">{{volunteering_event.deadline}}</strong></li>
+                      <li style="text-align: center; font-size: 16px; height: 20px;margin-top: 5px;">
+                        <p class="text-grey" *ngIf="volunteering_event.start_date">Start Date: <span
+                            style="color: black;">{{volunteering_event.start_date}}</span></p>
                       </li>
                     </ul>
-                    <div style="height: 63px; margin-bottom: 5px;">
+
+                    <div style="height: 40px;">
                       <p *ngIf="volunteering_event.description" class="text-grey" style="font-size: 15px;">
-                        {{volunteering_event.description | slice:0:80}} ...</p>
+                        {{volunteering_event.description | slice:0:77}}.. </p>
                     </div>
 
-                    <ul class="list-unstyled">
-                      <li style="text-align: center;">Spaces Available: {{volunteering_event.spaces_available}}</li>
-                      <li style="text-align: center;">Application Deadline:
-                        <strong>{{volunteering_event.deadline}}</strong></li>
-                      <li style="height: 20px;text-align: center;">
-                        <p *ngIf="volunteering_event.start_date">Start Date: {{volunteering_event.start_date}}</p>
-                      </li>
-                    </ul>
-
-
-                    <span class="text-grey pull-left">Created: {{volunteering_event.created_at}}</span>
-                    <p class="pull-right" *ngIf="volunteering_event.organization">
-                      by <a href="">{{volunteering_event.organization.title}}</a>
-                    </p>
+                    <hr>
+                    <div class="lower-font">
+                      <span class="text-grey pull-left">Created: {{volunteering_event.created_at}}</span>
+                      <p class="pull-right lower-font" *ngIf="volunteering_event.organization">
+                        by <a href="">{{volunteering_event.organization.title}}</a>
+                      </p>
+                    </div>
                   </div>
+
                 </div>
               </div>
-            </div> -->
+            </div>
           </div>
           <br>
           <br>
           <!-- /.row (nested) -->
-          <div class="text-center text" *ngIf="globals.user.id;else other_content ">
+          <!-- <div class="text-center text" *ngIf="globals.user.id;else other_content ">
             <a routerLink="/events" class="view-more">View More Events</a>
           </div>
           <ng-template #other_content>
             <div class="text-center text">
               <a routerLink="" class="view-more">View More Events</a>
             </div>
-        </ng-template>
+          </ng-template> -->
+          <div class="text-center text">
+            <a *ngIf="globals.user.id" routerLink="/events" class="view-more">View More Events</a>
+          </div>
 
         </div>
         <!-- /.col-lg-10 -->
@@ -92,7 +121,6 @@
     </div>
     <!-- /.container -->
   </div>
-
 
 
   <div class="features">

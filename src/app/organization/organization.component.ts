@@ -77,7 +77,6 @@ export class OrganizationComponent implements OnInit {
      //   if (checkURL && checkURL.segments[0].toString() == 'organization') {
           this.activatedRoute.queryParams.subscribe(params => {
             if (params.uuid) {
-              console.log(params.uuid);
               this.globals.organization = params.uuid            
               this.getOrganization(params.uuid)
             }
@@ -185,7 +184,7 @@ export class OrganizationComponent implements OnInit {
                   if(this.organizationComments.length){
                     this.paggination(1);
                   }
-
+            this.getOrganization(this.globals.organization);
             this.toastr.success(data.message)
 
           }
@@ -261,8 +260,8 @@ export class OrganizationComponent implements OnInit {
   getAllCities() {
     this.organizationsService.getcities(this.globals.user.accessToken).subscribe(
       (data) => {
-        this.cities = data.slice(0, 100);
-       // this.cities = data;
+        //this.cities = data.slice(0, 100);
+        this.cities = data;
       }
     )
   }

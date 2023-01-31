@@ -78,7 +78,11 @@ search: null;
 
   clearFilters() {
     this.getAllOrganizations();
-   // this.event_type = this.eventType[0];
+    this.selectedCategory = null;
+    this.selectedCity = null;
+    this.seletedCountry = null;
+    this.search = null
+   // this.vent_type = this.eventType[0];
   
   }
 

@@ -1,120 +1,95 @@
-<nav class="navbar navbar-expand-lg navbar-color bg-dark navbackground">
-
-  <a class="navbar-brand" routerLink="/">
-    <img src="../../assets/img/Volunteer-Icon.png" style="height: 40px; width: 40px;margin-top: -6px;">
-    <span class="logo"></span>
-    VolunteerUp
-
-  </a>
-
-  <div class="vr_line"></div>
-
-  <div class="collapse navbar-collapse">
-    <ul class="navbar-nav mr-auto" [ngClass]="{'d-none': !show.user}">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/">Home</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/events">Events
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/volunteers">Volunteers</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/organizations">Organizations</a>
-      </li>
-    </ul>
-  </div>
-
-  <div id="navbarSupportedContent-4">
-    <ul class="navbar-nav ml-auto">
-      <li [ngClass]="{'d-none': !show.user}" style="margin-top: 1px;">
-        <a *ngIf="isOrganization" data-toggle="modal" data-target="#add_listing" style="color: white; border: 1px solid rgba(255,255,255, .3);"
-          class="btn">
-          <span class="la la-plus"></span> + Create Volunteering Event
-        </a>
-      </li>
-      <li class="nav-item active" >
-      
-      <li [ngClass]="{'d-none': !show.user}" class="nav-item dropdown" ngbDropdown placement="bottom-right">
-        <a class="nav-link position-relative" id="dropdownBasic2" ngbDropdownToggle
-          style="display: inline-flex; margin-top: 10px;" (click)="getNotification()" data-toggle="tooltip"
-          data-placement="bottom" >
-          <div id="notification" style="margin-top: -9px">
-            <i class="fa fa-bell"></i>
-            <span *ngIf="unreadNotification" style="margin-left: -5px;margin-right: -8px;"
-              class="notification badge-inverse badge-pill badge-big-search-primary-inverse">{{unreadNotification}}</span>
-          </div>
-        </a>
-        <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="notification-dropdown card-shadow">
-          <div class="scroll" style="height: 47vh;">
-            <div *ngFor="let notification of notifications;let i = index">
-              <a class="dropdown-item noti-container py-3 border-bottom border-bottom-   border-bottom-lighten-4"
-                (click)="notificationAction(notification, i)"
-                [ngClass]="{'unread-notification': !notification.is_read}">
-                <span class="media" style="padding: 0.5rem 0rem 0rem 0rem">
-                  <span class="noti-wrapper">
-                    <div *ngIf="notification.title" class="valign-child">
-                      <div class="text-bold-300" style="line-height: 1.5;"
-                        [innerHTML]=notification.title></div>
-                    </div>
-                    <span
-                      class="noti-text">{{notification.created_at}}</span>
-                  </span>
-                </span>
-              </a>
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">
+      <i class="fa fa-line-chart"></i>
+      VolunteerUp
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto" [ngClass]="{'d-none': !show.user}">
+        <li class="nav-item">
+          <a routerLink="/" class="nav-link smoothScroll">Home</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/events" class="nav-link smoothScroll">Events</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/volunteers" class="nav-link">Volunteers</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/organizations" class="nav-link">Organizations</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto" [ngClass]="{'d-none': !show.user}">
+        <li [ngClass]="{'d-none': !show.user}" class="nav-item dropdown" ngbDropdown placement="bottom-right">
+          <a class="nav-link position-relative d-flex" id="dropdownBasic2" ngbDropdownToggle (click)="getNotification()" data-toggle="tooltip" data-placement="bottom">
+            <div id="notification">
+              <i class="fa fa-bell"></i>
+              <span *ngIf="unreadNotification" class="notification badge-inverse badge-pill badge-big-search-primary-inverse">{{unreadNotification}}</span>
             </div>
-          </div>
-          <hr>
-          <div class="row m-0">
-            <div class="col-12 p-0">
-              <a (click)="readAllNotification()" class="dropdown-item py-1 secondary-color text-center">
-                Read all
-              </a>
-            </div>
-          </div>
-        </div>
-      </li>
-
-
-      <li class="nav-item dropdown" [ngClass]="{'d-none': !show.user}">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
-          <i class="fa fa-user"></i> Profile </a>
-        <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-          <a *ngIf="isOrganization; else other_con" class="dropdown-item" routerLink="/organization" 
-            [queryParams]="{uuid: globals.user.uuid}" >
-            My account 
           </a>
-          <ng-template #other_con>
-            <a class="dropdown-item" routerLink="/volunteer"
-            [queryParams]="{uuid: globals.user.uuid}">
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="notification-dropdown card-shadow p-0">
+            <div class="scroll" style="height: 47vh;">
+              <div *ngFor="let notification of notifications;let i = index;let last = last">
+                <a class="dropdown-item noti-container py-3" [ngClass]="{'border-bottom border-bottom-lighten-4' : !last}" (click)="notificationAction(notification, i)"
+                  [ngClass]="{'unread-notification': !notification.is_read}">
+                  <span class="media" style="padding: 0.5rem 0rem 0rem 0rem">
+                    <span class="noti-wrapper">
+                      <div *ngIf="notification.title" class="valign-child">
+                        <div class="text-bold-300" style="line-height: 1.5;" [innerHTML]=notification.title></div>
+                      </div>
+                      <span class="noti-text">{{notification.created_at}}</span>
+                    </span>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <hr class="m-0">
+            <div class="row m-0">
+              <div class="col-12 p-0">
+                <a (click)="readAllNotification()" class="dropdown-item p-3 secondary-color text-center">
+                  Read all
+                </a>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item dropdown" [ngClass]="{'d-none': !show.user}">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-user"></i> Profile </a>
+          <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+            <a *ngIf="isOrganization; else other_con" class="dropdown-item" routerLink="/organization" [queryParams]="{uuid: globals.user.uuid}">
               My account
-            </a>         
-           </ng-template>  
-          <a class="dropdown-item" (click)="logoutUser()">Log out</a>
-        </div>
-      </li>     
-
-      <li [ngClass]="{'d-none': show.user}">
-        <a href="" class="access-link" data-toggle="modal"
-            data-target="#login_modal"><strong>Login</strong></a>
-        <span> or </span>
-        <a href="" class="access-link" data-toggle="modal"
-            data-target="#signup_modal"><strong>Register</strong></a>
-    </li>
-    
-
-    </ul>
+            </a>
+            <ng-template #other_con>
+              <a class="dropdown-item" routerLink="/volunteer" [queryParams]="{uuid: globals.user.uuid}">
+                My account
+              </a>
+            </ng-template>
+            <a class="dropdown-item" (click)="logoutUser()">Log out</a>
+          </div>
+        </li>
+        <li [ngClass]="{'d-none': !show.user}" *ngIf="isOrganization">
+          <a data-toggle="modal" data-target="#add_listing" style="color: white; border: 1px solid rgba(255,255,255, .3);" class="nav-link contact">
+            <span class="la la-plus"></span> Create event
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto" [ngClass]="{'d-none': show.user}">
+        <li class="nav-item">
+          <a href="" class="nav-link contact" data-toggle="modal" data-target="#login_modal"><span>Login</span></a>
+        </li>
+        <li class="nav-item">
+          <a href="" class="nav-link contact" data-toggle="modal" data-target="#signup_modal"><span>Register</span></a>
+        </li>
+      </ul>
+    </div>
   </div>
-
 </nav>
 
-<div class="modal fade" id="add_listing" tabindex="-1" role="dialog" aria-labelledby="claim_listing_label"
-  aria-hidden="true">
+<div class="modal fade" id="add_listing" tabindex="-1" role="dialog" aria-labelledby="claim_listing_label" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -127,13 +102,11 @@
             <div class="row">
               <div class="col-md-6">
                 * Event Title
-                <input type="text" placeholder="Insert title" class="form-control" required [(ngModel)]="addEvent.title"
-                  [ngModelOptions]="{standalone: true}">
+                <input type="text" placeholder="Insert title" class="form-control" required [(ngModel)]="addEvent.title" [ngModelOptions]="{standalone: true}">
               </div>
               <div class="col-md-6">
                 * Description
-                <input type="text" placeholder="Insert description" class="form-control" required
-                  [(ngModel)]="addEvent.description" [ngModelOptions]="{standalone: true}">
+                <input type="text" placeholder="Insert description" class="form-control" required [(ngModel)]="addEvent.description" [ngModelOptions]="{standalone: true}">
               </div>
             </div>
           </div>
@@ -141,8 +114,7 @@
             <div class="row">
               <div class="col-md-12">
                 * Category
-                <ng-select bindLabel="description" bindValue="value" dropdownPosition="bottom"
-                  [(ngModel)]="addEvent.category.value" placeholder="Select category" (open)="getAllCategories()"
+                <ng-select bindLabel="description" bindValue="value" dropdownPosition="bottom" [(ngModel)]="addEvent.category.value" placeholder="Select category" (open)="getAllCategories()"
                   [items]="categories" [ngModelOptions]="{standalone: true}">
                 </ng-select>
               </div>
@@ -155,8 +127,7 @@
                 <h6>Location</h6>
                 <div>
                   <label for="virtual">Is the event virtual ?</label>&nbsp;
-                  <input type="checkbox" [(ngModel)]="addEvent.is_virtual" name="virtual" id="is_virtual"
-                    value="is_virtual" [ngModelOptions]="{standalone: true}">
+                  <input type="checkbox" [(ngModel)]="addEvent.is_virtual" name="virtual" id="is_virtual" value="is_virtual" [ngModelOptions]="{standalone: true}">
                 </div>
               </div>
             </div>
@@ -166,15 +137,14 @@
             <div class="row">
               <div class="col-md-6">
                 Country
-                <ng-select (open)="getAllCountries()" [items]="countries" placeholder="Select country" bindLabel="name"
-                  bindValue="name" [(ngModel)]="seletedCountry" [ngModelOptions]="{standalone: true}">
+                <ng-select (open)="getAllCountries()" [items]="countries" placeholder="Select country" bindLabel="name" bindValue="name" [(ngModel)]="seletedCountry"
+                  [ngModelOptions]="{standalone: true}">
                 </ng-select>
               </div>
               <div class="col-md-6">
                 * City
-                <ng-select bindLabel="name" bindValue="name" dropdownPosition="bottom"
-                  [(ngModel)]="addEvent.location.city" placeholder="Select city" (open)="getAllCities()"
-                  [items]="cities" [ngModelOptions]="{standalone: true}">
+                <ng-select bindLabel="name" bindValue="name" dropdownPosition="bottom" [(ngModel)]="addEvent.location.city" placeholder="Select city" (open)="getAllCities()" [items]="cities"
+                  [ngModelOptions]="{standalone: true}">
                 </ng-select>
 
               </div>
@@ -182,21 +152,18 @@
             <div class="row" style="margin-top: 10px;">
               <div class="col-md-6">
                 Address
-                <input type="text" placeholder="Insert address" class="form-control"
-                  [(ngModel)]="addEvent.location.address" [ngModelOptions]="{standalone: true}">
+                <input type="text" placeholder="Insert address" class="form-control" [(ngModel)]="addEvent.location.address" [ngModelOptions]="{standalone: true}">
               </div>
               <div class="col-md-6">
                 Google Maps URL
-                <input type="text" placeholder="Insert Google Maps URL" class="form-control"
-                  [(ngModel)]="addEvent.location.postal_code" [ngModelOptions]="{standalone: true}">
+                <input type="text" placeholder="Insert Google Maps URL" class="form-control" [(ngModel)]="addEvent.location.postal_code" [ngModelOptions]="{standalone: true}">
               </div>
             </div>
           </div>
 
           <ng-template #other_content>
-            Virtual Event Informations 
-            <input type="text" placeholder="Insert virtual event info" class="form-control"
-            [(ngModel)]="addEvent.virtual_info" [ngModelOptions]="{standalone: true}">
+            Virtual Event Informations
+            <input type="text" placeholder="Insert virtual event info" class="form-control" [(ngModel)]="addEvent.virtual_info" [ngModelOptions]="{standalone: true}">
           </ng-template>
           <hr>
 
@@ -204,13 +171,11 @@
             <div class="row">
               <div class="col-md-6">
                 Application Deadline
-                <input type="date" data-date-format="DD MMMM YYYY" [ngModelOptions]="{standalone: true}"
-                  [(ngModel)]='addEvent.deadline' onFocusOut class="form-control">
+                <input type="date" data-date-format="DD MMMM YYYY" [ngModelOptions]="{standalone: true}" [(ngModel)]='addEvent.deadline' onFocusOut class="form-control">
               </div>
               <div class="col-md-6">
                 Volunteers Needed
-                <input type="text" placeholder="Number of volunteers needed" class="form-control"
-                  [(ngModel)]="addEvent.volunteers_needed" [ngModelOptions]="{standalone: true}">
+                <input type="text" placeholder="Number of volunteers needed" class="form-control" [(ngModel)]="addEvent.volunteers_needed" [ngModelOptions]="{standalone: true}">
               </div>
             </div>
           </div>
@@ -219,13 +184,11 @@
             <div class="row">
               <div class="col-md-6">
                 Start Date
-                <input type="date" data-date-format="DD MMMM YYYY" [ngModelOptions]="{standalone: true}"
-                  [(ngModel)]='addEvent.start_date' onFocusOut class="form-control">
+                <input type="date" data-date-format="DD MMMM YYYY" [ngModelOptions]="{standalone: true}" [(ngModel)]='addEvent.start_date' onFocusOut class="form-control">
               </div>
               <div class="col-md-6">
                 End Date
-                <input type="date" data-date-format="DD MMMM YYYY" [ngModelOptions]="{standalone: true}"
-                  [(ngModel)]='addEvent.end_date' onFocusOut class="form-control">
+                <input type="date" data-date-format="DD MMMM YYYY" [ngModelOptions]="{standalone: true}" [(ngModel)]='addEvent.end_date' onFocusOut class="form-control">
               </div>
             </div>
           </div>
@@ -234,8 +197,7 @@
             <div class="row">
               <div class="col-md-12">
                 Duration
-                <ng-select (open)="getAllDurations()" [items]="durations" placeholder="Select duration"
-                  bindLabel="description" bindValue="value" [(ngModel)]="addEvent.duration.value"
+                <ng-select (open)="getAllDurations()" [items]="durations" placeholder="Select duration" bindLabel="description" bindValue="value" [(ngModel)]="addEvent.duration.value"
                   [ngModelOptions]="{standalone: true}">
                 </ng-select>
               </div>
@@ -246,13 +208,11 @@
             <div class="row">
               <div class="col-md-6">
                 Estimated Work Hours
-                <input type="text" placeholder="Insert estimated hours" class="form-control"
-                  [(ngModel)]="addEvent.estimated_hours" [ngModelOptions]="{standalone: true}">
+                <input type="text" placeholder="Insert estimated hours" class="form-control" [(ngModel)]="addEvent.estimated_hours" [ngModelOptions]="{standalone: true}">
               </div>
               <div class="col-md-6">
                 Estimated Hours per Day
-                <input type="text" placeholder="Insert estimated hours per day" class="form-control"
-                  [(ngModel)]="addEvent.average_hours_per_day" [ngModelOptions]="{standalone: true}">
+                <input type="text" placeholder="Insert estimated hours per day" class="form-control" [(ngModel)]="addEvent.average_hours_per_day" [ngModelOptions]="{standalone: true}">
               </div>
             </div>
           </div>
@@ -261,8 +221,7 @@
             <div class="row">
               <div class="col-md-12">
                 Event Status
-                <ng-select (open)="getAllStatuses()" [items]="eventStatuses" placeholder="Select event status"
-                  bindLabel="description" bindValue="value" [(ngModel)]="addEvent.status.value"
+                <ng-select (open)="getAllStatuses()" [items]="eventStatuses" placeholder="Select event status" bindLabel="description" bindValue="value" [(ngModel)]="addEvent.status.value"
                   [ngModelOptions]="{standalone: true}">
                 </ng-select>
               </div>
@@ -273,15 +232,13 @@
             <div class="row">
               <div class="col-md-6">
                 Great For
-                <ng-select (open)="getAllGreatFor()" [items]="greatFor" placeholder="Select great for"
-                  bindLabel="description" bindValue="value" [(ngModel)]="addEvent.great_for.value"
+                <ng-select (open)="getAllGreatFor()" [items]="greatFor" placeholder="Select great for" bindLabel="description" bindValue="value" [(ngModel)]="addEvent.great_for.value"
                   [ngModelOptions]="{standalone: true}">
                 </ng-select>
               </div>
               <div class="col-md-6">
                 Group Size
-                <ng-select (open)="getAllGroupSize()" [items]="groupSize" placeholder="Select group size"
-                  bindLabel="description" bindValue="value" [(ngModel)]="addEvent.group_size.value"
+                <ng-select (open)="getAllGroupSize()" [items]="groupSize" placeholder="Select group size" bindLabel="description" bindValue="value" [(ngModel)]="addEvent.group_size.value"
                   [ngModelOptions]="{standalone: true}">
                 </ng-select>
               </div>
@@ -293,13 +250,11 @@
             <div class="row">
               <div class="col-md-6">
                 Driving License
-                <input type="text" placeholder="Driving license" class="form-control"
-                  [(ngModel)]="addEvent.requirements.driving_license" [ngModelOptions]="{standalone: true}">
+                <input type="text" placeholder="Driving license" class="form-control" [(ngModel)]="addEvent.requirements.driving_license" [ngModelOptions]="{standalone: true}">
               </div>
               <div class="col-md-6">
                 Minimum age
-                <input type="text" placeholder="Minimum age" class="form-control"
-                  [(ngModel)]="addEvent.requirements.min_age" [ngModelOptions]="{standalone: true}">
+                <input type="text" placeholder="Minimum age" class="form-control" [(ngModel)]="addEvent.requirements.min_age" [ngModelOptions]="{standalone: true}">
               </div>
             </div>
           </div>
@@ -308,12 +263,11 @@
             <div class="row">
               <div class="col-md-6">
                 Languages
-                Array of languages
+                  <input type="text" placeholder="Languages" class="form-control" [(ngModel)]="addEvent.requirements.languages" [ngModelOptions]="{standalone: true}">
               </div>
               <div class="col-md-6">
                 Other
-                <input type="text" placeholder="Something other" class="form-control"
-                  [(ngModel)]="addEvent.requirements.other" [ngModelOptions]="{standalone: true}">
+                <input type="text" placeholder="Something other" class="form-control" [(ngModel)]="addEvent.requirements.other" [ngModelOptions]="{standalone: true}">
               </div>
             </div>
           </div>
@@ -323,13 +277,11 @@
             <div class="row">
               <div class="col-md-6">
                 Sleeping
-                <input type="text" placeholder="Insert sleeping info" class="form-control"
-                  [(ngModel)]="addEvent.sleeping" [ngModelOptions]="{standalone: true}">
+                <input type="text" placeholder="Insert sleeping info" class="form-control" [(ngModel)]="addEvent.sleeping" [ngModelOptions]="{standalone: true}">
               </div>
               <div class="col-md-6">
                 Food
-                <input type="text" placeholder="Insert food info" class="form-control" [(ngModel)]="addEvent.food"
-                  [ngModelOptions]="{standalone: true}">
+                <input type="text" placeholder="Insert food info" class="form-control" [(ngModel)]="addEvent.food" [ngModelOptions]="{standalone: true}">
               </div>
             </div>
           </div>
@@ -338,26 +290,20 @@
             <div class="row">
               <div class="col-md-6">
                 Transport
-                <input type="text" placeholder="Insert transport info" class="form-control"
-                  [(ngModel)]="addEvent.transport" [ngModelOptions]="{standalone: true}">
+                <input type="text" placeholder="Insert transport info" class="form-control" [(ngModel)]="addEvent.transport" [ngModelOptions]="{standalone: true}">
               </div>
               <div class="col-md-6">
                 Benefits
-                <input type="text" placeholder="Insert benefits info" class="form-control"
-                  [(ngModel)]="addEvent.benefits" [ngModelOptions]="{standalone: true}">
+                <input type="text" placeholder="Insert benefits info" class="form-control" [(ngModel)]="addEvent.benefits" [ngModelOptions]="{standalone: true}">
               </div>
             </div>
           </div>
 
           <div class="form-group">
             <div class="row">
-              <div class="col-md-6">
-                Skills needed
-                Array of skills
-              </div>
-              <div class="col-md-6">
-                Additional tags
-                How do Insert array od tags
+              <div class="col-md-12">
+                Additional Skills needed
+                <input type="text" placeholder="Insert additional skills" class="form-control" [(ngModel)]="addEvent.Skills" [ngModelOptions]="{standalone: true}">
               </div>
             </div>
           </div>
@@ -365,8 +311,7 @@
             <div class="row">
               <div class="col-md-12">
                 Notes
-                <textarea placeholder="Insert notes" class="form-control" rows="2" [(ngModel)]="addEvent.notes"
-                  [ngModelOptions]="{standalone: true}"></textarea>
+                <textarea placeholder="Insert notes" class="form-control" rows="2" [(ngModel)]="addEvent.notes" [ngModelOptions]="{standalone: true}"></textarea>
               </div>
             </div>
           </div>
@@ -380,8 +325,7 @@
   </div>
 </div>
 
-<div class="modal fade" id="signup_modal" tabindex="-1" role="dialog" aria-labelledby="signup_modal_label"
-  aria-hidden="true">
+<div class="modal fade" id="signup_modal" tabindex="-1" role="dialog" aria-labelledby="signup_modal_label" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -401,36 +345,28 @@
           </div>
           <div style="display: inline-flex;justify-content: center;margin-bottom: 10px;font-size: 20px;">
             <div> <strong>Volunteer</strong> &nbsp;
-              <input type="checkbox" [(ngModel)]="selectVolunteer" name="volunteer" 
-                [ngModelOptions]="{standalone: true}">
+              <input type="checkbox" [(ngModel)]="selectVolunteer" name="volunteer" [ngModelOptions]="{standalone: true}">
             </div>
 
             <div> &nbsp;&nbsp; <strong>Organization</strong> &nbsp;
-              <input type="checkbox" [(ngModel)]="selectOrganization" name="organization" 
-                [ngModelOptions]="{standalone: true}">
+              <input type="checkbox" [(ngModel)]="selectOrganization" name="organization" [ngModelOptions]="{standalone: true}">
             </div>
 
           </div>
 
 
-          <input type="text" #name="ngModel" class="form-control" id="name" name="name" required placeholder="Name" name
-            [(ngModel)]="register.name" [ngModelOptions]="{standalone: true}" />
-          <input type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #email="ngModel"
-            class="form-control" id="email" name="email" required placeholder="Email" email [(ngModel)]="register.email"
-            [ngModelOptions]="{standalone: true}" />
-          <input class="form-control" type="password" placeholder="Password" name="password" required minlength="8"
-            [(ngModel)]="register.password" [ngModelOptions]="{standalone: true}">
-          <input class="form-control" type="password" placeholder="Password confirmation" name="password_confirmation"
-            required minlength="8" [(ngModel)]="register.password_confirmation" [ngModelOptions]="{standalone: true}">
-          <button type="submit" class="btn btn-block btn-lg btn-gradient btn-gradient-two"
-            (click)="registerUser()">Register</button>
+          <input type="text" #name="ngModel" class="form-control" id="name" name="name" required placeholder="Name" name [(ngModel)]="register.name" [ngModelOptions]="{standalone: true}" />
+          <input type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #email="ngModel" class="form-control" id="email" name="email" required placeholder="Email" email
+            [(ngModel)]="register.email" [ngModelOptions]="{standalone: true}" />
+          <input class="form-control" type="password" placeholder="Password" name="password" required minlength="8" [(ngModel)]="register.password" [ngModelOptions]="{standalone: true}">
+          <input class="form-control" type="password" placeholder="Password confirmation" name="password_confirmation" required minlength="8" [(ngModel)]="register.password_confirmation"
+            [ngModelOptions]="{standalone: true}">
+          <button type="submit" class="btn btn-block btn-lg btn-gradient btn-gradient-two" (click)="registerUser()">Register</button>
         </form>
         <div class="form-excerpts">
           <ul class="list-unstyled">
-            <li>Already a member? <a id="login" data-toggle="modal" data-dismiss="modal" aria-label="Close"
-                data-target="#login_modal" style="color: indianred;">Login</a></li>
-            <li><a id="register" data-toggle="modal" data-dismiss="modal" aria-label="Close"
-                data-target="#forgot_modal" style="color: indianred;">Forgot Password?</a></li>
+            <li>Already a member? <a id="login" data-toggle="modal" data-dismiss="modal" aria-label="Close" data-target="#login_modal" style="color: #f1c111;">Login</a></li>
+            <li><a id="register" data-toggle="modal" data-dismiss="modal" aria-label="Close" data-target="#forgot_modal" style="color: #f1c111;">Forgot Password?</a></li>
           </ul>
         </div>
       </div>
@@ -438,8 +374,7 @@
   </div>
 </div>
 
-<div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="login_modal_label"
-  aria-hidden="true">
+<div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="login_modal_label" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -450,20 +385,16 @@
       </div>
       <div class="modal-body">
         <form action="/" id="login-form">
-          <input type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #email="ngModel"
-            class="form-control" id="email" name="email" required placeholder="Email" email [(ngModel)]="login.email"
-            [ngModelOptions]="{standalone: true}" />
-          <input class="form-control" type="password" placeholder="Password" name="password" required minlength="8"
-            [(ngModel)]="login.password" [ngModelOptions]="{standalone: true}">
+          <input type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #email="ngModel" class="form-control" id="email" name="email" required placeholder="Email" email
+            [(ngModel)]="login.email" [ngModelOptions]="{standalone: true}" />
+          <input class="form-control" type="password" placeholder="Password" name="password" required minlength="8" [(ngModel)]="login.password" [ngModelOptions]="{standalone: true}">
           <button type="submit" class="btn btn-block btn-lg btn-gradient btn-gradient-two" (click)="loginUser()">Log
             In</button>
         </form>
         <div class="form-excerpts">
           <ul class="list-unstyled">
-            <li>Not a member? <a href="" data-toggle="modal" data-dismiss="modal" aria-label="Close"
-                data-target="#signup_modal" style="color: indianred;">Register</a></li>
-            <li><a href="" data-toggle="modal" data-dismiss="modal" aria-label="Close" data-target="#forgot_modal"
-                style="color: indianred;">Forgot Password?</a></li>
+            <li>Not a member? <a href="" data-toggle="modal" data-dismiss="modal" aria-label="Close" data-target="#signup_modal" style="color: #f1c111;">Register</a></li>
+            <li><a href="" data-toggle="modal" data-dismiss="modal" aria-label="Close" data-target="#forgot_modal" style="color: #f1c111;">Forgot Password?</a></li>
           </ul>
         </div>
       </div>
@@ -471,8 +402,7 @@
   </div>
 </div>
 
-<div class="modal fade" id="forgot_modal" tabindex="-1" role="dialog" aria-labelledby="login_modal_label"
-  aria-hidden="true">
+<div class="modal fade" id="forgot_modal" tabindex="-1" role="dialog" aria-labelledby="login_modal_label" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -483,16 +413,13 @@
       </div>
       <div class="modal-body">
         <form action="/" id="login-form">
-          <input type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #email="ngModel"
-            class="form-control" id="email" name="email" required placeholder="Email" email
+          <input type="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #email="ngModel" class="form-control" id="email" name="email" required placeholder="Email" email
             [(ngModel)]="forgotPassword.email" [ngModelOptions]="{standalone: true}" />
-          <button type="submit" class="btn btn-block btn-lg btn-gradient btn-gradient-two"
-            (click)="forgotPasswordUser()">Send</button>
+          <button type="submit" class="btn btn-block btn-lg btn-gradient btn-gradient-two" (click)="forgotPasswordUser()">Send</button>
         </form>
         <div class="form-excerpts">
           <ul class="list-unstyled">
-            <li>Not a member? <a data-toggle="modal" data-dismiss="modal" aria-label="Close"
-                data-target="#signup_modal">Register</a></li>
+            <li>Not a member? <a data-toggle="modal" data-dismiss="modal" aria-label="Close" data-target="#signup_modal">Register</a></li>
             <li><a data-toggle="modal" data-dismiss="modal" aria-label="Close" data-target="#login_modal">Login</a></li>
           </ul>
         </div>
@@ -500,8 +427,7 @@
     </div>
   </div>
 </div>
-<div class="modal fade" id="reset_modal" tabindex="-1" role="dialog" aria-labelledby="login_modal_label"
-  aria-hidden="true">
+<div class="modal fade" id="reset_modal" tabindex="-1" role="dialog" aria-labelledby="login_modal_label" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -512,15 +438,11 @@
       </div>
       <div class="modal-body">
         <form action="/" id="login-form">
-          <input class="form-control" type="password" placeholder="Old password" name="password" required minlength="8"
-            [(ngModel)]="resetPassword.old_password" [ngModelOptions]="{standalone: true}">
-          <input class="form-control" type="password" placeholder="Password" name="password" required minlength="8"
-            [(ngModel)]="resetPassword.password" [ngModelOptions]="{standalone: true}">
-          <input class="form-control" type="password" placeholder="Password confirmation" name="password_confirmation"
-            required minlength="8" [(ngModel)]="resetPassword.password_confirmation"
+          <input class="form-control" type="password" placeholder="Old password" name="password" required minlength="8" [(ngModel)]="resetPassword.old_password" [ngModelOptions]="{standalone: true}">
+          <input class="form-control" type="password" placeholder="Password" name="password" required minlength="8" [(ngModel)]="resetPassword.password" [ngModelOptions]="{standalone: true}">
+          <input class="form-control" type="password" placeholder="Password confirmation" name="password_confirmation" required minlength="8" [(ngModel)]="resetPassword.password_confirmation"
             [ngModelOptions]="{standalone: true}">
-          <button type="submit" class="btn btn-block btn-lg btn-gradient btn-gradient-two"
-            (click)="resetPasswordUser()">Reset password</button>
+          <button type="submit" class="btn btn-block btn-lg btn-gradient btn-gradient-two" (click)="resetPasswordUser()">Reset password</button>
         </form>
       </div>
     </div>

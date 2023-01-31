@@ -38,7 +38,7 @@ export class VolunteersComponent implements OnInit {
   getAllCities() {
     this.volunteersService.getcities(this.globals.user.accessToken).subscribe(
       (data) => {
-        this.cities = data.slice(0, 1000);
+        this.cities = data.slice(0, 100);
        // this.cities = data;
       }
     )
@@ -63,6 +63,9 @@ export class VolunteersComponent implements OnInit {
 
 clearFilters() {
   this.getAllVolunteers();
+  this.selectedCity = null;
+  this.seletedCountry = null;
+  this.search = null;
 }
 
 applySearch(applySearch) {

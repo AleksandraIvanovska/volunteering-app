@@ -46,9 +46,9 @@ export class NavbarComponent implements OnInit {
 		    
 	    },
 	    deadline: null,
-	    expired: {
+	    // expired: {
 		    
-	    },
+	    // },
 	    status: {
 		    
 	    },
@@ -137,7 +137,6 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.initNewEvent();
-
     if (localStorage.getItem('access-token')) {
       this.show.user = true;
       this.globals.user = {
@@ -149,15 +148,14 @@ export class NavbarComponent implements OnInit {
         uuid: localStorage.getItem('uuid')
       }
       this.isUserOrganization();
-      console.log(this.globals)
-    }
-    
+     }
     this.getNotification();
+
   }
 
-  onNewEvent() {
 
-    console.log(this.addEvent);
+
+  onNewEvent() {
     if(this.addEvent.title) { //organizacijata se zima sama od Auth:usero id to
       this.navbarService.addEvent(this.globals.user.accessToken,this.addEvent)
       .subscribe(
@@ -193,16 +191,16 @@ getAllCities() {
   if (this.seletedCountry) {
     this.organizationsService.getcities(this.globals.user.accessToken,this.seletedCountry).subscribe(
       (data) => {
-        this.cities = data.slice(0, 1000);
-       // this.cities = data;
+      //  this.cities = data.slice(0, 1000);
+        this.cities = data;
       }
     )
   }
   else {
     this.organizationsService.getcities(this.globals.user.accessToken).subscribe(
       (data) => {
-        this.cities = data.slice(0, 1000);
-       // this.cities = data;
+       // this.cities = data.slice(0, 1000);
+        this.cities = data;
       }
     )
   }
@@ -289,7 +287,8 @@ openContact(uuid)
               document.getElementById("close").click();
               this.show.user = true;
               this.show.profile = false;
-              console.log(this.globals.user);
+             
+              this.isUserOrganization();
             }
           },
           (error) => {
@@ -327,7 +326,7 @@ openContact(uuid)
         body.user_id = this.globals.user.id;
         body.first_name = this.register.name;
   
-        console.log(body);
+   
   
         this.navbarService.addVolunteer(this.globals.user.accessToken, body).subscribe(
           (data) => {
@@ -361,7 +360,7 @@ openContact(uuid)
         this.register.role = "volunteer";
       }
 
-      console.log(this.register);
+
       
       if (!this.validateEmail(this.register.email)) {
         this.toastr.error("Invalid email")
@@ -494,12 +493,10 @@ openContact(uuid)
 
   getNotification()
   {
-    console.log("Notifications od navbar povikano")
     this.navbarService.getNotifications(this.globals.user.accessToken)
       .subscribe(
         (data) =>
         {
-          console.log("Vleze vo data da zeme")
           this.notifications = data.events;
           this.unreadNotification = data.eventsCount;
         }

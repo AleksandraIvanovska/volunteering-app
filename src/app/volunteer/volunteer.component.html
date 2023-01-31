@@ -18,8 +18,8 @@
                                         {{volunteerData.last_name}}
                                     </h3>&nbsp;
 
-                                    <button  *ngIf="globals.user.id == volunteerData.user_id" type="submit" class="btn btn-edit btn-sm" data-toggle="modal"
-                                        data-target="#moda_claim_listing" style="height: 30px;width: 110px;">Edit
+                                    <button *ngIf="globals.user.id == volunteerData.user_id" type="submit" class="btn btn-edit btn-sm" data-toggle="modal"
+                                        data-target="#moda_claim_listing" style="height: 30px;width: 110px; margin-top: 3px;">Edit
                                         Profile
                                     </button>
 
@@ -33,28 +33,32 @@
                                     <p><i class="fa fa-envelope" aria-hidden="true"></i>
                                         {{volunteerData.email}}</p>
                                 </div>
-                                <div class="row" *ngIf="volunteerData.linkedIn">
+                                <!-- <div class="row" *ngIf="volunteerData.linkedIn">
                                     <p><i class="fa fa-linkedin-square" aria-hidden="true"></i>
                                         {{volunteerData.linkedIn}}</p>
-                                </div>
+                                </div> -->
 
-                                <div class="row"
-                                    *ngIf="volunteerData.facebook || volunteerData.twitter || volunteerData.instagram">
+                                <!-- <div class="row"
+                                    *ngIf="volunteerData.facebook || volunteerData.twitter || volunteerData.instagram || volunteerData.linkedIn">
                                     <ul style="display: inline-flex; list-style-type: none;">
                                         <li *ngIf="volunteerData.facebook">
                                             <a href="{{volunteerData.faceboo}}"><i class="fa fa-facebook-square"
                                                     aria-hidden="true"></i></a>&nbsp;
                                         </li>
+                                        <li *ngIf="volunteerData.linkedIn">
+                                            <a href="{{volunteerData.linkedIn}}"><i class="fa fa-linkedin-square"
+                                                aria-hidden="true"></i></a>&nbsp;
+                                        </li>
                                         <li *ngIf="volunteerData.twitter">
-                                            <a href="{{volunteerData.faceboo}}"><i class="fa fa-twitter-square"
+                                            <a href="{{volunteerData.twitter}}"><i class="fa fa-twitter-square"
                                                     aria-hidden="true"></i></a>&nbsp;
                                         </li>
                                         <li *ngIf="volunteerData.instagram">
-                                            <a href="{{volunteerData.faceboo}}"><i class="fa fa-instagram"
+                                            <a href="{{volunteerData.instagram}}"><i class="fa fa-instagram"
                                                     aria-hidden="true"></i></a>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -88,7 +92,7 @@
                                                 <div class="atbd_info">{{volunteerData.nationality.nationality}}</div>
                                             </li>
                                             <li
-                                                *ngIf="volunteerData.facebook || volunteerData.twitter || volunteerData.instagram">
+                                                *ngIf="volunteerData.facebook || volunteerData.twitter || volunteerData.instagram || volunteerData.linkedIn">
                                                 <div class="atbd_info_title"><i class="fa fa-globe"
                                                         aria-hidden="true"></i>
 
@@ -96,17 +100,21 @@
                                                 <div class="atbd_info">
                                                     <ul style="display: inline-flex; list-style-type: none;">
                                                         <li *ngIf="volunteerData.facebook">
-                                                            <a href="{{volunteerData.faceboo}}"><i
+                                                            <a href="{{volunteerData.facebook}}"><i
                                                                     class="fa fa-facebook-square"
                                                                     aria-hidden="true"></i></a>
                                                         </li>
+                                                        <li *ngIf="volunteerData.linkedIn">
+                                                            <a href="{{volunteerData.linkedIn}}"><i class="fa fa-linkedin-square"
+                                                                aria-hidden="true"></i></a>&nbsp;
+                                                        </li>
                                                         <li *ngIf="volunteerData.twitter">
-                                                            <a href="{{volunteerData.faceboo}}"><i
+                                                            <a href="{{volunteerData.twitter}}"><i
                                                                     class="fa fa-twitter-square"
                                                                     aria-hidden="true"></i></a>
                                                         </li>
                                                         <li *ngIf="volunteerData.instagram">
-                                                            <a href="{{volunteerData.faceboo}}"><i
+                                                            <a href="{{volunteerData.instagram}}"><i
                                                                     class="fa fa-instagram" aria-hidden="true"></i></a>
                                                         </li>
                                                     </ul>
@@ -124,7 +132,7 @@
                                                     My causes:</div>
                                                 <div class="atbd_info">{{volunteerData.my_causes}}</div>
                                             </li>
-                                            <li *ngIf="volunteerData.asset">
+                                            <!-- <li *ngIf="volunteerData.asset">
                                                 <div class="atbd_info_title"><i class="fa fa-file-text-o"
                                                         aria-hidden="true"></i>CV:</div>
                                                 <div class="atbd_info">
@@ -138,7 +146,7 @@
                                                     </div>
 
                                                 </div>
-                                            </li>
+                                            </li> -->
                                         </ul>
                                     </div>
                                 </div>
@@ -155,7 +163,7 @@
                                         <h4>Experiences</h4>
                                     </div>
                                     <div class="col-md-5">
-                                        <button *ngIf="globals.user.id == volunteerData.user_id" data-target="#add-experience-modal" type="submit" data-toggle="modal"
+                                        <button *ngIf="globals.user.id == volunteerData.user_id"  data-target="#add-experience-modal" type="submit" data-toggle="modal"
                                             class="btn btn-secondary btn-icon-left btn-sm not_empty btn-comment"
                                             style="float: right;" data-toggle="modal">+ Add Experience</button>
                                     </div>
@@ -186,7 +194,7 @@
                                                 </ul>
 
                                             </li>
-                                            <div  *ngIf="globals.user.id == volunteerData.user_id" style="float: right;margin-top: -10px;">
+                                            <div *ngIf="globals.user.id == volunteerData.user_id" style="float: right;margin-top: -10px;">
                                                 <a style="cursor: pointer; " data-toggle="modal"
                                                     data-target="#edit_experience_modal"
                                                     (click)="editExperienceSelected(experience)">
@@ -210,7 +218,7 @@
                             <div class="atbd_content_module">
                                 <div class="row">
                                     <div class="col-md-7">
-                                        <h4>Educations</h4>
+                                        <h4>Education</h4>
                                     </div>
                                     <div class="col-md-5">
                                         <button  *ngIf="globals.user.id == volunteerData.user_id" data-target="#add-education-modal" type="submit" data-toggle="modal"
@@ -243,12 +251,12 @@
                                                                 aria-hidden="true"></i>
                                                             {{education.start_date}} </span>
                                                         <span
-                                                            *ngIf="education.end_date">&nbsp;-&nbsp;{{education.graduation_date}}</span>
+                                                            *ngIf="education.graduation_date">&nbsp;-&nbsp;{{education.graduation_date}}</span>
                                                     </li>
                                                 </ul>
 
                                             </li>
-                                            <div *ngIf="globals.user.id == volunteerData.user_id" style="float: right;margin-top: -10px;">
+                                            <div *ngIf="globals.user.id == volunteerData.user_id"  style="float: right;margin-top: -10px;">
                                                 <a style="cursor: pointer; " data-toggle="modal"
                                                     data-target="#edit_education_modal"
                                                     (click)="editEducationSelected(education)">
@@ -346,7 +354,7 @@
                                                     <ul *ngFor="let event of volunteerData.favoriteEvents"
                                                         style="display: inline-flex">
                                                         <li><a href="">{{event.title}}</a>
-                                                        <button (click)="removeFavoriteEvent(event.favorite_event_uuid)"
+                                                        <button *ngIf="globals.user.id == volunteerData.user_id" (click)="removeFavoriteEvent(event.favorite_event_uuid)"
                                                         class="btn btn-sm"><i class="fa fa-times"></i></button>
                                                         </li>
                                                     </ul>
@@ -360,7 +368,7 @@
                                                     <ul *ngFor="let org of volunteerData.favoriteOrganizations"
                                                         style="display: inline-flex">
                                                         <li><a href="">{{org.name}}</a>
-                                                            <button (click)="removeFavoriteOrganization(org.favorite_organization_uuid)"
+                                                            <button *ngIf="globals.user.id == volunteerData.user_id" (click)="removeFavoriteOrganization(org.favorite_organization_uuid)"
                                                             class="btn btn-sm"><i class="fa fa-times"></i></button></li>
                                                     </ul>
                                                 </div>
@@ -502,8 +510,8 @@
                 <div class="col-md-5">
                     <div class="row">
                         <div class="col-md-12">
-
-                            <cdk-virtual-scroll-viewport style="height: 943px;" itemSize="90">
+                          
+                            <cdk-virtual-scroll-viewport *ngIf="this.eventAttendance.length > 0" itemSize="90" style="height: 270px">
                                 <div class="atbd_content_module" style="width: 450px;">
                                     <h5><i class="fa fa-list" aria-hidden="true"></i>
                                         &nbsp;Volunteer events attendence</h5>
@@ -513,8 +521,8 @@
                                             <ul *ngFor="let event of eventAttendance;">
                                                 <li *ngIf="event.title">
 
-                                                    <div class="atbd_info"><a style="color: #3a7dfd; font-size: 25px;"
-                                                            href="">{{event.title}}</a></div>
+                                                    <div class="atbd_info"><a style="color: #057a8d; font-size: 25px; font-weight: bold;" 
+                                                        routerLink="/volunteeringEvent" [queryParams]="{uuid: event.uuid}">{{event.title}}</a></div>
 
                                                 </li>
                                                 <li *ngIf="event.category">
@@ -531,7 +539,7 @@
                                                 <ng-template #other_virtual>
                                                     <li>
                                                         <div class="atbd_info"><span
-                                                                style="background-color: #32cc6f;padding: 5px; border-radius: 3px;">Virtual
+                                                                style="background-color: #f1c111; opacity: .6;padding: 5px; border-radius: 3px;">Virtual
                                                                 Event</span> </div>
                                                     </li>
                                                 </ng-template>
@@ -544,11 +552,9 @@
                                 </div>
                             </cdk-virtual-scroll-viewport>
                             <br>
-                            <br>
-
-
+                            
                             <!-- render here only those who don;t exits in attendence -->
-                            <cdk-virtual-scroll-viewport style="height: 900px" itemSize="90">
+                            <cdk-virtual-scroll-viewport *ngIf="this.eventInvitations.length > 0"  style="height: 270px" itemSize="90">
                                 <div class="atbd_content_module" style="width: 450px;">
                                     <h5><i class="fa fa-list" aria-hidden="true"></i>
                                         &nbsp;Events Invitations</h5>
@@ -558,8 +564,8 @@
                                             <ul *ngFor="let event of eventInvitations;">
                                                 <li *ngIf="event.title">
 
-                                                    <div class="atbd_info"><a style="color: #3a7dfd; font-size: 25px;"
-                                                            href="">{{event.title}}</a></div>
+                                                    <div class="atbd_info"><a style="color: #057a8d; font-size: 25px; font-weight: bold;"
+                                                        routerLink="/volunteeringEvent" [queryParams]="{uuid: event.uuid}">{{event.title}}</a></div>
 
                                                 </li>
                                                 <li *ngIf="event.category">
@@ -576,7 +582,7 @@
                                                 <ng-template #other_virtual>
                                                     <li>
                                                         <div class="atbd_info"><span
-                                                                style="background-color: #32cc6f;padding: 5px; border-radius: 3px;">Virtual
+                                                                style="background-color: #f1c111; opacity: .6;padding: 5px; border-radius: 3px;">Virtual
                                                                 Event</span> </div>
                                                     </li>
                                                 </ng-template>
@@ -681,11 +687,15 @@
                         <div class="row">
                             <div class="col-md-6">
                                 My causes
-
+                                <input type="text" placeholder="Insert causes" class="form-control"
+                                    [(ngModel)]="volunteerData.my_causes" [ngModelOptions]="{standalone: true}"
+                                    (focusout)="editVolunteer(volunteerData.my_causes, 'my_causes')">
                             </div>
                             <div class="col-md-6">
                                 Skills
-
+                                <input type="text" placeholder="Insert skills" class="form-control"
+                                [(ngModel)]="volunteerData.skills" [ngModelOptions]="{standalone: true}"
+                                (focusout)="editVolunteer(volunteerData.skills, 'skills')">
                             </div>
 
                         </div>
@@ -693,15 +703,12 @@
 
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-6">
-                                CV
-
-                            </div>
-                            <div class="col-md-6">
+                            
+                            <div class="col-md-12">
                                 Location
-                                <ng-select bindLabel="name" dropdownPosition="bottom"
+                                <ng-select bindLabel="name" bindValue="name" dropdownPosition="bottom"
                                     (change)="editVolunteer(volunteerData.location.name, 'city')"
-                                    (open)="getAllCities()" [(ngModel)]="volunteerData.location"
+                                    (open)="getAllCities()" [(ngModel)]="volunteerData.location.city"
                                     placeholder="Select city" [items]="cities" [ngModelOptions]="{standalone: true}">
                                 </ng-select>
                             </div>
@@ -808,7 +815,7 @@
         <div class="modal-content">
             <form action="/" id="atbdp-report-abuse-form" class="form-vertical">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="add-education-modal-label">Add Education</h4>
+                    <h3 class="modal-title" id="add-education-modal-label">Add Education</h3>
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
@@ -910,7 +917,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 Major
-                                <input type="text" placeholder="Institution name" class="form-control"
+                                <input type="text" placeholder="Major" class="form-control"
                                     (focusout)="editEducation(selectedEducation.major, 'major')"
                                     [(ngModel)]="selectedEducation.major" [ngModelOptions]="{standalone: true}">
                             </div>
@@ -954,7 +961,7 @@
         <div class="modal-content">
             <form action="/" id="atbdp-report-abuse-form" class="form-vertical">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="add-experience-modal-label">Add Experience</h4>
+                    <h3 class="modal-title" id="add-experience-modal-label">Add Experience</h3>
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
@@ -1103,7 +1110,7 @@
         <div class="modal-content">
             <form action="/" id="atbdp-report-abuse-form" class="form-vertical">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="add-language-modal-label">Add Language</h4>
+                    <h3 class="modal-title" id="add-language-modal-label">Add Language</h3>
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">

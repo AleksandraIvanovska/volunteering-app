@@ -4,7 +4,7 @@
 
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Plain-Light, sans-serif; }
 
 
 .blog-grid .grid-single {
@@ -16,7 +16,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
   
   .section-bg {
-    background-color: rgba(235, 213, 235, 0.26);
+    background-color: #f0f8ff;
   }
   
   .section-bg2 {
@@ -122,7 +122,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	font-family: "LineAwesome";
+	font-family: Plain-Light, sans-serif;
 	margin-left: 15px;
   }
 
@@ -141,7 +141,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
   .atbd_contact_info1 ul li {
 	list-style-type: none;
-	font-family: "LineAwesome";
+	font-family: Plain-Light, sans-serif;
 	margin-left: -20px;
   }
 
@@ -209,12 +209,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .pagination .nav-links .page-numbers.current {
-  background: #4A569D;
+  /* background: #4A569D; */
+  background: #f1c111;
   color: white;
 }
 
 
-.btn-comment {background-image: linear-gradient(to right, #DC2424 0%, #4A569D  51%, #DC2424  100%)}
+/* .btn-comment {background-image: linear-gradient(to right, #FFBD44 0%, #404040  51%, #FFBD44  100%)} */
+.btn-comment {background-image: linear-gradient(to right, #4CA1AF 0%, #C4E0E5  51%, #4CA1AF  100%)}
 .btn-comment {
    margin: 10px;
    text-align: center;
@@ -345,6 +347,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .btn-gradient.btn-gradient-two {
-  background: linear-gradient(to right, #f5548e, #fa8b0c);
+  /* background: linear-gradient(to right, #f5548e, #fa8b0c); */
+  /* background: linear-gradient(to right,  #f1c111, #057a8d); */
+  background: linear-gradient(to right, #f1c111 0%, #057a8d  70%, #057a8d  100%);
 }
 
+.yellow_buttons {
+  background-color: #f1c111;
+  color: white;
+}

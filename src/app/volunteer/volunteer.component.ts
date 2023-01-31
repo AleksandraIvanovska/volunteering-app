@@ -28,6 +28,7 @@ export class VolunteerComponent implements OnInit {
   addLanguage: any = {};
   allLanguages: any = [];
   languageLevels: any = [];
+  cdkVirtualScrollViewport: any = {};
 
   initNewEducation() {
     this.addEducation = {
@@ -82,7 +83,6 @@ export class VolunteerComponent implements OnInit {
 
   showAddComment = false;
   genders: any = [];
-
 
 
   constructor(private volunteerService: VolunteerService,public toastr: ToastrService, 
@@ -210,7 +210,7 @@ export class VolunteerComponent implements OnInit {
                   if(this.volunteerComments.length){
                     this.paggination(1);
                   }
-
+            this.getVolunteer(this.globals.volunteer);
             this.toastr.success(data.message)
 
           }
@@ -260,6 +260,7 @@ export class VolunteerComponent implements OnInit {
   updateVolunteer(body) {
     this.volunteerService.updateVolunteer(this.globals.user.accessToken, body, this.globals.volunteer).subscribe(
       (data) => {
+        this.getVolunteer(this.globals.volunteer);
         this.toastr.success(data.message);  
       },
       (error) => {
@@ -287,8 +288,8 @@ export class VolunteerComponent implements OnInit {
   getAllCities() {
     this.organizationsService.getcities(this.globals.user.accessToken).subscribe(
       (data) => {
-       // this.cities = data.slice(0, 50);
-        this.cities = data;
+        this.cities = data.slice(0, 50);
+       // this.cities = data;
        console.log(this.cities);
       }
     )
@@ -418,6 +419,7 @@ export class VolunteerComponent implements OnInit {
 
   editExperienceSelected(experience) {
     this.selectedExperience =  experience;
+    console.log(experience)
   }
 
 
@@ -496,4 +498,6 @@ export class VolunteerComponent implements OnInit {
         this.toastr.error(error.message)
       })
   }
+
+
 }

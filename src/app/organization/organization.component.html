@@ -15,7 +15,7 @@
                     <br>
                     <div class="row">
                         <div class="col-md-7">
-                            <h4>{{organizationData.name}}</h4>
+                            <h3>{{organizationData.name}}</h3>
                         </div>
                         <div class="col-md-5">
                             <div class="edit-delete">
@@ -84,13 +84,17 @@
                                                 <div class="atbd_info_title"><i class="fa fa-globe"
                                                         aria-hidden="true"></i>
                                                     Website:</div>
-                                                <div class="atbd_info">{{organizationData.website}}</div>
+                                                <div class="atbd_info">
+                                                    <a href="{{organizationData.website}}">{{organizationData.website}} </a>
+                                                </div>
                                             </li>
                                             <li *ngIf="organizationData.linkedIn">
                                                 <div class="atbd_info_title"><i class="fa fa-linkedin-square"
                                                         aria-hidden="true"></i>
                                                     LinkedIn:</div>
-                                                <div class="atbd_info">{{organizationData.linkedIn}}</div>
+                                                <div class="atbd_info">
+                                                    <a href="{{organizationData.linkedIn}}">{{organizationData.linkedIn}} </a>
+                                                </div>
                                             </li>
                                             <li *ngIf="organizationData.email">
                                                 <div class="atbd_info_title"><i class="fa fa-envelope"
@@ -108,19 +112,26 @@
                                                 <div class="atbd_info_title"><i class="fa fa-facebook-square"
                                                         aria-hidden="true"></i>
                                                     Facebook:</div>
-                                                <div class="atbd_info">{{organizationData.facebook}}</div>
+                                                    
+                                                <div class="atbd_info">
+                                                    <a href="{{organizationData.facebook}}">{{organizationData.facebook | slice:0:44}} </a>
+                                                </div>
                                             </li>
                                             <li *ngIf="organizationData.twitter">
                                                 <div class="atbd_info_title"><i class="fa fa-twitter-square"
                                                         aria-hidden="true"></i>
                                                     Twitter:</div>
-                                                <div class="atbd_info">{{organizationData.twitter}}</div>
+                                                <div class="atbd_info">
+                                                    <a href="{{organizationData.twitter}}">{{organizationData.twitter}} </a>
+                                                </div>
                                             </li>
                                             <li *ngIf="organizationData.instagram">
                                                 <div class="atbd_info_title"><i class="fa fa-instagram"
                                                         aria-hidden="true"></i>
                                                     Instagram:</div>
-                                                <div class="atbd_info">{{organizationData.instagram}}</div>
+                                                <div class="atbd_info">
+                                                    <a href="{{organizationData.instagram}}">{{organizationData.instagram}} </a>
+                                                </div>
                                             </li>
                                         </ul>
                                     </div>
@@ -196,21 +207,22 @@
                                                                     <label class="style-label">LinkedIn:
                                                                         &nbsp;</label><a
                                                                         href="{{contact.linkedIn}}">{{contact.linkedIn |
-                                                                        slice:0:15}}</a>
+                                                                        slice:0:15}} ..</a>
                                                                 </div>
                                                             </div>
 
                                                             <div style="float: right;">
-                                                                <div *ngIf="contact.linkedIn">
-                                                                    <label class="style-label">Twitter: &nbsp;</label><a
+                                                                <div *ngIf="contact.twitter">
+                                                                    <label class="style-label">Twitter: 
+                                                                        &nbsp;</label><a
                                                                         href="{{contact.linkedIn}}">{{contact.twitter |
-                                                                        slice:0:15}}</a>
+                                                                        slice:0:15}} ..</a>
                                                                 </div>
                                                                 <div *ngIf="contact.facebook">
                                                                     <label class="style-label">Facebook:
                                                                         &nbsp;</label><a
                                                                         href="{{contact.facebook}}">{{contact.facebook |
-                                                                        slice:0:15}}</a>
+                                                                        slice:0:15}} ..</a>
                                                                 </div>
                                                                 <div *ngIf="contact.skype">
                                                                     <label class="style-label">Skype:
@@ -397,7 +409,7 @@
                                     <div class="atbd_contact_info">
                                         <ul *ngFor="let event of organizationEvents;">
                                             <li *ngIf="event.title">
-                                                <div class="atbd_info"><a style="color: #3a7dfd; font-size: 25px;"
+                                                <div class="atbd_info"><a style="color: #057a8d; font-size: 25px; font-weight: bold;"
                                                         routerLink="/volunteeringEvent"
                                                         [queryParams]="{uuid: event.uuid}">{{event.title}}</a></div>
                                             </li>
@@ -415,7 +427,7 @@
                                             <ng-template #other_virtual>
                                                 <li>
                                                     <div class="atbd_info"><span
-                                                            style="background-color: #32cc6f;padding: 5px; border-radius: 3px;">Virtual
+                                                            style="background-color: #f1c111; opacity: .6;padding: 5px; border-radius: 3px;">Virtual
                                                             Event</span> </div>
                                                 </li>
                                             </ng-template>
@@ -485,7 +497,7 @@
                                 City
                                 <ng-select bindLabel="name" dropdownPosition="bottom"
                                     (change)="editOrganization(organizationData.location.name, 'city')"
-                                    (open)="getAllCities()" [(ngModel)]="organizationData.location"
+                                    (open)="getAllCities()" [(ngModel)]="organizationData.location.city"
                                     placeholder="Select city" [items]="cities" [ngModelOptions]="{standalone: true}">
                                 </ng-select>
                             </div>
@@ -620,7 +632,7 @@
         <div class="modal-content">
             <form action="/" id="atbdp-report-abuse-form" class="form-vertical">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="add-contact-modal-label">Add Organization Contact</h4>
+                    <h5 class="modal-title" id="add-contact-modal-label">Add Organization Contact</h5>
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
