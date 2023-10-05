@@ -12,6 +12,8 @@ Organizations organize events for volunteers and can invite volunteers on those 
 Volunteers can also search for volunteering events, filter them by city, state, category, age group, etc. and apply to them.
 Also in the application I keep records of the volunteers in which events they have participated and the organizations which events they have organized and many other detailed information about the volunteers, organizations and events.
 
+Link to video -> https://www.dropbox.com/s/u8r2dv29y1iw3p4/volunteerup_video.mp4?dl=0
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
